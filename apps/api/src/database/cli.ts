@@ -1,5 +1,5 @@
 import { createDb, createMigrator, migrateToLatest } from './db.ts';
-import { seedDevelopmentData } from './seed.ts';
+import { DEV_PASSWORD, seedDevelopmentData } from './seed.ts';
 
 /**
  * Database CLI: `migrate` (to latest), `rollback` (one step) and `seed` (development data).
@@ -33,8 +33,12 @@ try {
     if (appEnv !== 'development') {
       throw new Error(`Refusing to seed development data when APP_ENV=${appEnv}`);
     }
-    await seedDevelopmentData(db);
-    console.log('Seeded development data');
+    const seeded = await seedDevelopmentData(db);
+    console.log(
+      seeded
+        ? `Seeded development data (password for all accounts: ${DEV_PASSWORD})`
+        : 'Development data already present; reset the database to seed again',
+    );
   } else {
     console.error('Usage: cli.js <migrate|rollback|seed>');
     process.exitCode = 1;

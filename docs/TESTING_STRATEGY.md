@@ -74,3 +74,10 @@ A pull request **cannot merge** if any of these fail:
 9. Security: gitleaks, dependency audit (fail on High/Critical with available fix), CodeQL
 
 Mobile E2E and load tests run on `main` and release branches.
+
+## 6. Status (2026-10-02)
+
+- API: Vitest 4 + Testcontainers (real PostGIS and Redis), 100 tests. Automated critical scenarios: CS-1, CS-2, CS-3, CS-4, CS-10 (sequential and concurrent), CS-11, CS-12, CS-14, CS-17, CS-18; plus rate limits, schema drift, full migration rollback, worker delivery through real BullMQ.
+- Contract: the mobile app's HTTP client is exercised against the API for every screen call.
+- Mobile: Jest (jest-expo, Testing Library 14), 31 tests.
+- Not yet: Maestro E2E on devices, k6 load tests, scenarios tied to online payment (CS-5…CS-9, CS-13, CS-19) and to the outbox (CS-20), offline pickup sync (CS-16).

@@ -2,13 +2,15 @@
 
 Mobile-first marketplace for rescuing surplus food from local businesses.
 
-**Status:** architecture documented ([docs/](docs/README.md)); mobile app UI complete for customer, merchant, auth and settings flows, running on an isolated **demo adapter** until the backend exists. Backend (NestJS) is next.
+**Status:** architecture documented ([docs/](docs/README.md)); mobile app UI complete (customer, merchant, auth, settings); **backend API and worker implemented** (auth, merchants, offers, discovery, reservations paid at pickup, pickup validation, jobs). The app runs against the real API (`EXPO_PUBLIC_API_MODE=http`) or the isolated demo adapter. Not built yet: online payment (deferred, ADR-015), push notifications, admin web app, production infrastructure.
 
 ## Repository layout
 
 ```
 apps/mobile/          Expo (SDK 57) + React Native app — customer and merchant modes
+apps/api/             NestJS 12 API (HTTP) + worker (BullMQ jobs, email) — PostgreSQL/PostGIS, Redis
 packages/contracts/   Shared Zod schemas, enums, error codes, order state machine
+infra/docker/         Local PostgreSQL+PostGIS, Redis and Mailpit (docker compose)
 docs/                 Product, UX, design system, architecture, ADRs, risks, plan
 ```
 
@@ -16,14 +18,40 @@ docs/                 Product, UX, design system, architecture, ADRs, risks, pla
 
 - Node.js 24 (LTS) — see `.nvmrc`
 - pnpm 10 (`corepack enable` or install pnpm globally)
+- Docker (local services and the API test suite, which runs against real PostGIS and Redis containers)
 - To run on a device: an Expo **development build** (EAS Build) or a local Android SDK / Xcode is the supported path. Expo Go might work for a quick preview (the current native dependencies ship with Expo Go), but this has not been tested, and push notifications will require a development build.
 
 ## Setup
 
 ```bash
 pnpm install
-cp apps/mobile/.env.example apps/mobile/.env.local   # optional; defaults run demo mode
+pnpm --filter @mawjood/contracts build          # shared contracts (Turborepo also does this)
+
+# Backend
+pnpm services:up                                 # PostGIS :5442, Redis :6389, Mailpit :1035/:8035
+cp apps/api/.env.example apps/api/.env
+pnpm --filter @mawjood/api build
+pnpm --filter @mawjood/api db:migrate
+pnpm --filter @mawjood/api db:seed               # development data (see below)
+pnpm --filter @mawjood/api dev                   # API on :3100 + worker, rebuilt on change
+
+# App
+cp apps/mobile/.env.example apps/mobile/.env.local
+# set EXPO_PUBLIC_API_MODE=http and EXPO_PUBLIC_API_BASE_URL=http://<your-LAN-IP>:3100/api/v1
+pnpm --filter @mawjood/mobile start
 ```
+
+Emails (verification and reset codes) are delivered by the worker to Mailpit: open http://localhost:8035.
+
+### Development accounts (`db:seed`)
+
+| Email                    | Role                                                                     |
+| ------------------------ | ------------------------------------------------------------------------ |
+| `admin@mawjood.local`    | Platform admin (approves businesses)                                     |
+| `merchant@mawjood.local` | Owner of four approved stores in Maarif / Gauthier with offers for today |
+| `customer@mawjood.local` | Verified customer                                                        |
+
+Password for all: `mawjood-dev-password`. The seed refuses to run unless `APP_ENV=development`; reset with `pnpm services:reset`.
 
 ## Commands
 
@@ -33,8 +61,17 @@ cp apps/mobile/.env.example apps/mobile/.env.local   # optional; defaults run de
 | `pnpm lint` / `pnpm typecheck` / `pnpm test` / `pnpm build` | Individual steps via Turborepo                                                    |
 | `pnpm format` / `pnpm format:check`                         | Prettier                                                                          |
 | `pnpm --filter @mawjood/mobile start`                       | Start the Expo dev server                                                         |
+| `pnpm --filter @mawjood/api dev`                            | API + worker with rebuild on change                                               |
+| `pnpm --filter @mawjood/api db:migrate` / `db:rollback`     | Apply all migrations / roll back one                                              |
+| `pnpm services:up` / `services:down` / `services:reset`     | Local PostgreSQL, Redis, Mailpit (reset deletes the data)                         |
 
 `typecheck` in the mobile app first runs `scripts/typegen.mjs`, which generates Expo Router's typed routes, so a broken link fails the build.
+
+## API
+
+- REST under `/api/v1` (health probes at `/health/live` and `/health/ready`), errors in one envelope `{ error: { code, message, requestId, timestamp } }` — see `docs/API_SPECIFICATION.md` and `docs/ERROR_HANDLING.md`.
+- Configuration is validated at boot (`apps/api/.env.example` lists every variable). Staging/production refuse to start without `APP_SECRET`, JWT keys, `SMTP_URL` and rate limits.
+- Tests (`pnpm --filter @mawjood/api test`) start PostGIS and Redis containers, clone a migrated template database per test file, and include the critical concurrency scenarios (last-unit race, duplicate submissions, double pickup scans) plus a contract test that runs the mobile app's own HTTP client against the API.
 
 ## Configuration (mobile)
 

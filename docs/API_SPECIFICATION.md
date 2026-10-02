@@ -167,3 +167,20 @@ Content-Type: application/json
 - `packages/contracts` holds all request/response Zod schemas, enums and error codes. API controllers and the mobile client both import them → a breaking change fails TypeScript compilation in the monorepo.
 - Released mobile apps cannot be recompiled, so CI additionally diffs the generated OpenAPI against `main` and **fails on breaking changes** (removed fields, narrowed types, new required inputs) unless the PR is explicitly marked as a versioned breaking change.
 - Response schemas are validated in API integration tests (responses must parse with the contract schema).
+
+## 7. As implemented (2026-10-02)
+
+Differences from the tables above:
+
+| Endpoint | Note |
+|---|---|
+| `GET /orders?status=upcoming\|past&cursor=` | Upcoming sorted by pickup start, past newest first |
+| `POST /orders/:id/cancel` | Naturally idempotent (guarded transition); `Idempotency-Key` accepted, not required |
+| `GET /me/impact` | Collected orders only; `co2eKg` is `null` until sourced factors exist (D8) |
+| `GET /merchant/offers?businessId=` | Owner's offers for one business |
+| `POST /merchant/offers/:id/{pause,resume,end}` | Lifecycle actions |
+| `PUT /merchant/locations/:id/hours` | Replace weekly hours |
+| `GET /merchant/orders?locationId=` | Today's pickups in the store's timezone (owner or staff) |
+| `GET /merchant/insights?businessId=` | Last 30 days (owner) |
+| `GET /admin/businesses?status=` · `POST /admin/businesses/:id/{approve,reject,suspend}` | Admin review; reason required and audited |
+| Not implemented | `/orders/:id/payment`, payment webhooks, `/offers/map` clustering, `/pickups/sync`, pickup manifest, uploads, OAuth, `/me/devices`, `/me/data-export` |

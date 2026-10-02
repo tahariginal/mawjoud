@@ -28,7 +28,7 @@ Latest versions checked on npm on 2026-10-02. Exact versions are pinned in Phase
 | Push | expo-notifications + Expo Push Service | SDK 57 / expo-server-sdk 7.2 | Behind a `PushSender` port; FCM/APNs direct possible later |
 | i18n | i18next + react-i18next + expo-localization | 26 / 17 / SDK 57 | Keys + RTL |
 | Backend | NestJS (modular monolith) | 12.1 | Brief requirement. 12.0 shipped 2026-08-27; official packages we need already support it |
-| Validation (API) | Zod 4 via a small in-house `ZodValidationPipe` | — | `nestjs-zod` 5.5 does **not** yet support NestJS 12 (peer `^10 \|\| ^11`) |
+| Validation (API) | Zod 4 through NestJS 12's built-in `StandardSchemaValidationPipe` (`@Body({ schema })`) | NestJS 12.1 | Native Standard Schema support made a custom pipe unnecessary; `nestjs-zod` does not support NestJS 12 |
 | OpenAPI | @asteasolutions/zod-to-openapi | 9.1 | Generates the spec from the shared Zod contracts |
 | Database | PostgreSQL + PostGIS | 18 + 3.6 (image `postgis/postgis:18-3.6`) | ADR-002; PG 18 also provides native `uuidv7()`. Fallback PG 17 if the chosen host lacks 18 |
 | Data access | Kysely + kysely-codegen; SQL migrations | 0.29 / 0.20 | ADR-007 |
@@ -240,3 +240,15 @@ Final failures move to a `*.dead-letter` queue, raise a metric, and alert; an ad
 ## 10. Configuration
 
 All configuration through environment variables, validated at boot with Zod (`shared/config`). The process **refuses to start** if a required variable is missing, or if a development adapter (fake payments, console email) is enabled while `APP_ENV=production`.
+
+## 11. As implemented (2026-10-02)
+
+| Area | Implementation |
+|---|---|
+| Module system | ESM (`"type": "module"`), TypeScript `NodeNext` with `.ts` imports rewritten by `tsc` (`rewriteRelativeImportExtensions`). NestJS 12 core ships as ESM |
+| API tests | Vitest 4 with `unplugin-swc` (decorator metadata), Testcontainers PostGIS 18-3.6 + Redis 8.8, one database cloned from a migrated template per test file |
+| Queues | BullMQ 6.3 on ioredis 5.11; queues `email` and `maintenance` (job schedulers), prefix configurable per environment |
+| Email | nodemailer 10 over SMTP (Mailpit locally); a log-only sender exists for development without SMTP |
+| Modules | `identity` (auth, sessions, codes, /me), `merchants` (+ offers, admin review), `discovery` (feed, offers, stores, search, favorites), `orders` (reservations, pickups, insights, impact), `platform`, `jobs` (worker) |
+| Outbox | Not implemented yet: the only async side effect today is email, enqueued after commit (a failed enqueue is logged and the user can request a new code). The transactional outbox (ADR-010) is required before notifications |
+| Payments | Not implemented (ADR-015): reservations are confirmed in one transaction and paid at pickup |

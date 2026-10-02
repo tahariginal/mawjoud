@@ -28,3 +28,6 @@ Payment confirmation comes from **signed webhooks**, backed by a reconciliation 
 - ✅ "Pay twice" → one order; "app killed after paying" → order confirmed by webhook; "network lost" → safe resume.
 - ⚠️ More code and tests (CS-3, CS-4, CS-5, CS-6, CS-7, CS-19 are mandatory).
 - ⚠️ Idempotency records need cleanup (24 h expiry job).
+
+## Implementation note (2026-10-02, ADR-015)
+With pay-at-pickup there is no external call, so the key is claimed **in the same transaction** as the reservation: a concurrent duplicate blocks on the key's row and then replays the stored response; a failed attempt rolls back and frees the key. Phases and recovery points return with online payment. Pickup validation uses the same mechanism.

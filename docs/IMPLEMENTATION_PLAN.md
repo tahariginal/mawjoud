@@ -9,7 +9,9 @@ Work is delivered phase by phase. A phase is **done** only when its exit criteri
 ## Status (2026-10-02)
 
 - Phase 1 complete (docs, ADRs).
-- At the client's request, the **mobile UI for all phases was built first** (customer, merchant, auth, settings), backed by the isolated demo adapter. Backend phases (2–9) still follow the order below; each screen switches to the real API by setting `EXPO_PUBLIC_API_MODE=http`.
+- At the client's request, the **mobile UI for all phases was built first** (customer, merchant, auth, settings), backed by the isolated demo adapter.
+- **Backend implemented for phases 2–6** (foundation, auth, merchants/offers, discovery, reservations paid at pickup per ADR-015, pickup validation) plus the worker (email, time-based transitions, cleanup). The app talks to it with `EXPO_PUBLIC_API_MODE=http`.
+- Remaining: phase 7 notifications (push/email preferences delivery, outbox), phase 8 merchant extras (media uploads, offline pickup), phase 9 admin web, phases 10–11 (load/E2E tests, security review, production infrastructure), and online payment when a provider is chosen.
 
 ## Phases
 

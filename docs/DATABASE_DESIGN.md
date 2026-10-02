@@ -274,3 +274,12 @@ Low-zoom map views use server-side grid clustering (`ST_SnapToGrid` on the geome
 | Pickup attempts, notifications | 90 days |
 | Audit logs | ≥ 1 year (confirm with counsel) |
 | Precise user location | **Never stored** server-side; requests use it transiently; logs round coordinates to 2 decimals (~1 km) |
+
+## 8. As implemented (migrations 0001–0003)
+
+- `offers.status` stores only the merchant-controlled lifecycle (`DRAFT`, `ACTIVE`, `PAUSED`, `ENDED`, `REMOVED`); `SOLD_OUT` and time-based `ENDED` are derived on read from stock and the clock, so they can never be stale.
+- Orders have no hold or payment columns (ADR-015); `payment_method` is `PAY_AT_PICKUP`. No `pickup_token_hash`: the QR token is an HMAC (ADR-012). `pickup_code` is stored with a partial unique index per store over open orders.
+- Ratings are stored as `rating_sum` / `rating_count` on `businesses` (average computed on read).
+- Notification preferences live in `users.notification_preferences` (jsonb, validated by the contract).
+- Not created yet: `auth_identities`, `devices`, `notifications`, `impact_factors`, `impact_records`, `images`, `disputes`, `outbox_events`, `payments`, `refunds`, `webhook_events` — each arrives with its feature.
+- `test/platform.test.ts` fails if the TypeScript schema and the migrated database differ; `test/migrations.test.ts` rolls everything back and re-applies it.

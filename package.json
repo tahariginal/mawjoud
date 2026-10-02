@@ -12,7 +12,10 @@
     "build": "turbo run build",
     "verify": "turbo run lint typecheck test build",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "services:up": "docker compose -f infra/docker/docker-compose.yml up -d --wait",
+    "services:down": "docker compose -f infra/docker/docker-compose.yml down",
+    "services:reset": "docker compose -f infra/docker/docker-compose.yml down -v"
   },
   "devDependencies": {
     "prettier": "3.9.9",

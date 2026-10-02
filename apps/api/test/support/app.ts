@@ -38,6 +38,8 @@ export async function createTestDatabase(): Promise<string> {
 
 export type TestContext = {
   app: NestExpressApplication;
+  /** e.g. http://127.0.0.1:41234 (the server listens on an ephemeral port). */
+  baseUrl: string;
   email: CapturingEmailOutbox;
   http: () => ReturnType<typeof request>;
   db: Db;
@@ -84,6 +86,7 @@ export async function createTestApp(options: Options = {}): Promise<TestContext>
   const baseUrl = `http://127.0.0.1:${address.port}`;
   return {
     app,
+    baseUrl,
     email,
     http: () => request(baseUrl),
     db: app.get<Db>(DB),
