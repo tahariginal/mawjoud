@@ -1,6 +1,5 @@
 import '@/i18n';
 
-import { Fraunces_600SemiBold } from '@expo-google-fonts/fraunces';
 import {
   Inter_400Regular,
   Inter_500Medium,
@@ -35,7 +34,7 @@ const navigationTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: colors.textBrand,
+    primary: colors.textPrimary,
     background: colors.bgApp,
     card: colors.bgSurface,
     text: colors.textPrimary,
@@ -74,7 +73,6 @@ export default function RootLayout() {
     Inter_500Medium,
     Inter_600SemiBold,
     Inter_700Bold,
-    Fraunces_600SemiBold,
   });
   const ready = fontsLoaded || fontError !== null;
 

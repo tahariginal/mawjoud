@@ -16,7 +16,7 @@ import { useSession } from '@/state/session';
 function Metric({ label, value }: { label: string; value: string }) {
   return (
     <Card>
-      <AppText variant="display" color={colors.textBrand}>
+      <AppText variant="display" color={colors.textPrimary}>
         {value}
       </AppText>
       <AppText variant="subhead" color={colors.textSecondary}>

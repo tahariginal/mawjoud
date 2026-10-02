@@ -27,7 +27,7 @@ export function OfferImage({ image, size, height, accessibilityLabel }: Props) {
         accessibilityRole="image"
         accessibilityLabel={t('offer.noImage')}
       >
-        <Icon name="basket-outline" size={Math.min(40, height / 3)} color={colors.textBrand} />
+        <Icon name="basket-outline" size={Math.min(40, height / 3)} color={colors.textTertiary} />
       </View>
     );
   }
@@ -52,7 +52,7 @@ export function OfferImage({ image, size, height, accessibilityLabel }: Props) {
 const styles = StyleSheet.create({
   placeholder: {
     width: '100%',
-    backgroundColor: colors.bgBrandSoft,
+    backgroundColor: colors.bgSurfaceMuted,
     alignItems: 'center',
     justifyContent: 'center',
   },

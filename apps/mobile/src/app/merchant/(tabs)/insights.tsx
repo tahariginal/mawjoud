@@ -14,7 +14,7 @@ import { useMerchantContext } from '@/state/merchantContext';
 function Metric({ label, value }: { label: string; value: string }) {
   return (
     <Card>
-      <AppText variant="title1" color={colors.textBrand}>
+      <AppText variant="title1" color={colors.textPrimary}>
         {value}
       </AppText>
       <AppText variant="subhead" color={colors.textSecondary}>

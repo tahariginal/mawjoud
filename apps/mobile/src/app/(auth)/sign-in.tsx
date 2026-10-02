@@ -64,7 +64,7 @@ export default function SignInScreen() {
           onSubmitEditing={() => void submit()}
         />
         <Link href="/forgot-password" style={styles.link}>
-          <AppText variant="subhead" weight="semibold" color={colors.textBrand}>
+          <AppText variant="subhead" weight="semibold" color={colors.textPrimary}>
             {t('auth.forgot')}
           </AppText>
         </Link>

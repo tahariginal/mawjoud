@@ -81,7 +81,7 @@ function ImpactCard() {
         <AppText variant="headline">{t('home.impact')}</AppText>
         <View style={styles.impactRow}>
           <View style={styles.flex}>
-            <AppText variant="title2" color={colors.textBrand}>
+            <AppText variant="title2" color={colors.textPrimary}>
               {impact.data.itemsRescued}
             </AppText>
             <AppText variant="footnote" color={colors.textSecondary}>
@@ -89,7 +89,7 @@ function ImpactCard() {
             </AppText>
           </View>
           <View style={styles.flex}>
-            <AppText variant="title2" color={colors.textBrand}>
+            <AppText variant="title2" color={colors.textPrimary}>
               {formatMoney(impact.data.moneySaved, currentLocale())}
             </AppText>
             <AppText variant="footnote" color={colors.textSecondary}>
@@ -137,7 +137,7 @@ export default function HomeScreen() {
         }
       >
         <View style={styles.hero}>
-          <AppText variant="display" color={colors.textBrand} accessibilityRole="header">
+          <AppText variant="display" color={colors.textPrimary} accessibilityRole="header">
             {t('home.hero')}
           </AppText>
           <DemoBadge />

@@ -84,7 +84,7 @@ export function OffersMap({ center, offers, onSearchArea, onShowList }: Props) {
             coordinate={{ latitude: offer.store.location.lat, longitude: offer.store.location.lng }}
             title={offer.store.name}
             description={offer.title}
-            pinColor={offer.quantityAvailable > 0 ? colors.bgBrand : colors.iconMuted}
+            pinColor={offer.quantityAvailable > 0 ? colors.actionPrimaryBg : colors.iconMuted}
             onPress={() => setSelectedId(offer.id)}
             tracksViewChanges={false}
           />

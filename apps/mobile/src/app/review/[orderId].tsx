@@ -54,7 +54,7 @@ export default function ReviewScreen() {
             <Icon
               name={value <= rating ? 'star' : 'star-outline'}
               size={32}
-              color={colors.textAccent}
+              color={colors.textPrimary}
             />
           </Pressable>
         ))}

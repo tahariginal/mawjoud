@@ -94,7 +94,7 @@ export function SectionHeader({
       </AppText>
       {actionLabel && onAction ? (
         <Pressable onPress={onAction} accessibilityRole="button" hitSlop={12}>
-          <AppText variant="subhead" weight="semibold" color={colors.textBrand}>
+          <AppText variant="subhead" weight="semibold" color={colors.textPrimary}>
             {actionLabel}
           </AppText>
         </Pressable>
@@ -135,7 +135,7 @@ export function SwitchRow({
         onValueChange={onValueChange}
         disabled={disabled}
         accessibilityLabel={label}
-        trackColor={{ true: colors.bgBrand, false: colors.borderInput }}
+        trackColor={{ true: colors.actionPrimaryBg, false: colors.controlOff }}
         thumbColor={colors.bgSurface}
       />
     </View>

@@ -85,7 +85,7 @@ export default function LocationScreen() {
                     <Icon
                       name="checkmark"
                       size={20}
-                      color={colors.textBrand}
+                      color={colors.textPrimary}
                       accessibilityLabel={t('location.selected')}
                     />
                   ) : undefined

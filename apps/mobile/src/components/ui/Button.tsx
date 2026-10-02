@@ -28,14 +28,14 @@ const palettes: Record<Variant, { bg: string; bgPressed: string; fg: string; bor
   },
   secondary: {
     bg: colors.actionSecondaryBg,
-    bgPressed: colors.bgBrandSoft,
+    bgPressed: colors.actionSecondaryBgPressed,
     fg: colors.actionSecondaryFg,
-    border: colors.actionSecondaryBorder,
+    border: colors.actionSecondaryBg,
   },
   tertiary: {
     bg: 'transparent',
-    bgPressed: colors.bgBrandSoft,
-    fg: colors.textBrand,
+    bgPressed: colors.bgSurfaceMuted,
+    fg: colors.textPrimary,
     border: 'transparent',
   },
   destructive: {

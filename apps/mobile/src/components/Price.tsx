@@ -28,7 +28,7 @@ export function PriceTag({ price, referenceValue, size = 'md' }: PriceTagProps) 
           : priceText
       }
     >
-      <AppText variant={size === 'lg' ? 'title2' : 'headline'} color={colors.textBrand}>
+      <AppText variant={size === 'lg' ? 'title2' : 'headline'} color={colors.textPrimary}>
         {priceText}
       </AppText>
       {referenceText ? (

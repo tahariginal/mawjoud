@@ -31,13 +31,13 @@ export function SegmentedControl<T extends string>({ options, value, onChange }:
               <Icon
                 name={option.icon}
                 size={16}
-                color={selected ? colors.textOnBrand : colors.textPrimary}
+                color={selected ? colors.actionPrimaryFg : colors.textPrimary}
               />
             ) : null}
             <AppText
               variant="subhead"
               weight="semibold"
-              color={selected ? colors.textOnBrand : colors.textPrimary}
+              color={selected ? colors.actionPrimaryFg : colors.textPrimary}
               numberOfLines={1}
             >
               {option.label}
@@ -66,5 +66,5 @@ const styles = StyleSheet.create({
     gap: spacing.xs,
     paddingHorizontal: spacing.md,
   },
-  selected: { backgroundColor: colors.bgBrand },
+  selected: { backgroundColor: colors.actionPrimaryBg },
 });

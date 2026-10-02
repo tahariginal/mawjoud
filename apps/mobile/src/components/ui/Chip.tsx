@@ -40,19 +40,19 @@ export function Chip({
       ]}
     >
       {selected && !removable ? (
-        <Icon name="checkmark" size={16} color={colors.textOnBrand} />
+        <Icon name="checkmark" size={16} color={colors.actionPrimaryFg} />
       ) : null}
-      {icon && !selected ? <Icon name={icon} size={16} color={colors.textBrand} /> : null}
+      {icon && !selected ? <Icon name={icon} size={16} color={colors.textPrimary} /> : null}
       <AppText
         variant="subhead"
         weight="medium"
-        color={selected ? colors.textOnBrand : colors.textPrimary}
+        color={selected ? colors.actionPrimaryFg : colors.textPrimary}
         numberOfLines={1}
       >
         {label}
       </AppText>
       {removable ? (
-        <Icon name="close" size={16} color={selected ? colors.textOnBrand : colors.icon} />
+        <Icon name="close" size={16} color={selected ? colors.actionPrimaryFg : colors.icon} />
       ) : null}
     </Pressable>
   );
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   unselected: { backgroundColor: colors.bgSurface, borderColor: colors.borderInput },
-  selected: { backgroundColor: colors.bgBrand, borderColor: colors.bgBrand },
+  selected: { backgroundColor: colors.actionPrimaryBg, borderColor: colors.actionPrimaryBg },
   pressed: { opacity: 0.85 },
   disabled: { opacity: 0.5 },
 });

@@ -25,7 +25,7 @@ export function StoreRow({ store, subtitle }: Props) {
       style={({ pressed }) => [styles.row, pressed && styles.pressed]}
     >
       <View style={styles.avatar}>
-        <Icon name="storefront-outline" size={22} color={colors.textBrand} />
+        <Icon name="storefront-outline" size={22} color={colors.textTertiary} />
       </View>
       <View style={styles.text}>
         <AppText variant="headline" numberOfLines={1}>
@@ -37,13 +37,13 @@ export function StoreRow({ store, subtitle }: Props) {
       </View>
       {store.rating ? (
         <View style={styles.rating} accessibilityLabel={`${store.rating.average} / 5`}>
-          <Icon name="star" size={14} color={colors.textAccent} />
+          <Icon name="star" size={14} color={colors.textPrimary} />
           <AppText variant="subhead" weight="semibold">
             {store.rating.average.toFixed(1)}
           </AppText>
         </View>
       ) : (
-        <AppText variant="caption" color={colors.textBrand}>
+        <AppText variant="caption" color={colors.accent}>
           {t('home.newStores')}
         </AppText>
       )}
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: radius.pill,
-    backgroundColor: colors.bgBrandSoft,
+    backgroundColor: colors.bgSurfaceMuted,
     alignItems: 'center',
     justifyContent: 'center',
   },

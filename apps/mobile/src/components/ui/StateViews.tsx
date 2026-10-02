@@ -26,7 +26,7 @@ export function EmptyState({
   return (
     <View style={styles.container} accessibilityRole="summary">
       <View style={styles.iconWrap}>
-        <Icon name={icon} size={32} color={colors.textBrand} />
+        <Icon name={icon} size={32} color={colors.textTertiary} />
       </View>
       <AppText variant="headline" align="center">
         {title}
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: radius.pill,
-    backgroundColor: colors.bgBrandSoft,
+    backgroundColor: colors.bgSurfaceMuted,
     alignItems: 'center',
     justifyContent: 'center',
   },

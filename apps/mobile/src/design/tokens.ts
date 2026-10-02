@@ -2,65 +2,70 @@
  * MAWJOOd design tokens. Source of truth: docs/UI_DESIGN_SYSTEM.md.
  * Components use semantic `colors`, never `palette` directly.
  * Contrast pairs were verified against WCAG 2.2 AA (see the design doc).
+ *
+ * Style: clean and minimal. White surfaces, black primary actions, one accent green
+ * reserved for savings, "open now", success and the active state of brand elements.
  */
 export const palette = {
-  green900: '#0E3B2C',
-  green800: '#14523C',
-  green700: '#1C6B4E',
-  green600: '#25805E',
-  mint300: '#9FD3B6',
-  mint100: '#E4F2EA',
-  paper50: '#FBF8F2',
-  paper100: '#F4EEE3',
   white: '#FFFFFF',
-  ink900: '#17201B',
-  ink700: '#3E4A43',
-  ink600: '#56625B',
-  ink500: '#6B776F',
-  borderStrong: '#7D877F',
-  borderSubtle: '#E6DFD2',
-  terracotta700: '#A4471F',
-  red700: '#B3261E',
-  red50: '#FCEBEA',
-  amber800: '#7A4F00',
-  amber50: '#FFF3D6',
-  blue700: '#1D5FA6',
-  blue50: '#E6F0FA',
+  gray50: '#F5F5F4',
+  gray75: '#F0F0EF',
+  gray100: '#EDEDEC',
+  gray150: '#EBEBEA',
+  gray300: '#D6D6D3',
+  gray500: '#8A8A8A',
+  gray600: '#6B6B6B',
+  gray800: '#333333',
+  black: '#111111',
+  green700: '#0B7A4B',
+  green50: '#E8F5EE',
+  red700: '#B42318',
+  red50: '#FEF0EE',
+  amber800: '#8A5300',
+  amber50: '#FFF6E0',
+  blue700: '#1F5FA8',
+  blue50: '#EEF4FB',
 } as const;
 
 export const colors = {
-  bgApp: palette.paper50,
+  bgApp: palette.white,
   bgSurface: palette.white,
-  bgSurfaceMuted: palette.paper100,
-  bgBrand: palette.green800,
-  bgBrandSoft: palette.mint100,
-  textPrimary: palette.ink900,
-  textSecondary: palette.ink600,
-  textOnBrand: palette.white,
-  textBrand: palette.green800,
-  textAccent: palette.terracotta700,
-  icon: palette.ink700,
-  iconMuted: palette.ink500,
-  actionPrimaryBg: palette.green800,
-  actionPrimaryBgPressed: palette.green900,
+  bgSurfaceMuted: palette.gray50,
+  /** Dark block for the one element that must stand out (e.g. today's pickup). */
+  bgInverse: palette.black,
+  textOnInverse: palette.white,
+  textPrimary: palette.black,
+  textSecondary: palette.gray600,
+  /** 3.45:1 on white — icons and other non-text UI only, never body text. */
+  textTertiary: palette.gray500,
+  /** Accent green: savings, "open now", success, selected brand states. */
+  accent: palette.green700,
+  accentSoft: palette.green50,
+  icon: palette.black,
+  iconMuted: palette.gray500,
+  actionPrimaryBg: palette.black,
+  actionPrimaryBgPressed: palette.gray800,
   actionPrimaryFg: palette.white,
-  actionSecondaryBg: palette.white,
-  actionSecondaryFg: palette.green800,
-  actionSecondaryBorder: palette.green800,
-  actionDisabledBg: palette.paper100,
-  actionDisabledFg: palette.ink600,
-  borderInput: palette.borderStrong,
-  borderDivider: palette.borderSubtle,
-  focusRing: palette.green700,
-  successFg: palette.green800,
-  successBg: palette.mint100,
+  actionSecondaryBg: palette.gray50,
+  actionSecondaryBgPressed: palette.gray150,
+  actionSecondaryFg: palette.black,
+  actionDisabledBg: palette.gray50,
+  actionDisabledFg: palette.gray600,
+  /** Off state of switches and similar controls (3.45:1 on white). */
+  controlOff: palette.gray500,
+  borderInput: palette.gray300,
+  borderDivider: palette.gray100,
+  focusRing: palette.black,
+  skeleton: palette.gray75,
+  successFg: palette.green700,
+  successBg: palette.green50,
   errorFg: palette.red700,
   errorBg: palette.red50,
   warningFg: palette.amber800,
   warningBg: palette.amber50,
   infoFg: palette.blue700,
   infoBg: palette.blue50,
-  scrim: 'rgba(23, 32, 27, 0.45)',
+  scrim: 'rgba(17, 17, 17, 0.45)',
 } as const;
 
 export const spacing = {
@@ -79,6 +84,7 @@ export const spacing = {
 } as const;
 
 export const radius = {
+  xs: 6,
   sm: 8,
   md: 12,
   lg: 16,
@@ -89,18 +95,20 @@ export const radius = {
 /** Minimum touch target (dp). */
 export const TOUCH_TARGET = 48;
 
+/** Height of buttons and text fields (dp). */
+export const CONTROL_HEIGHT = 52;
+
 export const fontFamily = {
   regular: 'Inter_400Regular',
   medium: 'Inter_500Medium',
   semibold: 'Inter_600SemiBold',
   bold: 'Inter_700Bold',
-  display: 'Fraunces_600SemiBold',
 } as const;
 
 export const typography = {
-  display: { fontFamily: fontFamily.display, fontSize: 32, lineHeight: 38 },
-  title1: { fontFamily: fontFamily.bold, fontSize: 24, lineHeight: 30 },
-  title2: { fontFamily: fontFamily.semibold, fontSize: 20, lineHeight: 26 },
+  display: { fontFamily: fontFamily.bold, fontSize: 34, lineHeight: 40, letterSpacing: -0.6 },
+  title1: { fontFamily: fontFamily.bold, fontSize: 28, lineHeight: 34, letterSpacing: -0.4 },
+  title2: { fontFamily: fontFamily.semibold, fontSize: 22, lineHeight: 28, letterSpacing: -0.2 },
   headline: { fontFamily: fontFamily.semibold, fontSize: 17, lineHeight: 22 },
   body: { fontFamily: fontFamily.regular, fontSize: 16, lineHeight: 22 },
   callout: { fontFamily: fontFamily.medium, fontSize: 15, lineHeight: 20 },
@@ -112,15 +120,11 @@ export const typography = {
 export type TypographyVariant = keyof typeof typography;
 
 export const elevation = {
-  card: {
-    shadowColor: palette.ink900,
-    shadowOpacity: 0.08,
-    shadowRadius: 3,
-    shadowOffset: { width: 0, height: 1 },
-    elevation: 1,
-  },
+  /** Cards are flat: sections are separated by space and hairlines, not shadows. */
+  card: {},
+  /** Floating elements only: sticky footers, map overlays. */
   raised: {
-    shadowColor: palette.ink900,
+    shadowColor: palette.black,
     shadowOpacity: 0.12,
     shadowRadius: 8,
     shadowOffset: { width: 0, height: 2 },

@@ -48,7 +48,7 @@ export function Stepper({
             icon="remove"
             accessibilityLabel={decreaseLabel}
             onPress={() => canDecrease && onChange(value - 1)}
-            color={colors.textBrand}
+            color={colors.textPrimary}
           />
         </View>
         <AppText variant="title2" style={styles.value}>
@@ -59,7 +59,7 @@ export function Stepper({
             icon="add"
             accessibilityLabel={increaseLabel}
             onPress={() => canIncrease && onChange(value + 1)}
-            color={colors.textBrand}
+            color={colors.textPrimary}
           />
         </View>
       </View>

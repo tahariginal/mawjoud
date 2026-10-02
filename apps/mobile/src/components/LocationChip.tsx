@@ -21,7 +21,7 @@ export function LocationChip() {
       <Icon
         name={selected.source === 'device' ? 'navigate' : 'location-outline'}
         size={18}
-        color={colors.textBrand}
+        color={colors.textPrimary}
       />
       <AppText variant="subhead" weight="semibold" numberOfLines={1} style={styles.label}>
         {selected.label}
@@ -42,6 +42,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bgSurface,
     flexShrink: 1,
   },
-  pressed: { backgroundColor: colors.bgBrandSoft },
+  pressed: { backgroundColor: colors.bgSurfaceMuted },
   label: { flexShrink: 1 },
 });

@@ -13,8 +13,8 @@ const tones: Record<BadgeTone, { bg: string; fg: string }> = {
   warning: { bg: colors.warningBg, fg: colors.warningFg },
   error: { bg: colors.errorBg, fg: colors.errorFg },
   info: { bg: colors.infoBg, fg: colors.infoFg },
-  accent: { bg: colors.bgSurfaceMuted, fg: colors.textAccent },
-  brand: { bg: colors.bgBrand, fg: colors.textOnBrand },
+  accent: { bg: colors.accentSoft, fg: colors.accent },
+  brand: { bg: colors.bgInverse, fg: colors.textOnInverse },
 };
 
 type Props = { label: string; tone?: BadgeTone; icon?: IconName };

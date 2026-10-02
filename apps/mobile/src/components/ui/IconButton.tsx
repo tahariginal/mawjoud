@@ -51,5 +51,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   background: { backgroundColor: colors.bgSurface },
-  pressed: { backgroundColor: colors.bgBrandSoft },
+  pressed: { backgroundColor: colors.bgSurfaceMuted },
 });
