@@ -68,15 +68,17 @@ Deep links: `mawjood://offer/{id}`, `mawjood://order/{id}`, `mawjood://store/{id
 ### 3.1 Home
 
 Order of content (top to bottom):
-1. **Top bar** — location chip ("Maarif, Casablanca ▾"), search button, avatar.
-2. **Hero line** — "Good food. Less waste." (one line, not a carousel).
-3. **Active order banner** — only if a pickup is upcoming today: store, window, "Show pass".
-4. **Available near you** — horizontal cards, sorted by deterministic ranking (§6).
-5. **Pickup soon** — offers whose window starts within 2 h.
-6. **Your favorites with food** — only if any.
-7. **Categories** — compact chips row.
+1. **Top bar** — location chip ("Maarif, Casablanca ▾") and a search button. Profile is a tab, so there is no avatar here.
+2. **Search field** — full width; tapping it opens search.
+3. **Active order banner** — only if a pickup is upcoming today: store, window, "Show pass". The only dark block on the screen.
+4. **Categories** — one horizontally scrolling chip row; a chip opens Explore filtered.
+5. **Available near you** — horizontal cards, sorted by deterministic ranking (§6). Rails have a "See all" link to Explore.
+6. **Pickup soon** — offers whose window starts within 2 h.
+7. **Your favorites with food** — only if any.
 8. **New nearby** — merchants that joined recently.
 9. **Impact summary** — small, signed-in users only.
+
+(Revised 2026-10-03: the "Good food. Less waste." hero line was removed — it took the top of the screen on every visit.)
 
 **Decision: the location chip is the first element.**
 1. *Problem:* every result depends on location; a wrong location makes the whole app look empty.
