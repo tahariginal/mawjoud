@@ -108,18 +108,9 @@ export const useOrders = (scope: OrdersScope) => {
   });
 };
 
-const AWAITING: Order['status'][] = ['CREATED', 'PAYMENT_PENDING'];
-
-/** Order detail. Polls while the payment outcome is unknown ("Checking payment…"). */
-export const useOrder = (id: string, options: { pollWhilePending?: boolean } = {}) =>
-  useQuery({
-    queryKey: qk.order(id),
-    queryFn: () => api.getOrder(id),
-    refetchInterval: (query) =>
-      options.pollWhilePending && query.state.data && AWAITING.includes(query.state.data.status)
-        ? 3000
-        : false,
-  });
+/** Order detail. Refetched on focus so status changes (e.g. picked up) show up. */
+export const useOrder = (id: string) =>
+  useQuery({ queryKey: qk.order(id), queryFn: () => api.getOrder(id), staleTime: 0 });
 
 export const useQuote = (offerId: string, quantity: number, enabled: boolean) =>
   useQuery({
@@ -157,7 +148,7 @@ export function useCreateOrder() {
         { offerId: v.offerId, quantity: v.quantity, quoteVersion: v.quoteVersion },
         v.idempotencyKey,
       ),
-    onSuccess: (result) => invalidate(result.order),
+    onSuccess: (order) => invalidate(order),
   });
 }
 
@@ -174,14 +165,6 @@ export function useReviewOrder(id: string) {
   return useMutation({
     mutationFn: (input: ReviewRequest) => api.reviewOrder(id, input),
     onSuccess: () => void client.invalidateQueries({ queryKey: qk.order(id) }),
-  });
-}
-
-export function useSimulatePayment(orderId: string) {
-  const invalidate = useInvalidateOrders();
-  return useMutation({
-    mutationFn: (outcome: 'success' | 'failure') => api.simulateDevPayment(orderId, outcome),
-    onSuccess: (order) => invalidate(order),
   });
 }
 

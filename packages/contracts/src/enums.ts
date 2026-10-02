@@ -24,6 +24,10 @@ export const PaymentStatus = z.enum([
 ]);
 export type PaymentStatus = z.infer<typeof PaymentStatus>;
 
+/** MVP: reservations are paid at the store. ONLINE is added with the payment provider (ADR-015). */
+export const PaymentMethod = z.enum(['PAY_AT_PICKUP']);
+export type PaymentMethod = z.infer<typeof PaymentMethod>;
+
 export const OfferStatus = z.enum([
   'DRAFT',
   'SCHEDULED',

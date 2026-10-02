@@ -19,7 +19,6 @@ import { formatMoney } from '@/lib/format';
 import { useErrorMessage } from '@/lib/useErrorMessage';
 import { checkoutKeyFor, clearCheckoutAttempt } from '@/state/checkoutKeys';
 import { useLocationStore } from '@/state/location';
-import { usePendingPayments } from '@/state/pendingPayments';
 import { useSession } from '@/state/session';
 
 function Line({ label, value, strong }: { label: string; value: string; strong?: boolean }) {
@@ -44,7 +43,6 @@ export default function CheckoutScreen() {
   const canQuote = status === 'signedIn' && !!me?.emailVerified;
   const quote = useQuote(offerId, quantity, canQuote && offer.isSuccess);
   const createOrder = useCreateOrder();
-  const setPending = usePendingPayments((s) => s.set);
   const locale = currentLocale();
 
   if (status === 'signedOut') {
@@ -119,11 +117,10 @@ export default function CheckoutScreen() {
     createOrder.mutate(
       { offerId: o.id, quantity, quoteVersion: quote.data.quoteVersion, idempotencyKey },
       {
-        onSuccess: async (result) => {
+        onSuccess: async (order) => {
           await clearCheckoutAttempt();
-          setPending(result.order.id, result.payment);
           router.dismissAll();
-          router.push({ pathname: '/payment/[orderId]', params: { orderId: result.order.id } });
+          router.push({ pathname: '/order/[id]', params: { id: order.id } });
         },
         onError: (error) => {
           if (errorCodeOf(error) === 'PRICE_CHANGED') void quote.refetch();
@@ -136,11 +133,11 @@ export default function CheckoutScreen() {
 
   const footer = (
     <Button
-      label={total ? t('checkout.pay', { amount: total }) : t('checkout.calculating')}
+      label={total ? t('checkout.reserve', { amount: total }) : t('checkout.calculating')}
       onPress={() => void pay()}
       loading={createOrder.isPending}
       disabled={!quote.data}
-      icon="lock-closed-outline"
+      icon="bag-check-outline"
       fullWidth
     />
   );
@@ -219,7 +216,7 @@ export default function CheckoutScreen() {
               strong
             />
             <AppText variant="footnote" color={colors.textSecondary}>
-              {t('checkout.holdNote', { minutes: quote.data.holdMinutes })}
+              {t('checkout.payAtPickupNote')}
             </AppText>
           </>
         )}

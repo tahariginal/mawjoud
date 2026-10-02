@@ -44,7 +44,7 @@ describe('demo adapter mirrors the documented rules', () => {
     const api = await signedIn();
     const first = await api.createOrder({ offerId: OFFER_MULTI, quantity: 1 }, 'same-key');
     const second = await api.createOrder({ offerId: OFFER_MULTI, quantity: 1 }, 'same-key');
-    expect(second.order.id).toBe(first.order.id);
+    expect(second.id).toBe(first.id);
     const offer = await api.getOffer(OFFER_MULTI, null);
     expect(offer.quantityAvailable).toBe(5);
   });
@@ -64,21 +64,19 @@ describe('demo adapter mirrors the documented rules', () => {
     );
   });
 
-  it('confirms on successful payment and issues a pickup pass', async () => {
+  it('confirms a reservation immediately with a pickup pass, paid at pickup', async () => {
     const api = await signedIn();
-    const { order } = await api.createOrder({ offerId: OFFER_MULTI, quantity: 1 }, 'pay');
-    expect(order.status).toBe('PAYMENT_PENDING');
-    const paid = await api.simulateDevPayment(order.id, 'success');
-    expect(paid.status).toBe('CONFIRMED');
-    expect(paid.pickupPass?.code).toMatch(/^[A-Z0-9]{6}$/);
+    const order = await api.createOrder({ offerId: OFFER_MULTI, quantity: 1 }, 'reserve');
+    expect(['CONFIRMED', 'READY_FOR_PICKUP']).toContain(order.status);
+    expect(order.paymentMethod).toBe('PAY_AT_PICKUP');
+    expect(order.pickupPass?.code).toMatch(/^[A-Z0-9]{6}$/);
   });
 
-  it('releases stock when payment fails or the order is cancelled', async () => {
+  it('releases stock when a reservation is cancelled', async () => {
     const api = await signedIn();
-    const a = await api.createOrder({ offerId: OFFER_MULTI, quantity: 2 }, 'fail');
-    await api.simulateDevPayment(a.order.id, 'failure');
-    const b = await api.createOrder({ offerId: OFFER_MULTI, quantity: 2 }, 'cancel');
-    await api.cancelOrder(b.order.id, {}, 'c1');
+    const order = await api.createOrder({ offerId: OFFER_MULTI, quantity: 2 }, 'cancel');
+    expect((await api.getOffer(OFFER_MULTI, null)).quantityAvailable).toBe(4);
+    await api.cancelOrder(order.id, {}, 'c1');
     expect((await api.getOffer(OFFER_MULTI, null)).quantityAvailable).toBe(6);
   });
 

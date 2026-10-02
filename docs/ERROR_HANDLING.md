@@ -50,6 +50,7 @@
 | `PRICE_CHANGED` | 409 | Show new total, ask to confirm |
 | `ORDER_INVALID_TRANSITION` | 409 | Refresh order |
 | `ORDER_CANCELLATION_CLOSED` | 409 | Explain policy |
+| `ORDER_LIMIT_REACHED` | 409 | Too many active reservations (anti-hoarding without online payment, ADR-015) |
 | `PAYMENT_HOLD_EXPIRED` | 409 | Offer a new attempt if stock remains |
 | `PAYMENT_FAILED` | 402 | "You weren't charged." Retry |
 | `PAYMENT_PROVIDER_UNAVAILABLE` | 503 | Retry later; hold kept until expiry |

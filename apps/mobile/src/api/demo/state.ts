@@ -31,7 +31,6 @@ import {
   demoUserId,
 } from './fixtures';
 
-export const HOLD_MINUTES = 10;
 export const NO_SHOW_GRACE_MINUTES = 30;
 const MINUTE = 60_000;
 
@@ -281,15 +280,6 @@ export function transition(entry: DemoOrder, to: OrderStatus): void {
 /** Applies the time-based transitions the real backend runs as scheduled jobs. */
 export function applyTimeTransitions(state: DemoState, entry: DemoOrder, now: number): void {
   const o = entry.order;
-  if (
-    (o.status === 'CREATED' || o.status === 'PAYMENT_PENDING') &&
-    o.holdExpiresAt &&
-    Date.parse(o.holdExpiresAt) < now
-  ) {
-    transition(entry, 'EXPIRED');
-    if (o.payment) o.payment.status = 'CANCELLED';
-    releaseStock(state, entry);
-  }
   if (o.status === 'CONFIRMED' && Date.parse(o.pickup.start) <= now) {
     transition(entry, 'READY_FOR_PICKUP');
   }
@@ -299,9 +289,8 @@ export function applyTimeTransitions(state: DemoState, entry: DemoOrder, now: nu
   ) {
     transition(entry, 'NO_SHOW');
   }
-  o.cancellable =
-    o.status === 'PAYMENT_PENDING' ||
-    (o.status === 'CONFIRMED' && Date.parse(o.pickup.start) > now);
+  // Policy placeholder (D7): customers may cancel until the pickup window starts.
+  o.cancellable = o.status === 'CONFIRMED' && Date.parse(o.pickup.start) > now;
   o.reviewable = o.status === 'PICKED_UP';
 }
 
@@ -349,8 +338,7 @@ export function seedMerchantOrders(state: DemoState, now: number, makeToken: () 
           end: iso(now + 90 * MINUTE),
           timezone: s.timezone,
         },
-        holdExpiresAt: null,
-        payment: { status: 'PAID', refunded: null },
+        paymentMethod: 'PAY_AT_PICKUP',
         pickupPass: { token: makeToken(), code },
         pickedUpAt: null,
         cancellable: false,

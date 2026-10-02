@@ -4,7 +4,6 @@ import {
   AuthResponse,
   AuthTokens,
   Category,
-  CreateOrderResponse,
   FavoriteStore,
   HomeFeed,
   ImpactSummary,
@@ -281,13 +280,8 @@ export function createHttpApi(baseUrl: string): MawjoodApi {
 
     quote: (input) => send('POST', '/orders/quote', Quote, { body: input }),
     createOrder: (input, idempotencyKey) =>
-      send('POST', '/orders', CreateOrderResponse, {
+      send('POST', '/orders', Order, {
         body: input,
-        idempotencyKey,
-        timeoutMs: CHECKOUT_TIMEOUT_MS,
-      }),
-    resumePayment: (orderId, idempotencyKey) =>
-      send('POST', `/orders/${encodeURIComponent(orderId)}/payment`, CreateOrderResponse, {
         idempotencyKey,
         timeoutMs: CHECKOUT_TIMEOUT_MS,
       }),
@@ -301,10 +295,6 @@ export function createHttpApi(baseUrl: string): MawjoodApi {
       }),
     reviewOrder: (id, input) =>
       sendVoid('POST', `/orders/${encodeURIComponent(id)}/review`, { body: input }),
-    simulateDevPayment: () =>
-      Promise.reject(
-        new ApiError('NOT_AVAILABLE_YET', 'Payment simulator exists only in demo mode'),
-      ),
 
     getNotificationPreferences: () =>
       send('GET', '/me/notification-preferences', NotificationPreferences),

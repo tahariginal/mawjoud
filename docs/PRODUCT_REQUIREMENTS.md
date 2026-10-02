@@ -34,7 +34,7 @@ Explicitly avoided: clutter, decorative animation, repeated information, unneces
 | C-03 | Home feed: available near you, pickup soon, new nearby, favorites with stock, categories | Must |
 | C-04 | Explore in list and map views, with server-side filters (distance, price, category, pickup time, dietary, availability, rating) and sorting (relevance, distance, price, pickup time) | Must |
 | C-05 | Offer details: business, rating, distance, title, description, expected contents, price, reference value, savings, quantity left, pickup date and window, address, map, allergen info, terms | Must |
-| C-06 | Reserve with an explicit quantity and confirmation step; pay securely | Must |
+| C-06 | Reserve with an explicit quantity and confirmation step; **pay at the store at pickup** (MVP, ADR-015); online payment later | Must |
 | C-07 | Order confirmation with pickup pass (QR + short code) | Must |
 | C-08 | Directions to the business (hand-off to the device's maps app) | Must |
 | C-09 | Order history and order detail, including cancelled and refunded orders | Must |

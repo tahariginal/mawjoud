@@ -19,3 +19,4 @@ All records below are **Proposed** until the Phase 1 architecture is approved.
 | [012](ADR-012-pickup-validation.md) | Merchant-side pickup validation with offline manifest |
 | [013](ADR-013-apps-topology.md) | One mobile app (customer + merchant modes) and a web admin |
 | [014](ADR-014-expo-dev-builds.md) | Expo development builds, EAS and Continuous Native Generation |
+| [015](ADR-015-reservations-pay-at-pickup.md) | MVP reservations without online payment (pay at pickup) — **Accepted** |

@@ -52,21 +52,21 @@ Never commit `.env*` files (git-ignored). The app **refuses to start** in produc
 The demo adapter (`apps/mobile/src/api/demo/`) simulates the backend in memory with fictional Casablanca stores, so every screen can be reviewed now. A **"Demo data"** badge is shown while it is active.
 
 - Sign in with any email and password. Verification / reset code: `123456`.
-- Payments use a clearly labelled **development payment simulator** (success / failure). No money moves.
+- Reservations are confirmed immediately and paid at the store (no in-app payment, ADR-015).
 - Merchant mode: Profile → _Switch to business mode_. Seeded pickup codes to try on the Scan tab: `K7Q9MZ`, `P3XH8T`.
 
 ## Placeholders pending decisions
 
-| Placeholder                                               | Where                                                        | Decision                    |
-| --------------------------------------------------------- | ------------------------------------------------------------ | --------------------------- |
-| Payment provider (Stripe is not available in Morocco)     | Payment screen shows the dev simulator / "not available yet" | D1, D2, D3 — ADR-006        |
-| Brand spelling, bundle ID `com.mawjood.app`, icon         | `apps/mobile/app.config.ts`, `assets/images/`                | D5, D6                      |
-| Visual references                                         | Design tokens follow `docs/UI_DESIGN_SYSTEM.md`              | D6                          |
-| CO2e impact factors                                       | Impact screen shows "Coming soon", never a made-up number    | D8                          |
-| Cancellation / no-show policy, fees                       | Checkout shows a pending-policy note; fees are 0             | D7                          |
-| Legal texts, support contact                              | Legal and Help screens show "being prepared"                 | Client / counsel            |
-| Address search                                            | Location picker offers a fixed list of Casablanca areas      | Backend geocoding           |
-| Push notifications, OAuth (Apple/Google), French & Arabic | Settings show "coming soon" / "translation in progress"      | Later phases                |
-| Android Google Maps key                                   | Map falls back to the list                                   | Client Google Cloud account |
+| Placeholder                                                | Where                                                     | Decision                    |
+| ---------------------------------------------------------- | --------------------------------------------------------- | --------------------------- |
+| Online payment (deferred; Stripe not available in Morocco) | Reservations are paid at the store at pickup              | ADR-015                     |
+| Brand spelling, bundle ID `com.mawjood.app`, icon          | `apps/mobile/app.config.ts`, `assets/images/`             | D5, D6                      |
+| Visual references                                          | Design tokens follow `docs/UI_DESIGN_SYSTEM.md`           | D6                          |
+| CO2e impact factors                                        | Impact screen shows "Coming soon", never a made-up number | D8                          |
+| Cancellation / no-show policy, fees                        | Checkout shows a pending-policy note; fees are 0          | D7                          |
+| Legal texts, support contact                               | Legal and Help screens show "being prepared"              | Client / counsel            |
+| Address search                                             | Location picker offers a fixed list of Casablanca areas   | Backend geocoding           |
+| Push notifications, OAuth (Apple/Google), French & Arabic  | Settings show "coming soon" / "translation in progress"   | Later phases                |
+| Android Google Maps key                                    | Map falls back to the list                                | Client Google Cloud account |
 
 See [docs/README.md](docs/README.md) for the full list of open decisions.

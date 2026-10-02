@@ -3,10 +3,8 @@ import {
   OffersQuery as OffersQuerySchema,
   PICKUP_CODE_ALPHABET,
   isUpcomingOrderStatus,
-  type CreateOrderResponse,
   type GeoPoint,
   type Order,
-  type PaymentClientParams,
   type Quote,
 } from '@mawjood/contracts';
 
@@ -17,7 +15,6 @@ import { tokenStorage } from '../tokenStorage';
 import type { MawjoodApi } from '../types';
 import { DEMO_CURRENCY, demoCategories, demoStores } from './fixtures';
 import {
-  HOLD_MINUTES,
   MINUTE,
   applyTimeTransitions,
   demoMe,
@@ -40,7 +37,6 @@ import {
 const DEMO_REFRESH_TOKEN = 'demo-refresh-token';
 /** Demo verification / reset code. Shown in the UI in demo mode only. */
 export const DEMO_ONE_TIME_CODE = '123456';
-const DEV_PAYMENT: PaymentClientParams = { kind: 'DEV_SIMULATOR' };
 const NEARBY_RADIUS_M = 10_000;
 
 /** Deep copy so callers never mutate demo state (JSON-safe data only). */
@@ -69,12 +65,10 @@ type CustomerKeys =
   | 'removeFavorite'
   | 'quote'
   | 'createOrder'
-  | 'resumePayment'
   | 'listOrders'
   | 'getOrder'
   | 'cancelOrder'
   | 'reviewOrder'
-  | 'simulateDevPayment'
   | 'getNotificationPreferences'
   | 'updateNotificationPreferences'
   | 'getImpact';
@@ -138,7 +132,6 @@ export function createDemoCustomerApi(state: DemoState, now: () => number): Demo
         total: money(subtotal),
       },
       quoteVersion: `${offer.id}:${offer.version}:${offer.priceMinor}`,
-      holdMinutes: HOLD_MINUTES,
     };
   }
 
@@ -184,8 +177,7 @@ export function createDemoCustomerApi(state: DemoState, now: () => number): Demo
           total: money(offer.priceMinor),
         },
         pickup: { start: iso(t), end: iso(t + 60 * MINUTE), timezone: s.timezone },
-        holdExpiresAt: null,
-        payment: { status: 'PAID', refunded: null },
+        paymentMethod: 'PAY_AT_PICKUP',
         pickupPass: null,
         pickedUpAt: iso(t + 20 * MINUTE),
         cancellable: false,
@@ -413,7 +405,7 @@ export function createDemoCustomerApi(state: DemoState, now: () => number): Demo
       const replayKey = `order:${me.id}:${idempotencyKey}`;
       const fingerprint = JSON.stringify(input);
       const previous = state.idempotency.get(replayKey) as
-        { fingerprint: string; response: CreateOrderResponse } | undefined;
+        { fingerprint: string; response: Order } | undefined;
       if (previous) {
         if (previous.fingerprint !== fingerprint) {
           throw new ApiError('IDEMPOTENCY_KEY_REUSED', 'Key reused with another body', {
@@ -460,9 +452,11 @@ export function createDemoCustomerApi(state: DemoState, now: () => number): Demo
         ],
         breakdown: quote.breakdown,
         pickup: { start: offer.pickupStart, end: offer.pickupEnd, timezone: s.timezone },
-        holdExpiresAt: iso(t + HOLD_MINUTES * MINUTE),
-        payment: null,
-        pickupPass: null,
+        paymentMethod: 'PAY_AT_PICKUP',
+        pickupPass: {
+          token: newUuid().replace(/-/g, ''),
+          code: randomFromAlphabet(6, PICKUP_CODE_ALPHABET),
+        },
         pickedUpAt: null,
         cancellable: true,
         cancelledReason: null,
@@ -476,24 +470,14 @@ export function createDemoCustomerApi(state: DemoState, now: () => number): Demo
         quantity: input.quantity,
         customerInitial: me.displayName.charAt(0).toUpperCase(),
       };
-      transition(entry, 'PAYMENT_PENDING');
-      order.payment = { status: 'PENDING', refunded: null };
+      // Reservation without online payment: confirmed immediately (ADR-015).
+      transition(entry, 'CONFIRMED');
+      applyTimeTransitions(state, entry, t);
       state.orders.set(order.id, entry);
 
-      const response: CreateOrderResponse = { order: clone(order), payment: DEV_PAYMENT };
+      const response = clone(order);
       state.idempotency.set(replayKey, { fingerprint, response });
       return response;
-    },
-    async resumePayment(orderId) {
-      const entry = findUserOrder(orderId);
-      if (entry.order.status === 'EXPIRED')
-        throw new ApiError('PAYMENT_HOLD_EXPIRED', 'Hold expired', { status: 409 });
-      if (entry.order.status !== 'PAYMENT_PENDING') {
-        throw new ApiError('ORDER_INVALID_TRANSITION', 'Order is not awaiting payment', {
-          status: 409,
-        });
-      }
-      return { order: clone(entry.order), payment: DEV_PAYMENT };
     },
     async listOrders(scope) {
       const items = userOrders()
@@ -510,11 +494,6 @@ export function createDemoCustomerApi(state: DemoState, now: () => number): Demo
         throw new ApiError('ORDER_CANCELLATION_CLOSED', 'Too late to cancel', { status: 409 });
       transition(entry, 'CANCELLED');
       entry.order.cancelledReason = input.reason ?? null;
-      if (entry.order.payment?.status === 'PAID') {
-        entry.order.payment = { status: 'REFUNDED', refunded: entry.order.breakdown.total };
-      } else if (entry.order.payment) {
-        entry.order.payment.status = 'CANCELLED';
-      }
       releaseStock(state, entry);
       applyTimeTransitions(state, entry, now());
       return clone(entry.order);
@@ -526,27 +505,6 @@ export function createDemoCustomerApi(state: DemoState, now: () => number): Demo
       }
       reviewed.add(id);
       entry.order.reviewable = false;
-    },
-    async simulateDevPayment(orderId, outcome) {
-      const entry = findUserOrder(orderId);
-      if (entry.order.status === 'EXPIRED')
-        throw new ApiError('PAYMENT_HOLD_EXPIRED', 'Hold expired', { status: 409 });
-      if (entry.order.status !== 'PAYMENT_PENDING') return clone(entry.order);
-      if (outcome === 'success') {
-        transition(entry, 'CONFIRMED');
-        entry.order.payment = { status: 'PAID', refunded: null };
-        entry.order.holdExpiresAt = null;
-        entry.order.pickupPass = {
-          token: newUuid().replace(/-/g, ''),
-          code: randomFromAlphabet(6, PICKUP_CODE_ALPHABET),
-        };
-      } else {
-        transition(entry, 'FAILED');
-        entry.order.payment = { status: 'FAILED', refunded: null };
-        releaseStock(state, entry);
-      }
-      applyTimeTransitions(state, entry, now());
-      return clone(entry.order);
     },
 
     async getNotificationPreferences() {

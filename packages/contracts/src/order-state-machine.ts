@@ -5,7 +5,8 @@ import type { OrderStatus } from './enums.ts';
  * The API enforces these with guarded SQL updates; clients never send a status.
  */
 const TRANSITIONS: Readonly<Record<OrderStatus, readonly OrderStatus[]>> = {
-  CREATED: ['PAYMENT_PENDING', 'EXPIRED', 'FAILED'],
+  // CREATED -> CONFIRMED: reservation without online payment (pay at pickup, ADR-015).
+  CREATED: ['CONFIRMED', 'PAYMENT_PENDING', 'EXPIRED', 'FAILED'],
   PAYMENT_PENDING: ['CONFIRMED', 'EXPIRED', 'FAILED', 'CANCELLED'],
   CONFIRMED: ['READY_FOR_PICKUP', 'PICKED_UP', 'CANCELLED', 'NO_SHOW'],
   READY_FOR_PICKUP: ['PICKED_UP', 'CANCELLED', 'NO_SHOW'],

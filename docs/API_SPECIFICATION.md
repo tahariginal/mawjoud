@@ -94,13 +94,12 @@ GET /api/v1/offers?…&cursor=eyJ…
 | Method | Path | Notes |
 |---|---|---|
 | POST | `/orders/quote` | `{offerId, quantity}` → server-calculated price breakdown (no reservation) |
-| POST | `/orders` | `{offerId, quantity, quoteVersion?}` + `Idempotency-Key` → reserve + create payment. Errors: `OFFER_SOLD_OUT`, `OFFER_NOT_AVAILABLE`, `OFFER_QUANTITY_LIMIT`, `PRICE_CHANGED`, `PAYMENT_PROVIDER_UNAVAILABLE` |
-| POST | `/orders/:id/payment` | Resume/retry payment creation while hold is valid |
+| POST | `/orders` | `{offerId, quantity, quoteVersion?}` + `Idempotency-Key` → reservation confirmed immediately, returns `Order` with pickup pass (MVP pay at pickup, ADR-015). Errors: `OFFER_SOLD_OUT`, `OFFER_NOT_AVAILABLE`, `OFFER_QUANTITY_LIMIT`, `PRICE_CHANGED`, `ORDER_LIMIT_REACHED`, `AUTH_EMAIL_NOT_VERIFIED` |
 | GET | `/orders` | `status=upcoming|past`, cursor |
 | GET | `/orders/:id` | Detail, status, payment status, pickup pass (when confirmed) |
 | POST | `/orders/:id/cancel` | Customer cancel; policy-checked; refund automatic |
 | POST | `/orders/:id/review` | Only after `PICKED_UP`, once |
-| POST | `/webhooks/payments/:provider` | Provider-signed; raw body; not under user auth |
+| POST | `/webhooks/payments/:provider` | *Deferred with online payment (ADR-015).* Provider-signed; raw body; not under user auth |
 
 ### 4.7 Merchant (`/merchant/...`) — requires business membership
 | Method | Path | Role |

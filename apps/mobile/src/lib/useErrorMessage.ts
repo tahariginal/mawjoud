@@ -44,10 +44,8 @@ export function useErrorMessage(): (error: unknown) => string {
         }
         case 'PRICE_CHANGED':
           return t('errors.priceChanged');
-        case 'PAYMENT_HOLD_EXPIRED':
-          return t('errors.holdExpired');
-        case 'PAYMENT_FAILED':
-          return t('errors.paymentFailed');
+        case 'ORDER_LIMIT_REACHED':
+          return t('errors.orderLimit');
         case 'ORDER_CANCELLATION_CLOSED':
           return t('errors.cancellationClosed');
         case 'CONFLICT_STALE_VERSION':

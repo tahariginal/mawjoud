@@ -4,7 +4,6 @@ import type {
   CancelOrderRequest,
   Category,
   CreateOrderRequest,
-  CreateOrderResponse,
   DeleteAccountRequest,
   FavoriteStore,
   ForgotPasswordRequest,
@@ -80,14 +79,12 @@ export interface MawjoodApi {
 
   // Orders & payments
   quote(input: QuoteRequest): Promise<Quote>;
-  createOrder(input: CreateOrderRequest, idempotencyKey: string): Promise<CreateOrderResponse>;
-  resumePayment(orderId: string, idempotencyKey: string): Promise<CreateOrderResponse>;
+  /** Reserve: confirmed immediately, paid at pickup (ADR-015). */
+  createOrder(input: CreateOrderRequest, idempotencyKey: string): Promise<Order>;
   listOrders(scope: OrdersScope, cursor?: string): Promise<Page<Order>>;
   getOrder(id: string): Promise<Order>;
   cancelOrder(id: string, input: CancelOrderRequest, idempotencyKey: string): Promise<Order>;
   reviewOrder(id: string, input: ReviewRequest): Promise<void>;
-  /** Development payment simulator. Only the demo adapter supports it. */
-  simulateDevPayment(orderId: string, outcome: 'success' | 'failure'): Promise<Order>;
 
   // Profile
   getNotificationPreferences(): Promise<NotificationPreferences>;

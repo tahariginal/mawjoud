@@ -205,7 +205,8 @@ CREATED ──▶ PAYMENT_PENDING ──▶ CONFIRMED ──▶ READY_FOR_PICKUP
 
 | From | To | Actor | Condition |
 |---|---|---|---|
-| CREATED | PAYMENT_PENDING | SYSTEM | Provider payment created |
+| CREATED | CONFIRMED | SYSTEM | **MVP:** reservation without online payment, same transaction as stock decrement (ADR-015) |
+| CREATED | PAYMENT_PENDING | SYSTEM | Provider payment created (future online payment) |
 | CREATED, PAYMENT_PENDING | EXPIRED | SYSTEM | `hold_expires_at < now()`; stock released |
 | CREATED, PAYMENT_PENDING | FAILED | PROVIDER/SYSTEM | Payment failed definitively; stock released |
 | PAYMENT_PENDING | CANCELLED | CUSTOMER | Customer abandons before paying; stock released |

@@ -21,7 +21,7 @@ export default function OrderScreen() {
   const { t } = useTranslation();
   const errorMessage = useErrorMessage();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const order = useOrder(id, { pollWhilePending: true });
+  const order = useOrder(id);
   const cancel = useCancelOrder(id);
   const locale = currentLocale();
 
@@ -68,17 +68,14 @@ export default function OrderScreen() {
       {cancel.isError ? <Banner tone="error" message={errorMessage(cancel.error)} /> : null}
 
       {collectable && o.pickupPass ? (
-        <QRPass pass={o.pickupPass} storeName={o.store.name} />
-      ) : o.status === 'PAYMENT_PENDING' || o.status === 'CREATED' ? (
-        <Card>
-          <AppText variant="body">{t('orders.passNotYet')}</AppText>
-          <Button
-            label={t('orders.completePayment')}
-            onPress={() =>
-              router.push({ pathname: '/payment/[orderId]', params: { orderId: o.id } })
-            }
+        <>
+          <QRPass pass={o.pickupPass} storeName={o.store.name} />
+          <Banner
+            tone="info"
+            icon="cash-outline"
+            message={t('orders.payAtPickup', { amount: formatMoney(o.breakdown.total, locale) })}
           />
-        </Card>
+        </>
       ) : null}
 
       {o.pickedUpAt ? (
@@ -125,11 +122,6 @@ export default function OrderScreen() {
           </AppText>
           <AppText variant="headline">{formatMoney(o.breakdown.total, locale)}</AppText>
         </View>
-        {o.payment?.refunded ? (
-          <AppText variant="subhead" color={colors.successFg}>
-            {t('orders.refunded', { amount: formatMoney(o.payment.refunded, locale) })}
-          </AppText>
-        ) : null}
         <AppText variant="footnote" color={colors.textSecondary} selectable>
           {t('orders.reference')}: {o.shortCode}
         </AppText>

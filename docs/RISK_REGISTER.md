@@ -9,8 +9,8 @@ Scale: Likelihood / Impact = Low · Medium · High.
 | R3 | Data protection (Law 09-08 / CNDP), especially hosting abroad | Medium | High | Counsel review before staging with real data; region-agnostic infra (D4) | Client + counsel |
 | R4 | Overselling / double orders / double pickups | Low (by design) | High | Atomic conditional updates, unique constraints, idempotency, CS-1…CS-20 tests | Tech lead |
 | R5 | Low merchant adoption (empty map) | High | High | Launch in one dense area; merchant onboarding in < 10 min; staff-friendly scan flow | Client |
-| R6 | No-shows and late pickups hurt merchants | Medium | Medium | Reminders, clear policy (D7), no-show tracking, `NO_SHOW` state | Client + product |
-| R7 | Cash-at-pickup demanded by users (card penetration) | Medium | High | Decide D3; if yes, add reliability rules (verified accounts, limits) behind a flag | Client |
+| R6 | No-shows and late pickups hurt merchants (higher without online payment, ADR-015) | High | Medium | Reminders, clear policy (D7), no-show tracking, `NO_SHOW` state | Client + product |
+| R7 | Pay at pickup chosen for MVP (ADR-015) | — | — | Verified email, 3 active reservations max, no-show tracking | Client |
 | R8 | App Store / Play review rejection (account deletion, login options, privacy labels, reference prices) | Medium | Medium | Built-in compliance (in-app deletion, Apple sign-in with Google, accurate labels) | Tech lead |
 | R9 | Push notifications unreliable on some Android OEMs (battery optimizations) | Medium | Low | In-app notification center; email for transactional; reminders not critical for correctness | Tech lead |
 | R10 | Brand name / bundle id change after release | Medium | High | Confirm D5 before first store build | Client |

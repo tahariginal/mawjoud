@@ -11,7 +11,11 @@ import {
 
 const ALL = OrderStatus.options;
 
-test('happy path is allowed', () => {
+test('pay-at-pickup reservation is confirmed directly', () => {
+  assert.ok(canTransitionOrder('CREATED', 'CONFIRMED'));
+});
+
+test('online payment path is allowed', () => {
   assert.ok(canTransitionOrder('CREATED', 'PAYMENT_PENDING'));
   assert.ok(canTransitionOrder('PAYMENT_PENDING', 'CONFIRMED'));
   assert.ok(canTransitionOrder('CONFIRMED', 'READY_FOR_PICKUP'));
@@ -27,7 +31,6 @@ test('terminal states have no outgoing transitions', () => {
 
 test('cannot go backwards or skip payment', () => {
   assert.equal(canTransitionOrder('CONFIRMED', 'PAYMENT_PENDING'), false);
-  assert.equal(canTransitionOrder('CREATED', 'CONFIRMED'), false);
   assert.equal(canTransitionOrder('CREATED', 'PICKED_UP'), false);
   assert.equal(canTransitionOrder('PAYMENT_PENDING', 'PICKED_UP'), false);
 });

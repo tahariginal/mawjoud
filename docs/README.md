@@ -29,7 +29,7 @@ Last updated: 2026-10-02.
 |---|---|---|
 | A1 | Launch market is **Morocco**, currency **MAD** | Payments, legal, hosting, localization all change |
 | A2 | Launch in one city first (e.g. Casablanca) | Capacity planning, merchant onboarding |
-| A3 | Customers pay **in-app** before pickup | If cash-at-pickup is required, no-show and fraud handling change (see ADR-006) |
+| A3 | ~~Customers pay in-app~~ **MVP: customers reserve in the app and pay at pickup (ADR-015)** | Online payment added later |
 | A4 | One mobile app with customer + merchant modes; admin is a web app | See ADR-013 |
 | A5 | English first; French and Arabic (RTL) next; Darija later | i18n/RTL is built in from day one regardless |
 
@@ -37,9 +37,9 @@ Last updated: 2026-10-02.
 
 | ID | Decision | Owner | Blocks |
 |---|---|---|---|
-| D1 | **Payment provider.** Stripe does not support Morocco-based accounts (verified at stripe.com/global on 2026-10-02). Choose a Moroccan PSP/acquirer, or confirm a foreign entity. | Client + finance | Phase 5 |
+| D1 | **Payment provider** — *deferred: MVP has no online payment (ADR-015).* Stripe does not support Morocco-based accounts (verified at stripe.com/global on 2026-10-02). Choose a Moroccan PSP/acquirer, or confirm a foreign entity. | Client + finance | Phase 5 |
 | D2 | Marketplace money flow: does MAWJOOd collect and pay out merchants (commission), or do merchants get paid directly? | Client + legal | Phase 5 |
-| D3 | Cash-at-pickup allowed? | Client | Phase 5 |
+| D3 | ~~Cash-at-pickup allowed?~~ **Decided 2026-10-02: pay at pickup for the MVP (ADR-015).** | Client | — |
 | D4 | Hosting region and data residency under Law 09-08 (CNDP authorization for transfers abroad) | Client + legal counsel | Phase 2 (staging), Phase 11 (prod) |
 | D5 | Exact brand spelling for store listings and bundle IDs (`MAWJOOd` vs `Mawjood` vs `Mawjoud`). Bundle IDs **cannot change after publishing**. | Client | Phase 2 |
 | D6 | Visual references: the brief mentions "provided MAWJOOd references" but none are in the repository | Client | Phase 1 sign-off of design system |

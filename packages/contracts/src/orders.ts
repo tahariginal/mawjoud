@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { GeoPoint, IsoDateTime, Money, Uuid } from './common.ts';
 import { Address, PickupWindow } from './discovery.ts';
-import { OrderStatus, PaymentStatus } from './enums.ts';
+import { OrderStatus, PaymentMethod } from './enums.ts';
 
 export const MAX_QUANTITY_PER_ORDER = 20;
 
@@ -28,7 +28,6 @@ export const Quote = z.object({
   quantity: z.number().int().positive(),
   breakdown: PriceBreakdown,
   quoteVersion: z.string(),
-  holdMinutes: z.number().int().positive(),
 });
 export type Quote = z.infer<typeof Quote>;
 
@@ -38,17 +37,6 @@ export const CreateOrderRequest = z.strictObject({
   quoteVersion: z.string().optional(),
 });
 export type CreateOrderRequest = z.infer<typeof CreateOrderRequest>;
-
-/**
- * How the app should collect payment. The real provider is pending (docs ADR-006).
- * DEV_SIMULATOR exists only for development and is rejected by production builds.
- */
-export const PaymentClientParams = z.discriminatedUnion('kind', [
-  z.object({ kind: z.literal('HOSTED_PAGE'), url: z.url(), returnUrl: z.string() }),
-  z.object({ kind: z.literal('NATIVE_SHEET'), provider: z.string(), clientSecret: z.string() }),
-  z.object({ kind: z.literal('DEV_SIMULATOR') }),
-]);
-export type PaymentClientParams = z.infer<typeof PaymentClientParams>;
 
 export const OrderItem = z.object({
   offerId: Uuid,
@@ -81,8 +69,8 @@ export const Order = z.object({
   items: z.array(OrderItem).min(1),
   breakdown: PriceBreakdown,
   pickup: PickupWindow,
-  holdExpiresAt: IsoDateTime.nullable(),
-  payment: z.object({ status: PaymentStatus, refunded: Money.nullable() }).nullable(),
+  /** Online payment is deferred (ADR-015): customers pay the store at pickup. */
+  paymentMethod: PaymentMethod,
   pickupPass: PickupPass.nullable(),
   pickedUpAt: IsoDateTime.nullable(),
   cancellable: z.boolean(),
@@ -91,12 +79,6 @@ export const Order = z.object({
   createdAt: IsoDateTime,
 });
 export type Order = z.infer<typeof Order>;
-
-export const CreateOrderResponse = z.object({
-  order: Order,
-  payment: PaymentClientParams,
-});
-export type CreateOrderResponse = z.infer<typeof CreateOrderResponse>;
 
 export const CancelOrderRequest = z.strictObject({
   reason: z.string().trim().max(300).optional(),
