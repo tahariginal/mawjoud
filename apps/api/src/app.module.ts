@@ -8,6 +8,7 @@ import type { AppConfig } from './config/config.ts';
 import { DiscoveryModule } from './modules/discovery/discovery.module.ts';
 import { IdentityModule } from './modules/identity/identity.module.ts';
 import { MerchantsModule } from './modules/merchants/merchants.module.ts';
+import { OrdersModule } from './modules/orders/orders.module.ts';
 import { PlatformController } from './modules/platform/platform.controller.ts';
 import { AllExceptionsFilter } from './shared/errors/error.filter.ts';
 import { createValidationPipe } from './shared/errors/validation.ts';
@@ -41,6 +42,7 @@ export class AppModule {
         IdentityModule,
         MerchantsModule,
         DiscoveryModule,
+        OrdersModule,
         LoggerModule.forRoot({
           pinoHttp: {
             level: config.logLevel,

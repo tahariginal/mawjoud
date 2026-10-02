@@ -76,11 +76,15 @@ export async function createTestApp(options: Options = {}): Promise<TestContext>
   configureApp(app, config);
   await app.init();
 
-  const server = app.getHttpServer();
+  // Listen once on an ephemeral port; supertest would otherwise bind per request.
+  await app.listen(0, '127.0.0.1');
+  const address = app.getHttpServer().address();
+  if (!address || typeof address === 'string') throw new Error('Test server is not listening');
+  const baseUrl = `http://127.0.0.1:${address.port}`;
   return {
     app,
     email,
-    http: () => request(server),
+    http: () => request(baseUrl),
     db: app.get<Db>(DB),
     config,
     close: () => app.close(),
