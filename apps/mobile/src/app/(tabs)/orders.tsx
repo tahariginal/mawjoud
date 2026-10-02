@@ -9,7 +9,7 @@ import { useOrders } from '@/api/hooks';
 import { OrderRow } from '@/components/OrderRow';
 import { SignInPrompt } from '@/components/SignInPrompt';
 import { TabHeader } from '@/components/TabHeader';
-import { Screen } from '@/components/ui/Layout';
+import { Divider, Screen } from '@/components/ui/Layout';
 import { SegmentedControl } from '@/components/ui/SegmentedControl';
 import { EmptyState, ErrorState, ListSkeleton } from '@/components/ui/StateViews';
 import { spacing } from '@/design/tokens';
@@ -50,6 +50,7 @@ function OrdersList({ scope }: { scope: OrdersScope }) {
           <OrderRow order={item} />
         </View>
       )}
+      ItemSeparatorComponent={RowSeparator}
       refreshing={orders.isRefetching}
       onRefresh={() => void orders.refetch()}
     />
@@ -93,8 +94,17 @@ export default function OrdersScreen() {
   );
 }
 
+function RowSeparator() {
+  return (
+    <View style={styles.separator}>
+      <Divider />
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   controls: { paddingHorizontal: spacing.lg, paddingBottom: spacing.md },
   flex: { flex: 1 },
-  item: { paddingHorizontal: spacing.lg, paddingBottom: spacing.md },
+  item: { paddingHorizontal: spacing.lg },
+  separator: { paddingHorizontal: spacing.lg },
 });

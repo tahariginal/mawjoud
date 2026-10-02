@@ -11,9 +11,9 @@ import { TabHeader } from '@/components/TabHeader';
 import { AppText } from '@/components/ui/AppText';
 import { Banner } from '@/components/ui/Banner';
 import { Button } from '@/components/ui/Button';
-import { Screen } from '@/components/ui/Layout';
+import { Divider, Screen } from '@/components/ui/Layout';
 import { EmptyState, ErrorState, ListSkeleton } from '@/components/ui/StateViews';
-import { colors, elevation, radius, spacing } from '@/design/tokens';
+import { colors, spacing } from '@/design/tokens';
 import { useMerchantContext } from '@/state/merchantContext';
 
 function PickupRow({ order }: { order: MerchantOrder }) {
@@ -66,6 +66,7 @@ export default function TodayScreen() {
             <PickupRow order={item} />
           </View>
         )}
+        ItemSeparatorComponent={RowSeparator}
         refreshing={orders.isRefetching}
         onRefresh={() => void orders.refetch()}
       />
@@ -99,17 +100,23 @@ export default function TodayScreen() {
   );
 }
 
+function RowSeparator() {
+  return (
+    <View style={styles.separator}>
+      <Divider />
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   summary: { paddingHorizontal: spacing.lg, gap: spacing.md, paddingBottom: spacing.md },
   flex: { flex: 1 },
-  item: { paddingHorizontal: spacing.lg, paddingBottom: spacing.md },
+  item: { paddingHorizontal: spacing.lg },
+  separator: { paddingHorizontal: spacing.lg },
   row: {
     flexDirection: 'row',
     gap: spacing.md,
     alignItems: 'center',
-    padding: spacing.lg,
-    backgroundColor: colors.bgSurface,
-    borderRadius: radius.lg,
-    ...elevation.card,
+    paddingVertical: spacing.lg,
   },
 });

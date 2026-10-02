@@ -86,7 +86,11 @@ export default function StoreScreen() {
         {offers.length === 0 ? (
           <EmptyState icon="heart-outline" title={t('store.noOffers')} />
         ) : (
-          offers.map((o) => <OfferCard key={o.id} offer={o} />)
+          <View style={styles.offers}>
+            {offers.map((o) => (
+              <OfferCard key={o.id} offer={o} />
+            ))}
+          </View>
         )}
       </View>
 
@@ -118,6 +122,7 @@ export default function StoreScreen() {
 
 const styles = StyleSheet.create({
   section: { gap: spacing.md },
+  offers: { gap: spacing.xxl },
   hoursRow: { flexDirection: 'row', gap: spacing.md },
   flex: { flex: 1 },
 });

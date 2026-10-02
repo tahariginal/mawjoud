@@ -11,7 +11,7 @@ import { TabHeader } from '@/components/TabHeader';
 import { AppText } from '@/components/ui/AppText';
 import { Banner } from '@/components/ui/Banner';
 import { Button } from '@/components/ui/Button';
-import { Card, Screen } from '@/components/ui/Layout';
+import { Card, Divider, Screen } from '@/components/ui/Layout';
 import { EmptyState, ErrorState, ListSkeleton } from '@/components/ui/StateViews';
 import { colors, spacing } from '@/design/tokens';
 import { currentLocale } from '@/i18n';
@@ -124,6 +124,7 @@ export default function MerchantOffersScreen() {
             <OfferItem offer={item} />
           </View>
         )}
+        ItemSeparatorComponent={RowSeparator}
         refreshing={offers.isRefetching}
         onRefresh={() => void offers.refetch()}
       />
@@ -163,9 +164,18 @@ export default function MerchantOffersScreen() {
   );
 }
 
+function RowSeparator() {
+  return (
+    <View style={styles.separator}>
+      <Divider />
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  item: { paddingHorizontal: spacing.lg, paddingBottom: spacing.md },
+  item: { paddingHorizontal: spacing.lg, paddingVertical: spacing.lg },
+  separator: { paddingHorizontal: spacing.lg },
   top: { flexDirection: 'row', gap: spacing.sm, alignItems: 'flex-start' },
   actions: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
 });

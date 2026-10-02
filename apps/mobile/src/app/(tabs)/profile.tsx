@@ -188,5 +188,5 @@ const styles = StyleSheet.create({
   content: { paddingHorizontal: 0, gap: spacing.xl },
   pad: { paddingHorizontal: spacing.lg, gap: spacing.xs },
   guest: { gap: spacing.md },
-  groupTitle: { paddingHorizontal: spacing.xs, paddingBottom: spacing.xs },
+  groupTitle: { paddingBottom: spacing.xs },
 });

@@ -1,22 +1,21 @@
 import { Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, View } from 'react-native';
 
 import { useImpact } from '@/api/hooks';
 import { SignInPrompt } from '@/components/SignInPrompt';
 import { AppText } from '@/components/ui/AppText';
 import { Banner } from '@/components/ui/Banner';
-import { Card, Screen } from '@/components/ui/Layout';
+import { Card, Screen, Sections } from '@/components/ui/Layout';
 import { ErrorState, ListSkeleton } from '@/components/ui/StateViews';
-import { colors, spacing } from '@/design/tokens';
+import { colors } from '@/design/tokens';
 import { currentLocale } from '@/i18n';
 import { formatMoney } from '@/lib/format';
 import { useSession } from '@/state/session';
 
-function Metric({ label, value }: { label: string; value: string }) {
+function Metric({ label, value, color }: { label: string; value: string; color?: string }) {
   return (
     <Card>
-      <AppText variant="display" color={colors.textPrimary}>
+      <AppText variant="display" color={color ?? colors.textPrimary}>
         {value}
       </AppText>
       <AppText variant="subhead" color={colors.textSecondary}>
@@ -66,10 +65,14 @@ export default function ImpactScreen() {
   return (
     <Screen scroll>
       {title}
-      <View style={styles.grid}>
+      <Sections>
         <Metric label={t('impact.orders')} value={String(d.ordersCompleted)} />
         <Metric label={t('impact.items')} value={String(d.itemsRescued)} />
-        <Metric label={t('impact.moneySaved')} value={formatMoney(d.moneySaved, locale)} />
+        <Metric
+          label={t('impact.moneySaved')}
+          value={formatMoney(d.moneySaved, locale)}
+          color={colors.accent}
+        />
         <Metric
           label={t('impact.co2')}
           value={
@@ -78,7 +81,7 @@ export default function ImpactScreen() {
               : `${new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(d.co2eKg)} kg`
           }
         />
-      </View>
+      </Sections>
       <AppText variant="footnote" color={colors.textSecondary}>
         {t('impact.howCalculated')}
       </AppText>
@@ -88,7 +91,3 @@ export default function ImpactScreen() {
     </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  grid: { gap: spacing.md },
-});

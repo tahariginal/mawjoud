@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, TextInput, View } from 'react-native';
 
@@ -8,9 +8,9 @@ import { OfferCard } from '@/components/OfferCard';
 import { StoreRow } from '@/components/StoreRow';
 import { AppText } from '@/components/ui/AppText';
 import { Icon } from '@/components/ui/Icon';
-import { Screen, SectionHeader } from '@/components/ui/Layout';
+import { Divider, Screen, SectionHeader } from '@/components/ui/Layout';
 import { EmptyState, ErrorState, ListSkeleton } from '@/components/ui/StateViews';
-import { colors, radius, spacing, TOUCH_TARGET, typography } from '@/design/tokens';
+import { colors, CONTROL_HEIGHT, radius, spacing, typography } from '@/design/tokens';
 import { useLocationStore } from '@/state/location';
 
 /** Debounce so typing does not fire a request per keystroke. */
@@ -55,17 +55,24 @@ export default function SearchScreen() {
         {results.data.stores.length > 0 ? (
           <View style={styles.section}>
             <SectionHeader title={t('search.stores')} />
-            {results.data.stores.map((s) => (
-              <StoreRow key={s.id} store={s} />
-            ))}
+            <View>
+              {results.data.stores.map((s, index) => (
+                <Fragment key={s.id}>
+                  {index > 0 ? <Divider /> : null}
+                  <StoreRow store={s} />
+                </Fragment>
+              ))}
+            </View>
           </View>
         ) : null}
         {results.data.offers.length > 0 ? (
           <View style={styles.section}>
             <SectionHeader title={t('search.offers')} />
-            {results.data.offers.map((o) => (
-              <OfferCard key={o.id} offer={o} />
-            ))}
+            <View style={styles.offers}>
+              {results.data.offers.map((o) => (
+                <OfferCard key={o.id} offer={o} />
+              ))}
+            </View>
           </View>
         ) : null}
       </>
@@ -96,16 +103,15 @@ export default function SearchScreen() {
 
 const styles = StyleSheet.create({
   inputRow: {
-    minHeight: TOUCH_TARGET,
+    minHeight: CONTROL_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    paddingHorizontal: spacing.md,
-    borderRadius: radius.pill,
-    borderWidth: 1,
-    borderColor: colors.borderInput,
-    backgroundColor: colors.bgSurface,
+    paddingHorizontal: spacing.lg,
+    borderRadius: radius.md,
+    backgroundColor: colors.bgSurfaceMuted,
   },
   input: { ...typography.body, flex: 1, color: colors.textPrimary },
   section: { gap: spacing.md },
+  offers: { gap: spacing.xl },
 });

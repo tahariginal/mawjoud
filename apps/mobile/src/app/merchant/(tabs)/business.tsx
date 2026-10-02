@@ -5,7 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import { TabHeader } from '@/components/TabHeader';
 import { AppText } from '@/components/ui/AppText';
 import { Banner } from '@/components/ui/Banner';
-import { Card, Divider, Group, Screen } from '@/components/ui/Layout';
+import { Card, Divider, Group, Screen, Sections } from '@/components/ui/Layout';
 import { ListRow } from '@/components/ui/ListRow';
 import { ListSkeleton } from '@/components/ui/StateViews';
 import { colors, spacing } from '@/design/tokens';
@@ -46,29 +46,31 @@ export default function BusinessScreen() {
 
       <View style={styles.pad}>
         <AppText variant="headline">{t('merchant.locations')}</AppText>
-        {business.locations.map((loc) => (
-          <Card key={loc.id}>
-            <AppText variant="headline">{loc.name}</AppText>
-            <AppText variant="subhead" color={colors.textSecondary}>
-              {loc.address.line1}, {loc.address.city}
-            </AppText>
-            <AppText variant="subhead" weight="semibold">
-              {t('merchant.hours')}
-            </AppText>
-            {[...loc.hours]
-              .sort((a, b) => a.weekday - b.weekday)
-              .map((h) => (
-                <View key={h.weekday} style={styles.hours}>
-                  <AppText variant="subhead" style={styles.flex}>
-                    {weekdayName(h.weekday, locale)}
-                  </AppText>
-                  <AppText variant="subhead">
-                    {h.opensAt}–{h.closesAt}
-                  </AppText>
-                </View>
-              ))}
-          </Card>
-        ))}
+        <Sections>
+          {business.locations.map((loc) => (
+            <Card key={loc.id}>
+              <AppText variant="headline">{loc.name}</AppText>
+              <AppText variant="subhead" color={colors.textSecondary}>
+                {loc.address.line1}, {loc.address.city}
+              </AppText>
+              <AppText variant="subhead" weight="semibold">
+                {t('merchant.hours')}
+              </AppText>
+              {[...loc.hours]
+                .sort((a, b) => a.weekday - b.weekday)
+                .map((h) => (
+                  <View key={h.weekday} style={styles.hours}>
+                    <AppText variant="subhead" style={styles.flex}>
+                      {weekdayName(h.weekday, locale)}
+                    </AppText>
+                    <AppText variant="subhead">
+                      {h.opensAt}–{h.closesAt}
+                    </AppText>
+                  </View>
+                ))}
+            </Card>
+          ))}
+        </Sections>
         {/* PLACEHOLDER: editing locations/hours arrives with the merchant API (Phase 8). */}
         <Banner tone="info" message={t('merchant.editPending')} />
       </View>

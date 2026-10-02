@@ -171,6 +171,6 @@ const styles = StyleSheet.create({
   controls: { paddingHorizontal: spacing.lg, gap: spacing.md, paddingBottom: spacing.md },
   chips: { gap: spacing.sm, paddingEnd: spacing.lg },
   flex: { flex: 1 },
-  item: { paddingHorizontal: spacing.lg, paddingBottom: spacing.md },
+  item: { paddingHorizontal: spacing.lg, paddingBottom: spacing.xxl },
   footer: { padding: spacing.lg },
 });

@@ -7,7 +7,7 @@ import { useFavorites } from '@/api/hooks';
 import { SignInPrompt } from '@/components/SignInPrompt';
 import { StoreRow } from '@/components/StoreRow';
 import { TabHeader } from '@/components/TabHeader';
-import { Screen } from '@/components/ui/Layout';
+import { Divider, Screen } from '@/components/ui/Layout';
 import { EmptyState, ErrorState, ListSkeleton } from '@/components/ui/StateViews';
 import { spacing } from '@/design/tokens';
 import { useLocationStore } from '@/state/location';
@@ -56,6 +56,7 @@ function FavoritesList() {
           />
         </View>
       )}
+      ItemSeparatorComponent={RowSeparator}
       refreshing={favorites.isRefetching}
       onRefresh={() => void favorites.refetch()}
     />
@@ -83,6 +84,15 @@ export default function FavoritesScreen() {
   );
 }
 
+function RowSeparator() {
+  return (
+    <View style={styles.separator}>
+      <Divider />
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
-  item: { paddingHorizontal: spacing.lg, paddingBottom: spacing.sm },
+  item: { paddingHorizontal: spacing.lg },
+  separator: { paddingHorizontal: spacing.lg },
 });

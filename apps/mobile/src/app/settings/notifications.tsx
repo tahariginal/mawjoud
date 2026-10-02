@@ -12,7 +12,7 @@ import { Divider, Group, Screen, SwitchRow } from '@/components/ui/Layout';
 import { ErrorState, ListSkeleton } from '@/components/ui/StateViews';
 import { Stepper } from '@/components/ui/Stepper';
 import { TextField } from '@/components/ui/TextField';
-import { colors, radius, spacing } from '@/design/tokens';
+import { spacing } from '@/design/tokens';
 import { useErrorMessage } from '@/lib/useErrorMessage';
 
 export default function NotificationSettingsScreen() {
@@ -144,7 +144,7 @@ export default function NotificationSettingsScreen() {
         ) : null}
       </View>
 
-      <View style={styles.card}>
+      <View style={styles.section}>
         <Stepper
           label={t('settings.maxPerDay')}
           value={draft.maxFavoriteAlertsPerDay}
@@ -161,5 +161,4 @@ const styles = StyleSheet.create({
   section: { gap: spacing.sm },
   times: { flexDirection: 'row', gap: spacing.md },
   flex: { flex: 1 },
-  card: { backgroundColor: colors.bgSurface, borderRadius: radius.lg, padding: spacing.lg },
 });

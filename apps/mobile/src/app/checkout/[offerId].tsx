@@ -10,7 +10,7 @@ import { SignInPrompt } from '@/components/SignInPrompt';
 import { AppText } from '@/components/ui/AppText';
 import { Banner } from '@/components/ui/Banner';
 import { Button } from '@/components/ui/Button';
-import { Card, Divider, Screen } from '@/components/ui/Layout';
+import { Card, Divider, Screen, Sections } from '@/components/ui/Layout';
 import { EmptyState, ErrorState, ListSkeleton, Skeleton } from '@/components/ui/StateViews';
 import { Stepper } from '@/components/ui/Stepper';
 import { colors, spacing } from '@/design/tokens';
@@ -155,79 +155,81 @@ export default function CheckoutScreen() {
         <Banner tone="error" message={errorMessage(createOrder.error)} />
       ) : null}
 
-      <Card>
-        <Stepper
-          label={t('checkout.quantity')}
-          value={quantity}
-          min={1}
-          max={maxQuantity}
-          onChange={setQuantity}
-        />
-        <AppText variant="footnote" color={colors.textSecondary}>
-          {t('offer.maxPerOrder', { count: o.maxPerOrder })}
-        </AppText>
-      </Card>
-
-      <Card>
-        <AppText variant="headline">{t('checkout.pickup')}</AppText>
-        <PickupWindowText window={o.pickup} />
-        <AppText variant="subhead">
-          {o.storeDetail.address.line1}, {o.storeDetail.address.city}
-        </AppText>
-      </Card>
-
-      <Card>
-        {quote.isPending ? (
-          <Skeleton height={96} />
-        ) : quote.isError ? (
-          <ErrorState
-            error={quote.error}
-            onRetry={() => void quote.refetch()}
-            retrying={quote.isRefetching}
+      <Sections>
+        <Card>
+          <Stepper
+            label={t('checkout.quantity')}
+            value={quantity}
+            min={1}
+            max={maxQuantity}
+            onChange={setQuantity}
           />
-        ) : (
-          <>
-            <Line
-              label={t('checkout.subtotal')}
-              value={formatMoney(quote.data.breakdown.subtotal, locale)}
-            />
-            {quote.data.breakdown.fees.amountMinor > 0 ? (
-              <Line
-                label={t('checkout.fees')}
-                value={formatMoney(quote.data.breakdown.fees, locale)}
-              />
-            ) : null}
-            {quote.data.breakdown.tax.amountMinor > 0 ? (
-              <Line
-                label={t('checkout.tax')}
-                value={formatMoney(quote.data.breakdown.tax, locale)}
-              />
-            ) : null}
-            {quote.data.breakdown.discount.amountMinor > 0 ? (
-              <Line
-                label={t('checkout.discount')}
-                value={`−${formatMoney(quote.data.breakdown.discount, locale)}`}
-              />
-            ) : null}
-            <Divider />
-            <Line
-              label={t('checkout.total')}
-              value={formatMoney(quote.data.breakdown.total, locale)}
-              strong
-            />
-            <AppText variant="footnote" color={colors.textSecondary}>
-              {t('checkout.payAtPickupNote')}
-            </AppText>
-          </>
-        )}
-      </Card>
+          <AppText variant="footnote" color={colors.textSecondary}>
+            {t('offer.maxPerOrder', { count: o.maxPerOrder })}
+          </AppText>
+        </Card>
 
-      <Card>
-        <AppText variant="headline">{t('checkout.policyTitle')}</AppText>
-        <AppText variant="footnote" color={colors.textSecondary}>
-          {t('checkout.policyPending')}
-        </AppText>
-      </Card>
+        <Card>
+          <AppText variant="headline">{t('checkout.pickup')}</AppText>
+          <PickupWindowText window={o.pickup} />
+          <AppText variant="subhead">
+            {o.storeDetail.address.line1}, {o.storeDetail.address.city}
+          </AppText>
+        </Card>
+
+        <Card>
+          {quote.isPending ? (
+            <Skeleton height={96} />
+          ) : quote.isError ? (
+            <ErrorState
+              error={quote.error}
+              onRetry={() => void quote.refetch()}
+              retrying={quote.isRefetching}
+            />
+          ) : (
+            <>
+              <Line
+                label={t('checkout.subtotal')}
+                value={formatMoney(quote.data.breakdown.subtotal, locale)}
+              />
+              {quote.data.breakdown.fees.amountMinor > 0 ? (
+                <Line
+                  label={t('checkout.fees')}
+                  value={formatMoney(quote.data.breakdown.fees, locale)}
+                />
+              ) : null}
+              {quote.data.breakdown.tax.amountMinor > 0 ? (
+                <Line
+                  label={t('checkout.tax')}
+                  value={formatMoney(quote.data.breakdown.tax, locale)}
+                />
+              ) : null}
+              {quote.data.breakdown.discount.amountMinor > 0 ? (
+                <Line
+                  label={t('checkout.discount')}
+                  value={`−${formatMoney(quote.data.breakdown.discount, locale)}`}
+                />
+              ) : null}
+              <Divider />
+              <Line
+                label={t('checkout.total')}
+                value={formatMoney(quote.data.breakdown.total, locale)}
+                strong
+              />
+              <AppText variant="footnote" color={colors.textSecondary}>
+                {t('checkout.payAtPickupNote')}
+              </AppText>
+            </>
+          )}
+        </Card>
+
+        <Card>
+          <AppText variant="headline">{t('checkout.policyTitle')}</AppText>
+          <AppText variant="footnote" color={colors.textSecondary}>
+            {t('checkout.policyPending')}
+          </AppText>
+        </Card>
+      </Sections>
     </Screen>
   );
 }

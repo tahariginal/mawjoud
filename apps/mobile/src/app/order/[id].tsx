@@ -9,7 +9,7 @@ import { OrderStatusBadge } from '@/components/StatusBadges';
 import { AppText } from '@/components/ui/AppText';
 import { Banner } from '@/components/ui/Banner';
 import { Button } from '@/components/ui/Button';
-import { Card, Divider, Screen } from '@/components/ui/Layout';
+import { Card, Divider, Screen, Sections } from '@/components/ui/Layout';
 import { ErrorState, ListSkeleton } from '@/components/ui/StateViews';
 import { colors, spacing } from '@/design/tokens';
 import { currentLocale } from '@/i18n';
@@ -87,45 +87,47 @@ export default function OrderScreen() {
         />
       ) : null}
 
-      <Card>
-        <AppText variant="headline">{t('offer.pickup')}</AppText>
-        <AppText variant="subhead">
-          {o.store.address.line1}, {o.store.address.city}
-        </AppText>
-        <Button
-          label={t('offer.directions')}
-          icon="navigate-outline"
-          variant="secondary"
-          onPress={() => void openDirections(o.store.location, o.store.name)}
-        />
-      </Card>
-
-      <Card>
-        <AppText variant="headline">{t('orders.items')}</AppText>
-        {o.items.map((item) => (
-          <View key={item.offerId} style={styles.line}>
-            <AppText variant="subhead" style={styles.flex}>
-              {item.quantity}× {item.title}
-            </AppText>
-            <AppText variant="subhead">
-              {formatMoney(
-                { ...item.unitPrice, amountMinor: item.unitPrice.amountMinor * item.quantity },
-                locale,
-              )}
-            </AppText>
-          </View>
-        ))}
-        <Divider />
-        <View style={styles.line}>
-          <AppText variant="headline" style={styles.flex}>
-            {t('orders.total')}
+      <Sections>
+        <Card>
+          <AppText variant="headline">{t('offer.pickup')}</AppText>
+          <AppText variant="subhead">
+            {o.store.address.line1}, {o.store.address.city}
           </AppText>
-          <AppText variant="headline">{formatMoney(o.breakdown.total, locale)}</AppText>
-        </View>
-        <AppText variant="footnote" color={colors.textSecondary} selectable>
-          {t('orders.reference')}: {o.shortCode}
-        </AppText>
-      </Card>
+          <Button
+            label={t('offer.directions')}
+            icon="navigate-outline"
+            variant="secondary"
+            onPress={() => void openDirections(o.store.location, o.store.name)}
+          />
+        </Card>
+
+        <Card>
+          <AppText variant="headline">{t('orders.items')}</AppText>
+          {o.items.map((item) => (
+            <View key={item.offerId} style={styles.line}>
+              <AppText variant="subhead" style={styles.flex}>
+                {item.quantity}× {item.title}
+              </AppText>
+              <AppText variant="subhead">
+                {formatMoney(
+                  { ...item.unitPrice, amountMinor: item.unitPrice.amountMinor * item.quantity },
+                  locale,
+                )}
+              </AppText>
+            </View>
+          ))}
+          <Divider />
+          <View style={styles.line}>
+            <AppText variant="headline" style={styles.flex}>
+              {t('orders.total')}
+            </AppText>
+            <AppText variant="headline">{formatMoney(o.breakdown.total, locale)}</AppText>
+          </View>
+          <AppText variant="footnote" color={colors.textSecondary} selectable>
+            {t('orders.reference')}: {o.shortCode}
+          </AppText>
+        </Card>
+      </Sections>
 
       <View style={styles.actions}>
         {o.reviewable ? (
@@ -163,5 +165,5 @@ const styles = StyleSheet.create({
   header: { gap: spacing.sm },
   line: { flexDirection: 'row', gap: spacing.md, alignItems: 'center' },
   flex: { flex: 1 },
-  actions: { gap: spacing.md },
+  actions: { gap: spacing.xs },
 });

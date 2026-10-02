@@ -1,4 +1,4 @@
-import { useContext, type ReactNode } from 'react';
+import { Children, Fragment, useContext, type ReactNode } from 'react';
 import {
   Pressable,
   ScrollView,
@@ -120,6 +120,24 @@ export function SectionHeader({
   );
 }
 
+/**
+ * Flat sections stacked with hairline dividers between them — the replacement for stacked
+ * cards. Empty children (null/false) are skipped, so conditional sections need no wrapper.
+ */
+export function Sections({ children }: { children: ReactNode }) {
+  const items = Children.toArray(children);
+  return (
+    <View>
+      {items.map((child, index) => (
+        <Fragment key={index}>
+          {index > 0 ? <Divider /> : null}
+          <View style={styles.sectionItem}>{child}</View>
+        </Fragment>
+      ))}
+    </View>
+  );
+}
+
 /** Hairline separator. Inside a Group it spans the group, so it lines up with row text. */
 export function Divider() {
   return <View style={styles.divider} />;
@@ -192,6 +210,7 @@ const styles = StyleSheet.create({
     minHeight: 24,
   },
   divider: { height: StyleSheet.hairlineWidth, backgroundColor: colors.borderDivider },
+  sectionItem: { paddingVertical: spacing.xl },
   switchRow: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { useMerchantInsights } from '@/api/merchantHooks';
 import { TabHeader } from '@/components/TabHeader';
 import { AppText } from '@/components/ui/AppText';
-import { Card, Screen } from '@/components/ui/Layout';
+import { Card, Screen, Sections } from '@/components/ui/Layout';
 import { ErrorState, ListSkeleton } from '@/components/ui/StateViews';
 import { colors, spacing } from '@/design/tokens';
 import { currentLocale } from '@/i18n';
@@ -14,9 +14,7 @@ import { useMerchantContext } from '@/state/merchantContext';
 function Metric({ label, value }: { label: string; value: string }) {
   return (
     <Card>
-      <AppText variant="title1" color={colors.textPrimary}>
-        {value}
-      </AppText>
+      <AppText variant="title1">{value}</AppText>
       <AppText variant="subhead" color={colors.textSecondary}>
         {label}
       </AppText>
@@ -51,11 +49,13 @@ export default function InsightsScreen() {
         <AppText variant="subhead" color={colors.textSecondary}>
           {t('merchant.insightsPeriod')}
         </AppText>
-        <Metric label={t('merchant.revenue')} value={formatMoney(d.revenue, locale)} />
-        <Metric label={t('merchant.ordersCompleted')} value={String(d.ordersCompleted)} />
-        <Metric label={t('merchant.itemsRescued')} value={String(d.itemsRescued)} />
-        <Metric label={t('merchant.sellThrough')} value={percent(d.sellThroughRate)} />
-        <Metric label={t('merchant.noShowRate')} value={percent(d.noShowRate)} />
+        <Sections>
+          <Metric label={t('merchant.revenue')} value={formatMoney(d.revenue, locale)} />
+          <Metric label={t('merchant.ordersCompleted')} value={String(d.ordersCompleted)} />
+          <Metric label={t('merchant.itemsRescued')} value={String(d.itemsRescued)} />
+          <Metric label={t('merchant.sellThrough')} value={percent(d.sellThroughRate)} />
+          <Metric label={t('merchant.noShowRate')} value={percent(d.noShowRate)} />
+        </Sections>
       </View>
     );
   }

@@ -1,7 +1,8 @@
 import type { OfferSummary } from '@mawjood/contracts';
 import { router } from 'expo-router';
+import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 
 import { useHomeFeed, useImpact, useOrders } from '@/api/hooks';
 import { LocationChip } from '@/components/LocationChip';
@@ -12,21 +13,31 @@ import { StoreRow } from '@/components/StoreRow';
 import { AppText } from '@/components/ui/AppText';
 import { Banner } from '@/components/ui/Banner';
 import { Chip } from '@/components/ui/Chip';
+import { Icon } from '@/components/ui/Icon';
 import { IconButton } from '@/components/ui/IconButton';
-import { Card, Screen, SectionHeader } from '@/components/ui/Layout';
+import { Card, Divider, Screen, SectionHeader } from '@/components/ui/Layout';
 import { EmptyState, ErrorState, Skeleton } from '@/components/ui/StateViews';
-import { colors, spacing } from '@/design/tokens';
+import { colors, CONTROL_HEIGHT, radius, spacing } from '@/design/tokens';
 import { currentLocale } from '@/i18n';
 import { formatMoney, relativeDay } from '@/lib/format';
 import { DEFAULT_FILTERS, useFilters } from '@/state/filters';
 import { useLocationStore } from '@/state/location';
 import { useSession } from '@/state/session';
 
+const RAIL_CARD_WIDTH = 280;
+
 function OfferRail({ title, offers }: { title: string; offers: OfferSummary[] }) {
+  const { t } = useTranslation();
   if (offers.length === 0) return null;
   return (
-    <View style={styles.section}>
-      <SectionHeader title={title} />
+    <View style={styles.block}>
+      <View style={styles.pad}>
+        <SectionHeader
+          title={title}
+          actionLabel={t('common.seeAll')}
+          onAction={() => router.push('/explore')}
+        />
+      </View>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -40,6 +51,7 @@ function OfferRail({ title, offers }: { title: string; offers: OfferSummary[] })
   );
 }
 
+/** Today's pickup, when there is one: the one dark block on the screen. */
 function ActiveOrderBanner() {
   const { t } = useTranslation();
   const signedIn = useSession((s) => s.status === 'signedIn');
@@ -58,9 +70,9 @@ function ActiveOrderBanner() {
   );
   if (!signedIn || !next) return null;
   return (
-    <View style={styles.section}>
+    <View style={styles.pad}>
       <Banner
-        tone="success"
+        tone="inverse"
         icon="bag-check-outline"
         title={t('home.activeOrder', { store: next.store.name })}
         message={label}
@@ -76,20 +88,23 @@ function ImpactCard() {
   const impact = useImpact();
   if (!impact.data || impact.data.ordersCompleted === 0) return null;
   return (
-    <View style={styles.section}>
+    <View style={styles.pad}>
       <Card onPress={() => router.push('/impact')} accessibilityLabel={t('home.impact')}>
-        <AppText variant="headline">{t('home.impact')}</AppText>
+        <View style={styles.impactHeader}>
+          <AppText variant="title2" style={styles.flex}>
+            {t('home.impact')}
+          </AppText>
+          <Icon name="chevron-forward" size={18} color={colors.iconMuted} />
+        </View>
         <View style={styles.impactRow}>
           <View style={styles.flex}>
-            <AppText variant="title2" color={colors.textPrimary}>
-              {impact.data.itemsRescued}
-            </AppText>
+            <AppText variant="title1">{impact.data.itemsRescued}</AppText>
             <AppText variant="footnote" color={colors.textSecondary}>
               {t('impact.items')}
             </AppText>
           </View>
           <View style={styles.flex}>
-            <AppText variant="title2" color={colors.textPrimary}>
+            <AppText variant="title1" color={colors.accent}>
               {formatMoney(impact.data.moneySaved, currentLocale())}
             </AppText>
             <AppText variant="footnote" color={colors.textSecondary}>
@@ -118,15 +133,11 @@ export default function HomeScreen() {
       <View style={styles.topBar}>
         <LocationChip />
         <View style={styles.topActions}>
+          <DemoBadge />
           <IconButton
             icon="search-outline"
             accessibilityLabel={t('home.searchA11y')}
             onPress={() => router.push('/search')}
-          />
-          <IconButton
-            icon="person-circle-outline"
-            accessibilityLabel={t('home.profileA11y')}
-            onPress={() => router.push('/profile')}
           />
         </View>
       </View>
@@ -136,20 +147,36 @@ export default function HomeScreen() {
           <RefreshControl refreshing={feed.isRefetching} onRefresh={() => void feed.refetch()} />
         }
       >
-        <View style={styles.hero}>
-          <AppText variant="display" color={colors.textPrimary} accessibilityRole="header">
-            {t('home.hero')}
-          </AppText>
-          <DemoBadge />
+        <View style={styles.pad}>
+          <Pressable
+            onPress={() => router.push('/search')}
+            accessibilityRole="search"
+            accessibilityLabel={t('home.searchA11y')}
+            accessibilityHint={t('search.placeholder')}
+            style={({ pressed }) => [styles.searchField, pressed && styles.pressed]}
+          >
+            <Icon name="search-outline" size={20} color={colors.textPrimary} />
+            <AppText variant="body" color={colors.textSecondary} numberOfLines={1}>
+              {t('search.placeholder')}
+            </AppText>
+          </Pressable>
         </View>
+
         <ActiveOrderBanner />
 
         {feed.isPending ? (
-          <View style={styles.section}>
-            <Skeleton height={24} width="60%" />
+          <View style={styles.block}>
+            <View style={styles.chipRow}>
+              <Skeleton height={36} width={90} rounded={radius.pill} />
+              <Skeleton height={36} width={90} rounded={radius.pill} />
+              <Skeleton height={36} width={90} rounded={radius.pill} />
+            </View>
+            <View style={styles.pad}>
+              <Skeleton height={28} width="55%" />
+            </View>
             <View style={styles.rail}>
-              <Skeleton height={220} width={260} />
-              <Skeleton height={220} width={260} />
+              <Skeleton height={250} width={RAIL_CARD_WIDTH} rounded={radius.lg} />
+              <Skeleton height={250} width={RAIL_CARD_WIDTH} rounded={radius.lg} />
             </View>
           </View>
         ) : feed.isError ? (
@@ -168,25 +195,32 @@ export default function HomeScreen() {
           />
         ) : (
           <>
+            {feed.data.categories.length > 0 ? (
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.chipRow}
+                accessibilityLabel={t('home.categories')}
+              >
+                {feed.data.categories.map((c) => (
+                  <Chip key={c.id} label={c.name} onPress={() => openCategory(c.id)} />
+                ))}
+              </ScrollView>
+            ) : null}
             <OfferRail title={t('home.nearby')} offers={feed.data.nearby} />
             <OfferRail title={t('home.pickupSoon')} offers={feed.data.pickupSoon} />
             <OfferRail title={t('home.favorites')} offers={feed.data.favoritesAvailable} />
-            {feed.data.categories.length > 0 ? (
-              <View style={styles.section}>
-                <SectionHeader title={t('home.categories')} />
-                <View style={styles.chips}>
-                  {feed.data.categories.map((c) => (
-                    <Chip key={c.id} label={c.name} onPress={() => openCategory(c.id)} />
+            {feed.data.newStores.length > 0 ? (
+              <View style={[styles.pad, styles.stores]}>
+                <SectionHeader title={t('home.newStores')} />
+                <View>
+                  {feed.data.newStores.map((s, index) => (
+                    <Fragment key={s.id}>
+                      {index > 0 ? <Divider /> : null}
+                      <StoreRow store={s} />
+                    </Fragment>
                   ))}
                 </View>
-              </View>
-            ) : null}
-            {feed.data.newStores.length > 0 ? (
-              <View style={styles.section}>
-                <SectionHeader title={t('home.newStores')} />
-                {feed.data.newStores.map((s) => (
-                  <StoreRow key={s.id} store={s} />
-                ))}
               </View>
             ) : null}
             <ImpactCard />
@@ -202,16 +236,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.sm,
+    paddingStart: spacing.lg,
+    paddingEnd: spacing.sm,
     gap: spacing.sm,
   },
-  topActions: { flexDirection: 'row' },
-  content: { paddingBottom: spacing.huge, gap: spacing.xxl, paddingTop: spacing.sm },
-  hero: { paddingHorizontal: spacing.lg, gap: spacing.sm },
-  section: { gap: spacing.md, paddingHorizontal: spacing.lg },
-  rail: { gap: spacing.md, paddingEnd: spacing.lg, flexDirection: 'row' },
-  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  topActions: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs },
+  content: { paddingTop: spacing.xs, paddingBottom: spacing.huge, gap: spacing.xxxl },
+  pad: { paddingHorizontal: spacing.lg },
+  block: { gap: spacing.md },
+  searchField: {
+    minHeight: CONTROL_HEIGHT,
+    borderRadius: radius.md,
+    backgroundColor: colors.bgSurfaceMuted,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    paddingHorizontal: spacing.lg,
+  },
+  pressed: { opacity: 0.7 },
+  chipRow: { flexDirection: 'row', gap: spacing.sm, paddingHorizontal: spacing.lg },
+  rail: { flexDirection: 'row', gap: spacing.md, paddingHorizontal: spacing.lg },
+  stores: { gap: spacing.xs },
+  impactHeader: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   impactRow: { flexDirection: 'row', gap: spacing.lg },
   flex: { flex: 1 },
 });

@@ -48,6 +48,7 @@ export default function FiltersScreen() {
       <Button
         label={t('filters.reset')}
         variant="secondary"
+        fullWidth={false}
         onPress={() => setDraft(DEFAULT_FILTERS)}
       />
       <View style={styles.flex}>
