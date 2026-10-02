@@ -5,6 +5,7 @@ import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { LoggerModule } from 'nestjs-pino';
 
 import type { AppConfig } from './config/config.ts';
+import { DiscoveryModule } from './modules/discovery/discovery.module.ts';
 import { IdentityModule } from './modules/identity/identity.module.ts';
 import { MerchantsModule } from './modules/merchants/merchants.module.ts';
 import { PlatformController } from './modules/platform/platform.controller.ts';
@@ -39,6 +40,7 @@ export class AppModule {
         SecurityModule.forRoot(config),
         IdentityModule,
         MerchantsModule,
+        DiscoveryModule,
         LoggerModule.forRoot({
           pinoHttp: {
             level: config.logLevel,

@@ -90,29 +90,28 @@ export default function StoreScreen() {
         )}
       </View>
 
-      <View style={styles.section}>
-        <SectionHeader title={t('store.hours')} />
-        <Card>
-          {s.hours.length === 0 ? (
-            <AppText variant="subhead" color={colors.textSecondary}>
-              {t('store.closed')}
-            </AppText>
-          ) : (
-            [...s.hours]
-              .sort((a, b) => a.weekday - b.weekday)
-              .map((h) => (
-                <View key={h.weekday} style={styles.hoursRow}>
+      {s.hours.length > 0 ? (
+        // Hours are optional for merchants: show the section only once they are set,
+        // then list every weekday (Monday first) so missing days read as closed.
+        <View style={styles.section}>
+          <SectionHeader title={t('store.hours')} />
+          <Card>
+            {[1, 2, 3, 4, 5, 6, 0].map((weekday) => {
+              const h = s.hours.find((x) => x.weekday === weekday);
+              return (
+                <View key={weekday} style={styles.hoursRow}>
                   <AppText variant="subhead" style={styles.flex}>
-                    {weekdayName(h.weekday, locale)}
+                    {weekdayName(weekday, locale)}
                   </AppText>
-                  <AppText variant="subhead">
-                    {h.opensAt}–{h.closesAt}
+                  <AppText variant="subhead" color={h ? colors.textPrimary : colors.textSecondary}>
+                    {h ? `${h.opensAt}–${h.closesAt}` : t('store.closed')}
                   </AppText>
                 </View>
-              ))
-          )}
-        </Card>
-      </View>
+              );
+            })}
+          </Card>
+        </View>
+      ) : null}
     </Screen>
   );
 }
