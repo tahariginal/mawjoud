@@ -21,4 +21,6 @@ Scale: Likelihood / Impact = Low · Medium · High.
 | R15 | Scope creep vs. phased delivery | Medium | High | Phase gates with exit criteria; change requests logged | Client + tech lead |
 | R16 | Missing visual references delays design sign-off | Medium | Low | Tokens are swappable; request references (D6) | Client |
 | R17 | Third-party outage (maps, push, email, PSP) during peak | Medium | Medium | Timeouts, circuit breakers, fallbacks, outbox (ERROR_HANDLING.md) | Tech lead |
-| R18 | Secrets leak (repo, logs, app bundle) | Low | High | gitleaks, redaction, secret manager, mobile holds only public keys | Tech lead |
+| R18 | Secrets leak (repo, logs, app bundle) | Low | High | Secret scanning in CI (to add with the API phase), redaction, secret manager, mobile holds only public keys | Tech lead |
+| R19 | Known high advisory GHSA-86w9-cpqp-85rv in `node-forge`, pulled in by Expo's CLI (build tooling, not shipped in the app); no patched version on 2026-10-02 | Low | Medium | CI fails on critical; re-check on each Expo update and tighten to high once patched | Tech lead |
+| R20 | Mobile UI built ahead of the backend against an isolated demo adapter; demo behaviour could drift from the real API | Medium | Medium | Shared Zod contracts; HTTP client validates every response against them; demo adapter refused in production builds; replace demo with API integration tests in Phases 2–6 | Tech lead |

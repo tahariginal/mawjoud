@@ -37,6 +37,8 @@
 | `AUTH_INVALID_CREDENTIALS` | 401 | Generic "email or password is incorrect" |
 | `AUTH_SESSION_REVOKED` | 401 | Sign out locally; explain |
 | `AUTH_EMAIL_NOT_VERIFIED` | 403 | Show verify-email step |
+| `AUTH_EMAIL_TAKEN` | 409 | "An account with this email already exists." |
+| `AUTH_CODE_INVALID` | 400 | Wrong or expired 6-digit code; allow retry / resend |
 | `FORBIDDEN` | 403 | Show "not allowed" |
 | `NOT_FOUND` / `OFFER_NOT_FOUND` / `ORDER_NOT_FOUND` | 404 | Show gone state with alternatives |
 | `CONFLICT_STALE_VERSION` | 409 | Merchant edit conflict: reload and re-apply |

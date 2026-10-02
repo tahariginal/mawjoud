@@ -13,17 +13,17 @@ Latest versions checked on npm on 2026-10-02. Exact versions are pinned in Phase
 | Layer | Choice | Checked version | Why |
 |---|---|---|---|
 | Runtime | Node.js LTS | 24.x | Current LTS |
-| Language | TypeScript | pinned in Phase 2 | TS 7.0 (native compiler) is out, but `@nestjs/swagger` peers only on TS 5.5–6.x; we pin the newest version every toolchain supports |
+| Language | TypeScript | 6.0 (Expo SDK 57 template) | TS 7.0 (native compiler) is out, but `@nestjs/swagger` peers only on TS 5.5–6.x; TS 6 defaults `types` to `[]`, so test types are listed explicitly |
 | Monorepo | pnpm workspaces + Turborepo | turbo 2.11 | Shared contracts, cached builds (ADR-008) |
-| Mobile | Expo + React Native + Expo Router | expo 57, RN 0.87 | Brief requirement; development builds via EAS (ADR-014) |
+| Mobile | Expo + React Native + Expo Router | expo 57, RN 0.86.3 (pinned by Expo; npm `latest` is 0.87) | Brief requirement; development builds via EAS (ADR-014) |
 | Server state (mobile) | TanStack Query | 5.104 | Caching, dedup, retries |
 | UI state (mobile) | Zustand (small slices only) | 5.0 | Lightweight |
 | Forms / validation | React Hook Form + Zod | 7.89 / 4.6 | Same Zod schemas as the API |
 | Secure storage | expo-secure-store | SDK 57 | Keychain / Keystore for refresh token |
-| Local cache | react-native-mmkv | 4.3 | Non-sensitive persisted cache |
+| Local cache | react-native-mmkv (not yet installed) | 4.3 | Planned for persisted query cache; the checkout attempt key currently lives in SecureStore |
 | Lists | @shopify/flash-list | 2.3 | Virtualized lists |
 | Images | expo-image | SDK 57 | Caching, blurhash placeholders |
-| Maps | react-native-maps (+ supercluster) | 1.29 / 9.1 | Apple Maps on iOS, Google Maps on Android (API key required); `expo-maps` kept as an alternative |
+| Maps | react-native-maps | 1.27.2 (pinned by Expo) | Apple Maps on iOS, Google Maps on Android (API key required); server-side clustering planned; `expo-maps` kept as an alternative |
 | Camera / QR | expo-camera | SDK 57 | Barcode scanning |
 | Push | expo-notifications + Expo Push Service | SDK 57 / expo-server-sdk 7.2 | Behind a `PushSender` port; FCM/APNs direct possible later |
 | i18n | i18next + react-i18next + expo-localization | 26 / 17 / SDK 57 | Keys + RTL |
@@ -41,7 +41,9 @@ Latest versions checked on npm on 2026-10-02. Exact versions are pinned in Phase
 | Object storage | S3-compatible + CDN | — | Images; presigned uploads |
 | Image processing | sharp (in worker) | 0.35 | Variants, EXIF stripping |
 | Payments | `PaymentProvider` port; provider pending **D1** | — | Stripe unsupported in Morocco (ADR-006) |
-| Tests | Jest (+ jest-expo, RN Testing Library), Testcontainers, supertest, Maestro, k6 | jest 30 | TESTING_STRATEGY.md |
+| Tests | Jest (+ jest-expo, RN Testing Library 14), Testcontainers, supertest, Maestro, k6 | jest 29 (pinned by jest-expo 57) | TESTING_STRATEGY.md |
+| Lint | ESLint 9 + eslint-config-expo, Prettier | eslint 9.39 | ESLint 10 is out but `eslint-plugin-react` 7.37 still calls an API ESLint 10 removed |
+| Icons | Ionicons via @expo/vector-icons | 15.1 | MIT licence, bundled with Expo, outline + filled pairs for selected states |
 | Admin web (Phase 9) | React SPA (Vite) reusing contracts | — | ADR-013 |
 
 ## 3. Monorepo layout

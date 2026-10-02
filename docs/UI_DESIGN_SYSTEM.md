@@ -114,7 +114,7 @@ Rules: never below 12 pt; numbers use tabular figures in prices and times; Arabi
 
 ## 5. Iconography and imagery
 
-- One outline icon set with consistent 1.5–2 px stroke (selected in Phase 2 by licence check; candidates: Lucide, Phosphor). Filled variant marks the selected state.
+- Ionicons (MIT, via `@expo/vector-icons`): outline by default, filled variant marks the selected state. Icon names are type-checked.
 - Food photography: natural light, real products; no stock images that misrepresent what an offer contains.
 - Image sizes from the API: `thumb` (≈320 w), `medium` (≈720 w), `large` (≈1440 w), WebP/AVIF where supported; blurhash placeholders; fallback illustration on failure.
 

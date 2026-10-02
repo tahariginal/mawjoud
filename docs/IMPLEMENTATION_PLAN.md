@@ -6,6 +6,11 @@ Work is delivered phase by phase. A phase is **done** only when its exit criteri
 
 1. Typecheck — 2. Lint — 3. Tests — 4. Build — 5. Inspect and fix errors — 6. Architecture review (boundaries, sources of truth) — 7. UX review (states, a11y, copy) — 8. Docs/ADRs updated — 9. Clean milestone commit(s) using Conventional Commits (`feat(orders): …`, `fix(inventory): …`).
 
+## Status (2026-10-02)
+
+- Phase 1 complete (docs, ADRs).
+- At the client's request, the **mobile UI for all phases was built first** (customer, merchant, auth, settings), backed by the isolated demo adapter. Backend phases (2–9) still follow the order below; each screen switches to the real API by setting `EXPO_PUBLIC_API_MODE=http`.
+
 ## Phases
 
 | Phase | Scope | Exit criteria | Blocked by |
