@@ -1,0 +1,7 @@
+packages:
+  - apps/*
+  - packages/*
+
+# React Native libraries are most reliable with a hoisted node_modules layout.
+# See https://docs.expo.dev/guides/monorepos/
+nodeLinker: hoisted
