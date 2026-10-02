@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, TextInput, View, type TextInputProps } from 'react-native';
 
-import { colors, radius, spacing, TOUCH_TARGET, typography } from '@/design/tokens';
+import { colors, CONTROL_HEIGHT, radius, spacing, typography } from '@/design/tokens';
 
 import { AppText } from './AppText';
 import { Icon } from './Icon';
@@ -28,14 +28,16 @@ export function TextField({
 }: Props) {
   const [focused, setFocused] = useState(false);
   const [hidden, setHidden] = useState(password);
-  const borderColor = error ? colors.errorFg : focused ? colors.focusRing : colors.borderInput;
+  // Filled field: no border at rest (the visible label identifies it), a clear border on
+  // focus or error. The border width never changes, so the layout does not jump.
+  const borderColor = error ? colors.errorFg : focused ? colors.focusRing : 'transparent';
 
   return (
     <View style={styles.container}>
       <AppText variant="subhead" weight="medium">
         {label}
       </AppText>
-      <View style={[styles.inputRow, { borderColor, borderWidth: focused || error ? 2 : 1 }]}>
+      <View style={[styles.inputRow, { borderColor }]}>
         <TextInput
           {...inputProps}
           accessibilityLabel={label}
@@ -79,19 +81,20 @@ export function TextField({
 const styles = StyleSheet.create({
   container: { gap: spacing.xs },
   inputRow: {
-    minHeight: TOUCH_TARGET,
-    borderRadius: radius.sm,
-    backgroundColor: colors.bgSurface,
+    minHeight: CONTROL_HEIGHT,
+    borderRadius: radius.md,
+    borderWidth: 1.5,
+    backgroundColor: colors.bgSurfaceMuted,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingStart: spacing.md,
+    paddingStart: spacing.lg,
   },
   input: {
     ...typography.body,
     flex: 1,
     color: colors.textPrimary,
     paddingVertical: spacing.sm,
-    paddingEnd: spacing.md,
+    paddingEnd: spacing.lg,
   },
   message: { flexDirection: 'row', gap: spacing.xs, alignItems: 'center' },
   flex: { flex: 1 },

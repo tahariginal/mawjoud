@@ -80,9 +80,7 @@ export function Skeleton({
   rounded?: number;
 }) {
   return (
-    <View
-      style={{ height, width, borderRadius: rounded, backgroundColor: colors.bgSurfaceMuted }}
-    />
+    <View style={{ height, width, borderRadius: rounded, backgroundColor: colors.skeleton }} />
   );
 }
 

@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet } from 'react-native';
 
-import { colors, radius, TOUCH_TARGET } from '@/design/tokens';
+import { colors, elevation, radius, TOUCH_TARGET } from '@/design/tokens';
 
 import { Icon, type IconName } from './Icon';
 
@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  background: { backgroundColor: colors.bgSurface },
+  background: { backgroundColor: colors.bgSurface, ...elevation.raised },
   pressed: { backgroundColor: colors.bgSurfaceMuted },
 });

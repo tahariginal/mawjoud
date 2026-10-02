@@ -1,9 +1,10 @@
-import type { ReactNode } from 'react';
+import { useContext, type ReactNode } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { colors, spacing, TOUCH_TARGET } from '@/design/tokens';
 
 import { AppText } from './AppText';
+import { GroupContext } from './context';
 import { Icon, type IconName } from './Icon';
 
 type Props = {
@@ -29,6 +30,8 @@ export function ListRow({
   accessibilityHint,
   testID,
 }: Props) {
+  const inGroup = useContext(GroupContext);
+  const rowStyle = [styles.row, inGroup && styles.inGroup];
   const color = destructive ? colors.errorFg : colors.textPrimary;
   const content = (
     <>
@@ -51,7 +54,7 @@ export function ListRow({
   );
   if (!onPress) {
     return (
-      <View style={styles.row} testID={testID}>
+      <View style={rowStyle} testID={testID}>
         {content}
       </View>
     );
@@ -63,7 +66,7 @@ export function ListRow({
       accessibilityRole="button"
       accessibilityLabel={subtitle ? `${title}. ${subtitle}` : title}
       accessibilityHint={accessibilityHint}
-      style={({ pressed }) => [styles.row, pressed && styles.pressed]}
+      style={({ pressed }) => [rowStyle, pressed && (inGroup ? styles.dimmed : styles.pressed)]}
     >
       {content}
     </Pressable>
@@ -80,6 +83,8 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
     backgroundColor: colors.bgSurface,
   },
+  inGroup: { paddingHorizontal: 0 },
   pressed: { backgroundColor: colors.bgSurfaceMuted },
+  dimmed: { opacity: 0.6 },
   text: { flex: 1, gap: spacing.xxs },
 });

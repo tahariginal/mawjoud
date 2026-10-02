@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useContext, type ReactNode } from 'react';
 import {
   Pressable,
   ScrollView,
@@ -9,9 +9,11 @@ import {
 } from 'react-native';
 import { SafeAreaView, type Edge } from 'react-native-safe-area-context';
 
-import { colors, elevation, radius, spacing } from '@/design/tokens';
+import { colors, elevation, spacing } from '@/design/tokens';
 
 import { AppText } from './AppText';
+import { FooterContext, GroupContext } from './context';
+import { Icon } from './Icon';
 import { OfflineBanner } from '../OfflineBanner';
 
 type ScreenProps = {
@@ -49,11 +51,19 @@ export function Screen({
       ) : (
         <View style={styles.flex}>{children}</View>
       )}
-      {footer ? <View style={styles.footer}>{footer}</View> : null}
+      {footer ? (
+        <FooterContext.Provider value>
+          <View style={styles.footer}>{footer}</View>
+        </FooterContext.Provider>
+      ) : null}
     </SafeAreaView>
   );
 }
 
+/**
+ * A content section. Flat: no background, border or shadow — sections are separated by
+ * spacing and dividers. Pressable sections dim while pressed.
+ */
 export function Card({
   children,
   onPress,
@@ -93,16 +103,24 @@ export function SectionHeader({
         {title}
       </AppText>
       {actionLabel && onAction ? (
-        <Pressable onPress={onAction} accessibilityRole="button" hitSlop={12}>
-          <AppText variant="subhead" weight="semibold" color={colors.textPrimary}>
+        <Pressable
+          onPress={onAction}
+          accessibilityRole="button"
+          accessibilityLabel={actionLabel}
+          hitSlop={12}
+          style={({ pressed }) => [styles.sectionAction, pressed && styles.pressed]}
+        >
+          <AppText variant="subhead" weight="semibold">
             {actionLabel}
           </AppText>
+          <Icon name="chevron-forward" size={16} color={colors.textPrimary} />
         </Pressable>
       ) : null}
     </View>
   );
 }
 
+/** Hairline separator. Inside a Group it spans the group, so it lines up with row text. */
 export function Divider() {
   return <View style={styles.divider} />;
 }
@@ -120,8 +138,9 @@ export function SwitchRow({
   onValueChange: (value: boolean) => void;
   disabled?: boolean;
 }) {
+  const inGroup = useContext(GroupContext);
   return (
-    <View style={styles.switchRow}>
+    <View style={[styles.switchRow, inGroup && styles.rowInGroup]}>
       <View style={styles.flex}>
         <AppText variant="body">{label}</AppText>
         {description ? (
@@ -137,13 +156,19 @@ export function SwitchRow({
         accessibilityLabel={label}
         trackColor={{ true: colors.actionPrimaryBg, false: colors.controlOff }}
         thumbColor={colors.bgSurface}
+        ios_backgroundColor={colors.controlOff}
       />
     </View>
   );
 }
 
+/** Rows grouped like a settings list: flat, hairline dividers, no card around them. */
 export function Group({ children }: { children: ReactNode }) {
-  return <View style={styles.group}>{children}</View>;
+  return (
+    <GroupContext.Provider value>
+      <View style={styles.group}>{children}</View>
+    </GroupContext.Provider>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -155,19 +180,17 @@ const styles = StyleSheet.create({
     paddingTop: spacing.md,
     paddingBottom: spacing.lg,
     backgroundColor: colors.bgSurface,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: colors.borderDivider,
     ...elevation.raised,
   },
-  card: {
-    backgroundColor: colors.bgSurface,
-    borderRadius: radius.lg,
-    padding: spacing.lg,
-    gap: spacing.md,
-    ...elevation.card,
-  },
-  pressed: { opacity: 0.9 },
+  card: { gap: spacing.md },
+  pressed: { opacity: 0.6 },
   sectionHeader: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
+  sectionAction: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xxs,
+    minHeight: 24,
+  },
   divider: { height: StyleSheet.hairlineWidth, backgroundColor: colors.borderDivider },
   switchRow: {
     flexDirection: 'row',
@@ -177,10 +200,6 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.md,
     backgroundColor: colors.bgSurface,
   },
-  group: {
-    borderRadius: radius.lg,
-    overflow: 'hidden',
-    backgroundColor: colors.bgSurface,
-    ...elevation.card,
-  },
+  rowInGroup: { paddingHorizontal: 0 },
+  group: { backgroundColor: colors.bgSurface },
 });

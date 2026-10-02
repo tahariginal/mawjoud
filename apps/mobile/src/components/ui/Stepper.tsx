@@ -78,10 +78,8 @@ const styles = StyleSheet.create({
   controls: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: colors.borderInput,
     borderRadius: radius.pill,
-    backgroundColor: colors.bgSurface,
+    backgroundColor: colors.bgSurfaceMuted,
   },
   value: { minWidth: 32, textAlign: 'center' },
   disabled: { opacity: 0.35 },

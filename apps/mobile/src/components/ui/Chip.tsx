@@ -5,6 +5,10 @@ import { colors, radius, spacing, TOUCH_TARGET } from '@/design/tokens';
 import { AppText } from './AppText';
 import { Icon, type IconName } from './Icon';
 
+/** 36 dp visually; hit slop keeps the 48 dp touch target. */
+const CHIP_HEIGHT = 36;
+const HIT_SLOP = (TOUCH_TARGET - CHIP_HEIGHT) / 2;
+
 type Props = {
   label: string;
   selected?: boolean;
@@ -31,7 +35,7 @@ export function Chip({
       accessibilityRole={onPress ? 'button' : 'text'}
       accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ selected, disabled: !!disabled }}
-      hitSlop={{ top: 4, bottom: 4 }}
+      hitSlop={{ top: HIT_SLOP, bottom: HIT_SLOP }}
       style={({ pressed }) => [
         styles.base,
         selected ? styles.selected : styles.unselected,
@@ -39,10 +43,13 @@ export function Chip({
         disabled && styles.disabled,
       ]}
     >
-      {selected && !removable ? (
-        <Icon name="checkmark" size={16} color={colors.actionPrimaryFg} />
+      {icon ? (
+        <Icon
+          name={icon}
+          size={16}
+          color={selected ? colors.actionPrimaryFg : colors.textPrimary}
+        />
       ) : null}
-      {icon && !selected ? <Icon name={icon} size={16} color={colors.textPrimary} /> : null}
       <AppText
         variant="subhead"
         weight="medium"
@@ -60,17 +67,16 @@ export function Chip({
 
 const styles = StyleSheet.create({
   base: {
-    minHeight: TOUCH_TARGET - 8,
-    paddingHorizontal: spacing.md,
+    minHeight: CHIP_HEIGHT,
+    paddingHorizontal: spacing.md + spacing.xxs,
     borderRadius: radius.pill,
-    borderWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.xs,
     alignSelf: 'flex-start',
   },
-  unselected: { backgroundColor: colors.bgSurface, borderColor: colors.borderInput },
-  selected: { backgroundColor: colors.actionPrimaryBg, borderColor: colors.actionPrimaryBg },
-  pressed: { opacity: 0.85 },
+  unselected: { backgroundColor: colors.bgSurfaceMuted },
+  selected: { backgroundColor: colors.actionPrimaryBg },
+  pressed: { opacity: 0.7 },
   disabled: { opacity: 0.5 },
 });
