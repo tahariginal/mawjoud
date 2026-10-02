@@ -5,11 +5,13 @@ import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { LoggerModule } from 'nestjs-pino';
 
 import type { AppConfig } from './config/config.ts';
+import { IdentityModule } from './modules/identity/identity.module.ts';
 import { PlatformController } from './modules/platform/platform.controller.ts';
 import { AllExceptionsFilter } from './shared/errors/error.filter.ts';
 import { createValidationPipe } from './shared/errors/validation.ts';
 import { HealthController } from './shared/health/health.controller.ts';
 import { InfrastructureModule } from './shared/infrastructure.module.ts';
+import { SecurityModule } from './shared/security/security.module.ts';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -33,6 +35,8 @@ export class AppModule {
       module: AppModule,
       imports: [
         InfrastructureModule.forRoot(config),
+        SecurityModule.forRoot(config),
+        IdentityModule,
         LoggerModule.forRoot({
           pinoHttp: {
             level: config.logLevel,

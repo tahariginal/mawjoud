@@ -12,6 +12,8 @@ import { AppModule } from '../../src/app.module.ts';
 import { configureApp } from '../../src/bootstrap.ts';
 import { type AppConfig, loadConfig } from '../../src/config/config.ts';
 import { DB, type Db } from '../../src/database/db.ts';
+import { EMAIL_OUTBOX } from '../../src/shared/email/email.ts';
+import { CapturingEmailOutbox } from './email.ts';
 
 const TEMPLATE_DB = 'mawjood_template';
 
@@ -36,6 +38,7 @@ export async function createTestDatabase(): Promise<string> {
 
 export type TestContext = {
   app: NestExpressApplication;
+  email: CapturingEmailOutbox;
   http: () => ReturnType<typeof request>;
   db: Db;
   config: AppConfig;
@@ -43,9 +46,11 @@ export type TestContext = {
 };
 
 type Overrides = { provide: unknown; useValue: unknown }[];
+type Options = { overrides?: Overrides; env?: Record<string, string> };
 
 /** Boots the full application against an isolated database (no mocks of our own code). */
-export async function createTestApp(overrides: Overrides = []): Promise<TestContext> {
+export async function createTestApp(options: Options = {}): Promise<TestContext> {
+  const overrides = options.overrides ?? [];
   const databaseUrl = await createTestDatabase();
   const config: AppConfig = {
     ...loadConfig({
@@ -53,12 +58,17 @@ export async function createTestApp(overrides: Overrides = []): Promise<TestCont
       LOG_LEVEL: 'silent',
       DATABASE_URL: databaseUrl,
       REDIS_URL: inject('redisUrl'),
+      RATE_LIMITS_ENABLED: 'false',
+      ...options.env,
     }),
     // Separate Redis key space per test file.
     redisKeyPrefix: `test:${randomUUID()}:`,
   };
 
-  let builder = Test.createTestingModule({ imports: [AppModule.forRoot(config)] });
+  const email = new CapturingEmailOutbox();
+  let builder = Test.createTestingModule({ imports: [AppModule.forRoot(config)] })
+    .overrideProvider(EMAIL_OUTBOX)
+    .useValue(email);
   for (const o of overrides) builder = builder.overrideProvider(o.provide).useValue(o.useValue);
   const moduleRef = await builder.compile();
 
@@ -69,6 +79,7 @@ export async function createTestApp(overrides: Overrides = []): Promise<TestCont
   const server = app.getHttpServer();
   return {
     app,
+    email,
     http: () => request(server),
     db: app.get<Db>(DB),
     config,

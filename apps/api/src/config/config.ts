@@ -27,6 +27,10 @@ const EnvSchema = z.object({
     .regex(/^[A-Z]{3}$/)
     .default('MAD'),
   MAX_ACTIVE_RESERVATIONS: z.coerce.number().int().min(1).max(20).default(3),
+  RATE_LIMITS_ENABLED: z
+    .enum(['true', 'false'])
+    .default('true')
+    .transform((v) => v === 'true'),
 });
 
 export type AppEnv = z.infer<typeof EnvSchema>['APP_ENV'];
@@ -49,6 +53,8 @@ export type AppConfig = {
   defaultTimezone: string;
   defaultCurrency: string;
   maxActiveReservations: number;
+  /** Always true outside tests; test suites enable it only where rate limits are under test. */
+  rateLimitsEnabled: boolean;
 };
 
 /**
@@ -69,6 +75,7 @@ export function loadConfig(env: NodeJS.ProcessEnv): AppConfig {
     if (!e.APP_SECRET || e.APP_SECRET.length < 32) problems.push('APP_SECRET (>= 32 chars)');
     if (!e.JWT_PRIVATE_KEY || !e.JWT_PUBLIC_KEY) problems.push('JWT_PRIVATE_KEY / JWT_PUBLIC_KEY');
     if (!e.SMTP_URL) problems.push('SMTP_URL');
+    if (!e.RATE_LIMITS_ENABLED) problems.push('RATE_LIMITS_ENABLED must be true');
     if (problems.length > 0) {
       throw new Error(`Missing required configuration for ${e.APP_ENV}: ${problems.join(', ')}`);
     }
@@ -93,6 +100,7 @@ export function loadConfig(env: NodeJS.ProcessEnv): AppConfig {
     defaultTimezone: e.DEFAULT_TIMEZONE,
     defaultCurrency: e.DEFAULT_CURRENCY,
     maxActiveReservations: e.MAX_ACTIVE_RESERVATIONS,
+    rateLimitsEnabled: e.RATE_LIMITS_ENABLED,
   };
 }
 
