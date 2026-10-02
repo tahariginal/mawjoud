@@ -16,7 +16,7 @@ export function FavoriteButton({ storeId, isFavorite }: { storeId: string; isFav
   return (
     <IconButton
       icon={shown ? 'heart' : 'heart-outline'}
-      color={shown ? colors.errorFg : colors.icon}
+      color={colors.icon}
       selected={shown}
       background
       accessibilityLabel={shown ? t('favorites.remove') : t('favorites.add')}

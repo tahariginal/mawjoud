@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
-import { colors, radius, spacing } from '@/design/tokens';
+import { colors, fontFamily, radius, spacing } from '@/design/tokens';
 
 import { AppText } from './ui/AppText';
 
@@ -35,7 +35,7 @@ export function QRPass({ pass, storeName }: { pass: PickupPass; storeName: strin
       <AppText variant="footnote" color={colors.textSecondary} align="center">
         {t('orders.code')}
       </AppText>
-      <AppText variant="display" align="center" selectable style={styles.code}>
+      <AppText align="center" selectable style={styles.code}>
         {pass.code}
       </AppText>
       <AppText variant="footnote" color={colors.textSecondary} align="center">
@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.bgSurface,
     borderRadius: radius.xl,
-    padding: spacing.xxl,
+    padding: spacing.xxxl,
     gap: spacing.sm,
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: colors.borderDivider,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.borderInput,
   },
   qr: { padding: spacing.sm, backgroundColor: colors.bgSurface },
-  code: { letterSpacing: 6 },
+  code: { fontFamily: fontFamily.bold, fontSize: 32, lineHeight: 40, letterSpacing: 8 },
 });

@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
-import { colors } from '@/design/tokens';
+import { useCategoryIcon } from '@/api/categoryLookup';
+import { colors, spacing } from '@/design/tokens';
+import { storeInitials } from '@/lib/categoryIcon';
 
+import { AppText } from './ui/AppText';
 import { Icon } from './ui/Icon';
 
 type Props = {
@@ -13,13 +16,26 @@ type Props = {
   size: 'thumb' | 'medium' | 'large';
   height: number;
   accessibilityLabel?: string;
+  /** Used by the placeholder: category icon and store initials. */
+  categoryId?: string | null;
+  storeName?: string;
 };
 
 /** Right-sized image variant with blurhash placeholder; graceful fallback when missing or failing. */
-export function OfferImage({ image, size, height, accessibilityLabel }: Props) {
+export function OfferImage({
+  image,
+  size,
+  height,
+  accessibilityLabel,
+  categoryId,
+  storeName,
+}: Props) {
   const { t } = useTranslation();
   const [failed, setFailed] = useState(false);
+  const icon = useCategoryIcon(categoryId);
   if (!image || failed) {
+    // No photos yet for most offers, so the placeholder is designed, not a gap:
+    // the category icon with the store's initials on a quiet grey.
     return (
       <View
         style={[styles.placeholder, { height }]}
@@ -27,7 +43,17 @@ export function OfferImage({ image, size, height, accessibilityLabel }: Props) {
         accessibilityRole="image"
         accessibilityLabel={t('offer.noImage')}
       >
-        <Icon name="basket-outline" size={Math.min(40, height / 3)} color={colors.textTertiary} />
+        <Icon name={icon} size={Math.min(40, Math.round(height / 4))} color={colors.textTertiary} />
+        {storeName ? (
+          <AppText
+            variant="footnote"
+            weight="semibold"
+            color={colors.textSecondary}
+            style={styles.initials}
+          >
+            {storeInitials(storeName)}
+          </AppText>
+        ) : null}
       </View>
     );
   }
@@ -55,5 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bgSurfaceMuted,
     alignItems: 'center',
     justifyContent: 'center',
+    gap: spacing.xs,
   },
+  initials: { letterSpacing: 1 },
 });

@@ -5,7 +5,7 @@ import { Platform, StyleSheet, View } from 'react-native';
 import MapView, { Marker, type Region } from 'react-native-maps';
 
 import { env } from '@/config/env';
-import { colors, spacing } from '@/design/tokens';
+import { colors, elevation, radius, spacing } from '@/design/tokens';
 
 import { OfferCard } from './OfferCard';
 import { Button } from './ui/Button';
@@ -95,7 +95,7 @@ export function OffersMap({ center, offers, onSearchArea, onShowList }: Props) {
           <Button
             label={t('explore.searchThisArea')}
             icon="refresh-outline"
-            variant="secondary"
+            variant="tertiary"
             onPress={() => {
               onSearchArea(regionToBbox(movedRegion));
               setMovedRegion(null);
@@ -114,6 +114,23 @@ export function OffersMap({ center, offers, onSearchArea, onShowList }: Props) {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  searchArea: { position: 'absolute', top: spacing.md, alignSelf: 'center' },
-  preview: { position: 'absolute', bottom: spacing.lg, start: spacing.lg, end: spacing.lg },
+  searchArea: {
+    position: 'absolute',
+    top: spacing.md,
+    alignSelf: 'center',
+    borderRadius: radius.pill,
+    backgroundColor: colors.bgSurface,
+    overflow: 'visible',
+    ...elevation.raised,
+  },
+  preview: {
+    position: 'absolute',
+    bottom: spacing.lg,
+    start: spacing.lg,
+    end: spacing.lg,
+    padding: spacing.md,
+    borderRadius: radius.lg,
+    backgroundColor: colors.bgSurface,
+    ...elevation.raised,
+  },
 });

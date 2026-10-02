@@ -29,7 +29,7 @@ const offerTone: Record<OfferStatus, BadgeTone> = {
   SCHEDULED: 'info',
   ACTIVE: 'success',
   PAUSED: 'warning',
-  SOLD_OUT: 'accent',
+  SOLD_OUT: 'neutral',
   ENDED: 'neutral',
   REMOVED: 'error',
 };

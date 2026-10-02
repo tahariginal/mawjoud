@@ -8,25 +8,36 @@ import { formatMoney, pickupPhase, pickupWindowParts } from '@/lib/format';
 import { useNow } from '@/lib/useNow';
 
 import { AppText } from './ui/AppText';
+import { Badge } from './ui/Badge';
 import { Icon } from './ui/Icon';
 
 type PriceTagProps = { price: Money; referenceValue: Money | null; size?: 'md' | 'lg' };
 
-/** Price first; legitimate reference value as text ("usually …"), never only a strikethrough. */
+/** Whole-percent discount against a genuine usual value, or null when there is none. */
+export function discountPercent(price: Money, referenceValue: Money | null): number | null {
+  if (!referenceValue || referenceValue.amountMinor <= price.amountMinor) return null;
+  const percent = Math.round((1 - price.amountMinor / referenceValue.amountMinor) * 100);
+  return percent >= 1 ? percent : null;
+}
+
+/**
+ * Price first, in primary text; the legitimate reference value as text ("usually …"), never
+ * only a strikethrough; the discount as a small accent-green pill.
+ */
 export function PriceTag({ price, referenceValue, size = 'md' }: PriceTagProps) {
   const { t } = useTranslation();
   const locale = currentLocale();
   const priceText = formatMoney(price, locale);
   const referenceText = referenceValue ? formatMoney(referenceValue, locale) : null;
+  const percent = discountPercent(price, referenceValue);
+  const label = referenceText
+    ? t('offer.priceA11y', { price: priceText, reference: referenceText })
+    : priceText;
   return (
     <View
       style={styles.row}
       accessible
-      accessibilityLabel={
-        referenceText
-          ? t('offer.priceA11y', { price: priceText, reference: referenceText })
-          : priceText
-      }
+      accessibilityLabel={percent ? `${label}, ${t('offer.percentOffA11y', { percent })}` : label}
     >
       <AppText variant={size === 'lg' ? 'title2' : 'headline'} color={colors.textPrimary}>
         {priceText}
@@ -36,6 +47,7 @@ export function PriceTag({ price, referenceValue, size = 'md' }: PriceTagProps) 
           {t('offer.usually', { amount: referenceText })}
         </AppText>
       ) : null}
+      {percent ? <Badge label={t('offer.percentOff', { percent })} tone="accent" /> : null}
     </View>
   );
 }
@@ -74,7 +86,7 @@ export function PickupWindowText({
         {label}
       </AppText>
       {phase === 'open' ? (
-        <AppText variant="caption" color={colors.successFg}>
+        <AppText variant="caption" color={colors.accent}>
           · {t('pickup.openNow')}
         </AppText>
       ) : phase === 'ended' ? (

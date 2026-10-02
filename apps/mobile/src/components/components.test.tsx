@@ -2,7 +2,7 @@ import type { OfferSummary } from '@mawjood/contracts';
 import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { OfferCard } from './OfferCard';
-import { PriceTag } from './Price';
+import { discountPercent, PriceTag } from './Price';
 import { EmptyState } from './ui/StateViews';
 
 const offer: OfferSummary = {
@@ -49,6 +49,17 @@ describe('PriceTag', () => {
     await render(<PriceTag price={offer.price} referenceValue={offer.referenceValue} />);
     const label = screen.getByLabelText(/usually/);
     expect(label).toBeTruthy();
+  });
+
+  it('shows the discount against the usual value as a percentage', async () => {
+    await render(<PriceTag price={offer.price} referenceValue={offer.referenceValue} />);
+    expect(screen.getByText('-61%')).toBeTruthy();
+    expect(screen.getByLabelText(/61% off/)).toBeTruthy();
+  });
+
+  it('has no discount without a higher usual value', () => {
+    expect(discountPercent(offer.price, null)).toBeNull();
+    expect(discountPercent(offer.price, offer.price)).toBeNull();
   });
 });
 

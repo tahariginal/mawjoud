@@ -17,7 +17,7 @@ import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { api } from '@/api';
-import { useAppConfig } from '@/api/hooks';
+import { useAppConfig, useCategories } from '@/api/hooks';
 import { queryClient } from '@/api/queryClient';
 import { AppText } from '@/components/ui/AppText';
 import { Button } from '@/components/ui/Button';
@@ -57,6 +57,12 @@ function SessionBootstrap() {
   return null;
 }
 
+/** Loads categories once (cached for an hour) so image placeholders can show the category icon. */
+function CategoriesPrefetch() {
+  useCategories();
+  return null;
+}
+
 function VersionGate() {
   const config = useAppConfig();
   const minimum = config.data?.minSupportedVersion;
@@ -89,6 +95,7 @@ export default function RootLayout() {
         <StatusBar style="dark" />
         <SessionBootstrap />
         <VersionGate />
+        <CategoriesPrefetch />
         <Stack screenOptions={stackScreenOptions}>
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
