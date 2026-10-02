@@ -32,7 +32,10 @@ export class SecurityModule {
       ],
       providers: [
         { provide: TokenService, useFactory: () => TokenService.create(config) },
-        { provide: EMAIL_OUTBOX, useFactory: () => new BullMqEmailOutbox(config.redisUrl) },
+        {
+          provide: EMAIL_OUTBOX,
+          useFactory: () => new BullMqEmailOutbox(config.redisUrl, config.bullPrefix),
+        },
         { provide: APP_GUARD, useClass: AuthGuard },
         { provide: APP_GUARD, useClass: AppThrottlerGuard },
       ],

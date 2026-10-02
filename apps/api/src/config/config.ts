@@ -44,6 +44,8 @@ export type AppConfig = {
   redisUrl: string;
   /** Optional key prefix so several apps (or test files) can share one Redis. */
   redisKeyPrefix: string;
+  /** Key prefix for BullMQ queues (separate from the cache/rate-limit prefix). */
+  bullPrefix: string;
   smtpUrl: string | null;
   emailFrom: string;
   appSecret: string;
@@ -89,6 +91,7 @@ export function loadConfig(env: NodeJS.ProcessEnv): AppConfig {
     databasePoolMax: e.DATABASE_POOL_MAX,
     redisUrl: e.REDIS_URL,
     redisKeyPrefix: 'mawjood:',
+    bullPrefix: 'mawjood:bull',
     smtpUrl: e.SMTP_URL ?? null,
     emailFrom: e.EMAIL_FROM,
     appSecret: e.APP_SECRET && e.APP_SECRET.length > 0 ? e.APP_SECRET : DEV_INSECURE_SECRET,

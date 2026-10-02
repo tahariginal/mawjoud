@@ -14,22 +14,10 @@ import { AllExceptionsFilter } from './shared/errors/error.filter.ts';
 import { createValidationPipe } from './shared/errors/validation.ts';
 import { HealthController } from './shared/health/health.controller.ts';
 import { InfrastructureModule } from './shared/infrastructure.module.ts';
+import { LOG_REDACT_PATHS } from './shared/logging/redaction.ts';
 import { SecurityModule } from './shared/security/security.module.ts';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-
-/** Fields never written to logs (docs/OBSERVABILITY.md §2). */
-export const LOG_REDACT_PATHS = [
-  'req.headers.authorization',
-  'req.headers.cookie',
-  'req.headers["idempotency-key"]',
-  '*.password',
-  '*.newPassword',
-  '*.refreshToken',
-  '*.accessToken',
-  '*.code',
-  '*.token',
-];
 
 @Module({})
 export class AppModule {

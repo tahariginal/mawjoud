@@ -15,7 +15,6 @@ export interface EmailOutbox {
 
 export const EMAIL_OUTBOX = Symbol('EMAIL_OUTBOX');
 export const EMAIL_QUEUE = 'email';
-export const BULL_PREFIX = 'mawjood:bull';
 
 /**
  * BullMQ-backed outbox. Jobs carry one-time codes, so they are removed as soon as they are
@@ -26,13 +25,13 @@ export class BullMqEmailOutbox implements EmailOutbox, OnApplicationShutdown {
   private readonly connection: Redis;
   private readonly queue: Queue<EmailMessage>;
 
-  constructor(redisUrl: string) {
+  constructor(redisUrl: string, prefix: string) {
     // Fail fast when Redis is down instead of hanging the request (offline queue disabled).
     this.connection = new Redis(redisUrl, { maxRetriesPerRequest: 1, enableOfflineQueue: false });
     this.connection.on('error', (err) => this.logger.warn({ err }, 'Redis connection error'));
     this.queue = new Queue<EmailMessage>(EMAIL_QUEUE, {
       connection: this.connection,
-      prefix: BULL_PREFIX,
+      prefix,
       defaultJobOptions: {
         attempts: 5,
         backoff: { type: 'exponential', delay: 2_000 },

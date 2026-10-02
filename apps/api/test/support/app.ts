@@ -63,6 +63,7 @@ export async function createTestApp(options: Options = {}): Promise<TestContext>
     }),
     // Separate Redis key space per test file.
     redisKeyPrefix: `test:${randomUUID()}:`,
+    bullPrefix: `test-bull-${randomUUID()}`,
   };
 
   const email = new CapturingEmailOutbox();
