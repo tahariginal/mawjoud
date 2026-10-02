@@ -49,6 +49,8 @@
 | `OFFER_QUANTITY_LIMIT` | 422 | Adjust quantity |
 | `PRICE_CHANGED` | 409 | Show new total, ask to confirm |
 | `ORDER_INVALID_TRANSITION` | 409 | Refresh order |
+| `INVALID_STATE_TRANSITION` | 409 | Non-order resource is not in a state that allows the action (e.g. approving a rejected business) |
+| `BUSINESS_NOT_ACTIVE` | 403 | Business is pending review or suspended; selling is disabled |
 | `ORDER_CANCELLATION_CLOSED` | 409 | Explain policy |
 | `ORDER_LIMIT_REACHED` | 409 | Too many active reservations (anti-hoarding without online payment, ADR-015) |
 | `PAYMENT_HOLD_EXPIRED` | 409 | Offer a new attempt if stock remains |

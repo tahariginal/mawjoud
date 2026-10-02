@@ -9,6 +9,7 @@ import { PickupWindowText } from '@/components/Price';
 import { DemoBadge, OrderStatusBadge } from '@/components/StatusBadges';
 import { TabHeader } from '@/components/TabHeader';
 import { AppText } from '@/components/ui/AppText';
+import { Banner } from '@/components/ui/Banner';
 import { Button } from '@/components/ui/Button';
 import { Screen } from '@/components/ui/Layout';
 import { EmptyState, ErrorState, ListSkeleton } from '@/components/ui/StateViews';
@@ -75,6 +76,14 @@ export default function TodayScreen() {
     <Screen edges={['top', 'left', 'right']}>
       <TabHeader title={t('merchant.todayTitle')} right={<DemoBadge />} />
       <View style={styles.summary}>
+        {context && context.business.status !== 'ACTIVE' ? (
+          <Banner
+            tone="warning"
+            icon="hourglass-outline"
+            title={t('merchant.pendingReviewTitle')}
+            message={t('merchant.pendingReviewBody')}
+          />
+        ) : null}
         <AppText variant="subhead" color={colors.textSecondary}>
           {context?.location?.name ?? ''} · {t('merchant.pickups', { count: open.length })}
         </AppText>

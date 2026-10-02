@@ -6,6 +6,7 @@ import { LoggerModule } from 'nestjs-pino';
 
 import type { AppConfig } from './config/config.ts';
 import { IdentityModule } from './modules/identity/identity.module.ts';
+import { MerchantsModule } from './modules/merchants/merchants.module.ts';
 import { PlatformController } from './modules/platform/platform.controller.ts';
 import { AllExceptionsFilter } from './shared/errors/error.filter.ts';
 import { createValidationPipe } from './shared/errors/validation.ts';
@@ -37,6 +38,7 @@ export class AppModule {
         InfrastructureModule.forRoot(config),
         SecurityModule.forRoot(config),
         IdentityModule,
+        MerchantsModule,
         LoggerModule.forRoot({
           pinoHttp: {
             level: config.logLevel,

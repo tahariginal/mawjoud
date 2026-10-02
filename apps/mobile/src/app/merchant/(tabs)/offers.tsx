@@ -93,6 +93,7 @@ export default function MerchantOffersScreen() {
   const { context } = useMerchantContext();
   const offers = useMerchantOffers(context?.business.id);
   const lifecycle = useOfferLifecycle();
+  const canSell = context?.business.status === 'ACTIVE';
 
   let body;
   if (offers.isPending) body = <ListSkeleton rows={3} rowHeight={140} />;
@@ -109,8 +110,8 @@ export default function MerchantOffersScreen() {
       <EmptyState
         icon="pricetag-outline"
         title={t('merchant.noOffers')}
-        actionLabel={t('merchant.newOffer')}
-        onAction={() => router.push('/merchant/offer/new')}
+        actionLabel={canSell ? t('merchant.newOffer') : undefined}
+        onAction={canSell ? () => router.push('/merchant/offer/new') : undefined}
       />
     );
   } else {
@@ -137,10 +138,21 @@ export default function MerchantOffersScreen() {
           <Button
             label={t('merchant.newOffer')}
             icon="add"
+            disabled={!canSell}
             onPress={() => router.push('/merchant/offer/new')}
           />
         }
       />
+      {context && !canSell ? (
+        <View style={styles.item}>
+          <Banner
+            tone="warning"
+            icon="hourglass-outline"
+            title={t('merchant.pendingReviewTitle')}
+            message={t('merchant.pendingReviewBody')}
+          />
+        </View>
+      ) : null}
       {lifecycle.isError ? (
         <View style={styles.item}>
           <Banner tone="error" message={errorMessage(lifecycle.error)} />

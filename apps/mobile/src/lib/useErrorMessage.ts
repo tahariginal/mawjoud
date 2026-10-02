@@ -32,6 +32,8 @@ export function useErrorMessage(): (error: unknown) => string {
           return t('errors.emailNotVerified');
         case 'FORBIDDEN':
           return t('errors.forbidden');
+        case 'BUSINESS_NOT_ACTIVE':
+          return t('errors.businessNotActive');
         case 'RATE_LIMITED':
           return t('errors.rateLimited');
         case 'OFFER_SOLD_OUT':

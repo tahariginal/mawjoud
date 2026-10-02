@@ -1,6 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MerchantApplicationRequest } from '@mawjood/contracts';
+import * as Location from 'expo-location';
 import { Redirect, router } from 'expo-router';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
@@ -24,6 +26,8 @@ export default function ApplyScreen() {
   const { status, me } = useSession();
   const categories = useCategories();
   const submit = useSubmitApplication();
+  const [locating, setLocating] = useState(false);
+  const [pinProblem, setPinProblem] = useState(false);
   const { control, handleSubmit } = useForm<MerchantApplicationRequest>({
     resolver: zodResolver(MerchantApplicationRequest),
     defaultValues: {
@@ -129,6 +133,54 @@ export default function ApplyScreen() {
           errorMessage={t('validation.email')}
           keyboardType="email-address"
           autoCapitalize="none"
+        />
+        <Controller
+          control={control}
+          name="location"
+          render={({ field, fieldState }) => (
+            <View style={styles.group}>
+              <AppText variant="subhead" weight="medium">
+                {t('merchant.storePin')}
+              </AppText>
+              <AppText variant="footnote" color={colors.textSecondary}>
+                {t('merchant.storePinHint')}
+              </AppText>
+              <Button
+                label={field.value ? t('merchant.storePinDone') : t('merchant.storePinAction')}
+                icon={field.value ? 'checkmark-circle-outline' : 'navigate-outline'}
+                variant="secondary"
+                loading={locating}
+                onPress={async () => {
+                  setPinProblem(false);
+                  setLocating(true);
+                  try {
+                    const permission = await Location.requestForegroundPermissionsAsync();
+                    if (permission.status !== 'granted') {
+                      setPinProblem(true);
+                      return;
+                    }
+                    const pos = await Location.getCurrentPositionAsync({
+                      accuracy: Location.Accuracy.High,
+                    });
+                    field.onChange({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+                  } catch {
+                    setPinProblem(true);
+                  } finally {
+                    setLocating(false);
+                  }
+                }}
+              />
+              {pinProblem ? (
+                <AppText variant="footnote" color={colors.errorFg}>
+                  {t('location.permissionDenied')}
+                </AppText>
+              ) : fieldState.error ? (
+                <AppText variant="footnote" color={colors.errorFg}>
+                  {t('validation.required')}
+                </AppText>
+              ) : null}
+            </View>
+          )}
         />
         <Button
           label={t('merchant.submit')}

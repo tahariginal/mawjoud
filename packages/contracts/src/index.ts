@@ -8,3 +8,4 @@ export * from './orders.ts';
 export * from './profile.ts';
 export * from './merchant.ts';
 export * from './config.ts';
+export * from './admin.ts';
