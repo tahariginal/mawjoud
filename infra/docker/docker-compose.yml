@@ -1,0 +1,38 @@
+# Local development services. Ports are offset from defaults to avoid clashing with other projects.
+name: mawjood
+
+services:
+  postgres:
+    image: postgis/postgis:18-3.6
+    environment:
+      POSTGRES_USER: mawjood
+      POSTGRES_PASSWORD: mawjood
+      POSTGRES_DB: mawjood
+    ports:
+      - '5442:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U mawjood -d mawjood']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:8.8-alpine
+    ports:
+      - '6389:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:v1.31.3
+    ports:
+      - '1035:1025'
+      - '8035:8025'
+
+volumes:
+  postgres-data:
