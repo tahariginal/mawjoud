@@ -6,6 +6,7 @@
 import {
   canTransitionOrder,
   type GeoPoint,
+  type ImageSet,
   type Me,
   type NotificationPreferences,
   type OfferDetail,
@@ -51,6 +52,7 @@ export type DemoOffer = {
   status: OfferStatus;
   allergens: Allergen[];
   dietaryTags: DietaryTag[];
+  image: ImageSet | null;
   version: number;
 };
 
@@ -86,6 +88,7 @@ function seedOffers(now: number): DemoOffer[] {
       status: seed.quantity > 0 ? 'ACTIVE' : 'SOLD_OUT',
       allergens: seed.allergens,
       dietaryTags: seed.dietaryTags,
+      image: seed.image,
       version: 0,
     };
   });
@@ -117,7 +120,8 @@ export function createDemoState(now = Date.now()) {
   return {
     offers: seedOffers(now),
     orders: new Map<string, DemoOrder>(),
-    favorites: new Set<string>(),
+    // Two followed stores, so the signed-in Favorites tab and home rail have content.
+    favorites: new Set<string>([demoStores[0]?.id ?? '', demoStores[8]?.id ?? ''].filter(Boolean)),
     session: null as Me | null,
     pendingEmailVerification: false,
     idempotency: new Map<string, unknown>(),
@@ -226,7 +230,7 @@ export function toOfferSummary(offer: DemoOffer, near: GeoPoint | null): OfferSu
     title: offer.title,
     store: { id: s.id, name: s.name, logo: s.logo, location: s.location },
     categoryId: offer.categoryId,
-    image: null,
+    image: offer.image,
     price: money(offer.priceMinor),
     referenceValue: offer.referenceMinor === null ? null : money(offer.referenceMinor),
     pickup: { start: offer.pickupStart, end: offer.pickupEnd, timezone: s.timezone },

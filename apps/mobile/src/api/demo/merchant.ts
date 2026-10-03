@@ -170,6 +170,8 @@ export function createDemoMerchantApi(state: DemoState, now: () => number): Demo
         status: 'ACTIVE',
         allergens: input.allergens,
         dietaryTags: input.dietaryTags,
+        // Photo uploads are not built yet (placeholder until then).
+        image: null,
         version: 0,
       };
       refreshOfferStatus(offer, now());
