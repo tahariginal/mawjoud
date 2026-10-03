@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mazal design review</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --muted: #f5f5f4;
+        --text: #111111;
+        --secondary: #6b6b6b;
+        --line: #ededec;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          15px/1.45 -apple-system,
+          'Segoe UI',
+          Inter,
+          Roboto,
+          sans-serif;
+      }
+      header {
+        padding: 32px 24px 8px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 8px;
+        letter-spacing: -0.4px;
+      }
+      header p {
+        color: var(--secondary);
+        margin: 4px 0;
+        max-width: 760px;
+      }
+      main {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px 48px;
+      }
+      section {
+        border-top: 1px solid var(--line);
+        padding-top: 24px;
+        margin-top: 24px;
+      }
+      h2 {
+        font-size: 20px;
+        margin: 0 0 16px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 24px 16px;
+      }
+      figure {
+        margin: 0;
+      }
+      figure img {
+        width: 100%;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: var(--muted);
+        display: block;
+      }
+      figcaption {
+        font-size: 13px;
+        color: var(--secondary);
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mazal — design review</h1>
+      <p>
+        Every screen after the minimal redesign, rendered from the real app code in demo mode at
+        iPhone size (390 × 844 pt). Click a screen to open it full size.
+      </p>
+      <p>
+        Browser-preview differences: the map shows a placeholder, switches use browser colors (teal
+        knob), the camera shows its permission state, and there is no status bar.
+      </p>
+    </header>
+    <main>
+      <section>
+        <h2>Customer — signed out</h2>
+        <div class="grid">
+          <figure>
+            <a href="1-customer-guest/01-home.jpg" target="_blank"
+              ><img src="1-customer-guest/01-home.jpg" alt="Home (guest)" loading="lazy"
+            /></a>
+            <figcaption>Home (guest)</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/02-explore-list-2.jpg" target="_blank"
+              ><img
+                src="1-customer-guest/02-explore-list-2.jpg"
+                alt="Explore — list (scrolled)"
+                loading="lazy"
+            /></a>
+            <figcaption>Explore — list (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/02-explore-list.jpg" target="_blank"
+              ><img src="1-customer-guest/02-explore-list.jpg" alt="Explore — list" loading="lazy"
+            /></a>
+            <figcaption>Explore — list</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/03-explore-map.jpg" target="_blank"
+              ><img
+                src="1-customer-guest/03-explore-map.jpg"
+                alt="Explore — map (native map not rendered on web)"
+                loading="lazy"
+            /></a>
+            <figcaption>Explore — map (native map not rendered on web)</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/04-filters-2.jpg" target="_blank"
+              ><img src="1-customer-guest/04-filters-2.jpg" alt="Filters (scrolled)" loading="lazy"
+            /></a>
+            <figcaption>Filters (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/04-filters.jpg" target="_blank"
+              ><img src="1-customer-guest/04-filters.jpg" alt="Filters" loading="lazy"
+            /></a>
+            <figcaption>Filters</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/05-location.jpg" target="_blank"
+              ><img src="1-customer-guest/05-location.jpg" alt="Location" loading="lazy"
+            /></a>
+            <figcaption>Location</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/06-search-empty.jpg" target="_blank"
+              ><img
+                src="1-customer-guest/06-search-empty.jpg"
+                alt="Search — before typing"
+                loading="lazy"
+            /></a>
+            <figcaption>Search — before typing</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/07-search-results.jpg" target="_blank"
+              ><img
+                src="1-customer-guest/07-search-results.jpg"
+                alt="Search — results"
+                loading="lazy"
+            /></a>
+            <figcaption>Search — results</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/08-offer-details-2.jpg" target="_blank"
+              ><img
+                src="1-customer-guest/08-offer-details-2.jpg"
+                alt="Offer details (scrolled)"
+                loading="lazy"
+            /></a>
+            <figcaption>Offer details (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/08-offer-details.jpg" target="_blank"
+              ><img src="1-customer-guest/08-offer-details.jpg" alt="Offer details" loading="lazy"
+            /></a>
+            <figcaption>Offer details</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/09-store-2.jpg" target="_blank"
+              ><img
+                src="1-customer-guest/09-store-2.jpg"
+                alt="Store page (scrolled)"
+                loading="lazy"
+            /></a>
+            <figcaption>Store page (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/09-store.jpg" target="_blank"
+              ><img src="1-customer-guest/09-store.jpg" alt="Store page" loading="lazy"
+            /></a>
+            <figcaption>Store page</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/10-orders-guest.jpg" target="_blank"
+              ><img
+                src="1-customer-guest/10-orders-guest.jpg"
+                alt="Orders (guest prompt)"
+                loading="lazy"
+            /></a>
+            <figcaption>Orders (guest prompt)</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/11-favorites-guest.jpg" target="_blank"
+              ><img
+                src="1-customer-guest/11-favorites-guest.jpg"
+                alt="Favorites (guest prompt)"
+                loading="lazy"
+            /></a>
+            <figcaption>Favorites (guest prompt)</figcaption>
+          </figure>
+          <figure>
+            <a href="1-customer-guest/12-profile-guest.jpg" target="_blank"
+              ><img
+                src="1-customer-guest/12-profile-guest.jpg"
+                alt="Profile (guest)"
+                loading="lazy"
+            /></a>
+            <figcaption>Profile (guest)</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section>
+        <h2>Account (sign in, sign up, passwords)</h2>
+        <div class="grid">
+          <figure>
+            <a href="2-account/01-sign-in.jpg" target="_blank"
+              ><img src="2-account/01-sign-in.jpg" alt="Sign in" loading="lazy"
+            /></a>
+            <figcaption>Sign in</figcaption>
+          </figure>
+          <figure>
+            <a href="2-account/02-sign-up.jpg" target="_blank"
+              ><img src="2-account/02-sign-up.jpg" alt="Create account" loading="lazy"
+            /></a>
+            <figcaption>Create account</figcaption>
+          </figure>
+          <figure>
+            <a href="2-account/03-forgot-password.jpg" target="_blank"
+              ><img src="2-account/03-forgot-password.jpg" alt="Forgot password" loading="lazy"
+            /></a>
+            <figcaption>Forgot password</figcaption>
+          </figure>
+          <figure>
+            <a href="2-account/04-reset-password.jpg" target="_blank"
+              ><img src="2-account/04-reset-password.jpg" alt="Reset password" loading="lazy"
+            /></a>
+            <figcaption>Reset password</figcaption>
+          </figure>
+          <figure>
+            <a href="2-account/05-verify-email.jpg" target="_blank"
+              ><img src="2-account/05-verify-email.jpg" alt="Verify email" loading="lazy"
+            /></a>
+            <figcaption>Verify email</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section>
+        <h2>Customer — signed in</h2>
+        <div class="grid">
+          <figure>
+            <a href="3-customer-signed-in/01-home-2.jpg" target="_blank"
+              ><img
+                src="3-customer-signed-in/01-home-2.jpg"
+                alt="Home (signed in, pickup today) (scrolled)"
+                loading="lazy"
+            /></a>
+            <figcaption>Home (signed in, pickup today) (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/01-home.jpg" target="_blank"
+              ><img
+                src="3-customer-signed-in/01-home.jpg"
+                alt="Home (signed in, pickup today)"
+                loading="lazy"
+            /></a>
+            <figcaption>Home (signed in, pickup today)</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/02-checkout.jpg" target="_blank"
+              ><img src="3-customer-signed-in/02-checkout.jpg" alt="Checkout" loading="lazy"
+            /></a>
+            <figcaption>Checkout</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/03-order-pass-2.jpg" target="_blank"
+              ><img
+                src="3-customer-signed-in/03-order-pass-2.jpg"
+                alt="Order — pickup pass (scrolled)"
+                loading="lazy"
+            /></a>
+            <figcaption>Order — pickup pass (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/03-order-pass.jpg" target="_blank"
+              ><img
+                src="3-customer-signed-in/03-order-pass.jpg"
+                alt="Order — pickup pass"
+                loading="lazy"
+            /></a>
+            <figcaption>Order — pickup pass</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/04-orders-upcoming.jpg" target="_blank"
+              ><img
+                src="3-customer-signed-in/04-orders-upcoming.jpg"
+                alt="Orders — upcoming"
+                loading="lazy"
+            /></a>
+            <figcaption>Orders — upcoming</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/05-orders-past.jpg" target="_blank"
+              ><img
+                src="3-customer-signed-in/05-orders-past.jpg"
+                alt="Orders — past (empty)"
+                loading="lazy"
+            /></a>
+            <figcaption>Orders — past (empty)</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/06-favorites.jpg" target="_blank"
+              ><img src="3-customer-signed-in/06-favorites.jpg" alt="Favorites" loading="lazy"
+            /></a>
+            <figcaption>Favorites</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/07-profile-2.jpg" target="_blank"
+              ><img
+                src="3-customer-signed-in/07-profile-2.jpg"
+                alt="Profile (signed in) (scrolled)"
+                loading="lazy"
+            /></a>
+            <figcaption>Profile (signed in) (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/07-profile.jpg" target="_blank"
+              ><img
+                src="3-customer-signed-in/07-profile.jpg"
+                alt="Profile (signed in)"
+                loading="lazy"
+            /></a>
+            <figcaption>Profile (signed in)</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/08-impact.jpg" target="_blank"
+              ><img src="3-customer-signed-in/08-impact.jpg" alt="Your impact" loading="lazy"
+            /></a>
+            <figcaption>Your impact</figcaption>
+          </figure>
+          <figure>
+            <a href="3-customer-signed-in/09-review.jpg" target="_blank"
+              ><img src="3-customer-signed-in/09-review.jpg" alt="Rate this rescue" loading="lazy"
+            /></a>
+            <figcaption>Rate this rescue</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section>
+        <h2>Settings and information</h2>
+        <div class="grid">
+          <figure>
+            <a href="4-settings/01-account.jpg" target="_blank"
+              ><img src="4-settings/01-account.jpg" alt="Account details" loading="lazy"
+            /></a>
+            <figcaption>Account details</figcaption>
+          </figure>
+          <figure>
+            <a href="4-settings/02-notifications-2.jpg" target="_blank"
+              ><img
+                src="4-settings/02-notifications-2.jpg"
+                alt="Notifications (scrolled)"
+                loading="lazy"
+            /></a>
+            <figcaption>Notifications (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="4-settings/02-notifications.jpg" target="_blank"
+              ><img src="4-settings/02-notifications.jpg" alt="Notifications" loading="lazy"
+            /></a>
+            <figcaption>Notifications</figcaption>
+          </figure>
+          <figure>
+            <a href="4-settings/03-language.jpg" target="_blank"
+              ><img src="4-settings/03-language.jpg" alt="Language" loading="lazy"
+            /></a>
+            <figcaption>Language</figcaption>
+          </figure>
+          <figure>
+            <a href="4-settings/04-privacy.jpg" target="_blank"
+              ><img src="4-settings/04-privacy.jpg" alt="Privacy" loading="lazy"
+            /></a>
+            <figcaption>Privacy</figcaption>
+          </figure>
+          <figure>
+            <a href="4-settings/05-delete-account.jpg" target="_blank"
+              ><img src="4-settings/05-delete-account.jpg" alt="Delete account" loading="lazy"
+            /></a>
+            <figcaption>Delete account</figcaption>
+          </figure>
+          <figure>
+            <a href="4-settings/06-terms.jpg" target="_blank"
+              ><img src="4-settings/06-terms.jpg" alt="Terms of service" loading="lazy"
+            /></a>
+            <figcaption>Terms of service</figcaption>
+          </figure>
+          <figure>
+            <a href="4-settings/07-help.jpg" target="_blank"
+              ><img src="4-settings/07-help.jpg" alt="Help" loading="lazy"
+            /></a>
+            <figcaption>Help</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section>
+        <h2>Merchant mode</h2>
+        <div class="grid">
+          <figure>
+            <a href="5-merchant/01-today.jpg" target="_blank"
+              ><img src="5-merchant/01-today.jpg" alt="Today" loading="lazy"
+            /></a>
+            <figcaption>Today</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/02-offers.jpg" target="_blank"
+              ><img src="5-merchant/02-offers.jpg" alt="Offers" loading="lazy"
+            /></a>
+            <figcaption>Offers</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/03-offer-new-2.jpg" target="_blank"
+              ><img src="5-merchant/03-offer-new-2.jpg" alt="New offer (scrolled)" loading="lazy"
+            /></a>
+            <figcaption>New offer (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/03-offer-new.jpg" target="_blank"
+              ><img src="5-merchant/03-offer-new.jpg" alt="New offer" loading="lazy"
+            /></a>
+            <figcaption>New offer</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/04-offer-edit-2.jpg" target="_blank"
+              ><img src="5-merchant/04-offer-edit-2.jpg" alt="Edit offer (scrolled)" loading="lazy"
+            /></a>
+            <figcaption>Edit offer (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/04-offer-edit.jpg" target="_blank"
+              ><img src="5-merchant/04-offer-edit.jpg" alt="Edit offer" loading="lazy"
+            /></a>
+            <figcaption>Edit offer</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/05-scan.jpg" target="_blank"
+              ><img
+                src="5-merchant/05-scan.jpg"
+                alt="Scan (camera permission state on web)"
+                loading="lazy"
+            /></a>
+            <figcaption>Scan (camera permission state on web)</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/06-insights.jpg" target="_blank"
+              ><img src="5-merchant/06-insights.jpg" alt="Insights" loading="lazy"
+            /></a>
+            <figcaption>Insights</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/07-business.jpg" target="_blank"
+              ><img src="5-merchant/07-business.jpg" alt="Business" loading="lazy"
+            /></a>
+            <figcaption>Business</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/08-staff.jpg" target="_blank"
+              ><img src="5-merchant/08-staff.jpg" alt="Staff" loading="lazy"
+            /></a>
+            <figcaption>Staff</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/09-apply-2.jpg" target="_blank"
+              ><img
+                src="5-merchant/09-apply-2.jpg"
+                alt="Apply as a business (scrolled)"
+                loading="lazy"
+            /></a>
+            <figcaption>Apply as a business (scrolled)</figcaption>
+          </figure>
+          <figure>
+            <a href="5-merchant/09-apply.jpg" target="_blank"
+              ><img src="5-merchant/09-apply.jpg" alt="Apply as a business" loading="lazy"
+            /></a>
+            <figcaption>Apply as a business</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section>
+        <h2>System screens</h2>
+        <div class="grid">
+          <figure>
+            <a href="6-system/01-not-found.jpg" target="_blank"
+              ><img src="6-system/01-not-found.jpg" alt="Page not found" loading="lazy"
+            /></a>
+            <figcaption>Page not found</figcaption>
+          </figure>
+          <figure>
+            <a href="6-system/02-update-required.jpg" target="_blank"
+              ><img src="6-system/02-update-required.jpg" alt="Update required" loading="lazy"
+            /></a>
+            <figcaption>Update required</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
