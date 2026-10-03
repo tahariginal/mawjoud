@@ -42,7 +42,7 @@ const palettes: Record<Variant, { bg: string; bgPressed: string; fg: string; fil
   tertiary: {
     bg: 'transparent',
     bgPressed: colors.bgSurfaceMuted,
-    fg: colors.textPrimary,
+    fg: colors.brand,
     filled: false,
   },
   destructive: {

@@ -4,7 +4,7 @@ import { colors, fontFamily } from './tokens';
 
 /** Shared header styling for every stack navigator. */
 export const stackScreenOptions: NativeStackNavigationOptions = {
-  headerTintColor: colors.textPrimary,
+  headerTintColor: colors.brand,
   headerTitleStyle: { fontFamily: fontFamily.semibold, color: colors.textPrimary },
   headerStyle: { backgroundColor: colors.bgSurface },
   headerShadowVisible: false,
@@ -15,7 +15,7 @@ export const stackScreenOptions: NativeStackNavigationOptions = {
 /** Shared bottom tab styling: plain white bar, no top border or shadow. */
 export const tabScreenOptions = {
   headerShown: false,
-  tabBarActiveTintColor: colors.textPrimary,
+  tabBarActiveTintColor: colors.brand,
   tabBarInactiveTintColor: colors.textSecondary,
   tabBarStyle: {
     backgroundColor: colors.bgSurface,

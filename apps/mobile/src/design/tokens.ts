@@ -3,8 +3,9 @@
  * Components use semantic `colors`, never `palette` directly.
  * Contrast pairs were verified against WCAG 2.2 AA (see the design doc).
  *
- * Style: clean and minimal. White surfaces, black primary actions, one accent green
- * reserved for savings, "open now", success and the active state of brand elements.
+ * Style: clean and minimal. White surfaces, ink text, Majorelle blue (the brand color, see
+ * brand/) for every primary action and selected state, and one accent green reserved for
+ * savings, "open now" and success.
  */
 export const palette = {
   white: '#FFFFFF',
@@ -15,8 +16,10 @@ export const palette = {
   gray300: '#D6D6D3',
   gray500: '#8A8A8A',
   gray600: '#6B6B6B',
-  gray800: '#333333',
   black: '#111111',
+  /** Majorelle blue — the Jardin Majorelle, Marrakech. Brand and primary actions. */
+  majorelle600: '#6050DC',
+  majorelle700: '#4A3BC2',
   green700: '#0B7A4B',
   green50: '#E8F5EE',
   red700: '#B42318',
@@ -31,9 +34,11 @@ export const colors = {
   bgApp: palette.white,
   bgSurface: palette.white,
   bgSurfaceMuted: palette.gray50,
-  /** Dark block for the one element that must stand out (e.g. today's pickup). */
-  bgInverse: palette.black,
+  /** Brand block for the one element that must stand out (e.g. today's pickup). */
+  bgInverse: palette.majorelle600,
   textOnInverse: palette.white,
+  /** Brand color: links, tints, the logo. 5.71:1 on white. */
+  brand: palette.majorelle600,
   textPrimary: palette.black,
   textSecondary: palette.gray600,
   /** 3.45:1 on white — icons and other non-text UI only, never body text. */
@@ -43,8 +48,8 @@ export const colors = {
   accentSoft: palette.green50,
   icon: palette.black,
   iconMuted: palette.gray500,
-  actionPrimaryBg: palette.black,
-  actionPrimaryBgPressed: palette.gray800,
+  actionPrimaryBg: palette.majorelle600,
+  actionPrimaryBgPressed: palette.majorelle700,
   actionPrimaryFg: palette.white,
   actionSecondaryBg: palette.gray50,
   actionSecondaryBgPressed: palette.gray150,
@@ -55,7 +60,7 @@ export const colors = {
   controlOff: palette.gray500,
   borderInput: palette.gray300,
   borderDivider: palette.gray100,
-  focusRing: palette.black,
+  focusRing: palette.majorelle600,
   skeleton: palette.gray75,
   successFg: palette.green700,
   successBg: palette.green50,

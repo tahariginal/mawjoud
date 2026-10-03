@@ -110,10 +110,10 @@ export function SectionHeader({
           hitSlop={12}
           style={({ pressed }) => [styles.sectionAction, pressed && styles.pressed]}
         >
-          <AppText variant="subhead" weight="semibold">
+          <AppText variant="subhead" weight="semibold" color={colors.brand}>
             {actionLabel}
           </AppText>
-          <Icon name="chevron-forward" size={16} color={colors.textPrimary} />
+          <Icon name="chevron-forward" size={16} color={colors.brand} />
         </Pressable>
       ) : null}
     </View>

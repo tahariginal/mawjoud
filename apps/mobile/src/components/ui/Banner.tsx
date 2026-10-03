@@ -61,7 +61,7 @@ export function Banner({ message, title, tone = 'info', icon, actionLabel, onAct
             <AppText
               variant="subhead"
               weight="semibold"
-              color={inverse ? colors.textPrimary : t.fg}
+              color={inverse ? colors.brand : t.fg}
               style={inverse ? undefined : styles.underline}
             >
               {actionLabel}
