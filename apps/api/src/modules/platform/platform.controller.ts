@@ -1,4 +1,4 @@
-import { AppConfig, Category } from '@mawjood/contracts';
+import { AppConfig, Category } from '@mazal/contracts';
 import { Controller, Get, Inject } from '@nestjs/common';
 
 import { DB, type Db } from '../../database/db.ts';

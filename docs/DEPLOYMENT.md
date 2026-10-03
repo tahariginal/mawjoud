@@ -1,4 +1,4 @@
-# Deployment & Operations — MAWJOOd
+# Deployment & Operations — Mazal
 
 ## 1. Environments
 

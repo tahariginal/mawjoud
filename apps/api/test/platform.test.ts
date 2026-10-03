@@ -1,4 +1,4 @@
-import { ApiErrorEnvelope, AppConfig, Category } from '@mawjood/contracts';
+import { ApiErrorEnvelope, AppConfig, Category } from '@mazal/contracts';
 import { sql } from 'kysely';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { z } from 'zod';

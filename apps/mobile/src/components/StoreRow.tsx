@@ -1,4 +1,4 @@
-import type { StoreSummary } from '@mawjood/contracts';
+import type { StoreSummary } from '@mazal/contracts';
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';

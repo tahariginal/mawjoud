@@ -1,6 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 
-const REFRESH_TOKEN_KEY = 'mawjood.refreshToken';
+const REFRESH_TOKEN_KEY = 'mazal.refreshToken';
 
 /**
  * Refresh token lives in the Keychain / Keystore. The access token is kept in memory only

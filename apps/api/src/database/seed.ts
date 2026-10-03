@@ -5,7 +5,7 @@ import { geographyPoint } from './geo.ts';
 import type { Db } from './db.ts';
 
 /** Shared password of all seeded development accounts (documented in the README). */
-export const DEV_PASSWORD = 'mawjood-dev-password';
+export const DEV_PASSWORD = 'mazal-dev-password';
 
 const SEED_MARKER = 'dev_seeded_at';
 const TZ = 'Africa/Casablanca';
@@ -145,9 +145,9 @@ export async function seedDevelopmentData(db: Db): Promise<boolean> {
         .returning('id')
         .executeTakeFirstOrThrow();
 
-    await user('admin@mawjood.local', 'Admin', 'ADMIN');
-    const merchant = await user('merchant@mawjood.local', 'Merchant', 'CUSTOMER');
-    await user('customer@mawjood.local', 'Customer', 'CUSTOMER');
+    await user('admin@mazal.local', 'Admin', 'ADMIN');
+    const merchant = await user('merchant@mazal.local', 'Merchant', 'CUSTOMER');
+    await user('customer@mazal.local', 'Customer', 'CUSTOMER');
 
     const categories = new Map(
       (await trx.selectFrom('categories').select(['id', 'slug']).execute()).map((c) => [
@@ -165,7 +165,7 @@ export async function seedDevelopmentData(db: Db): Promise<boolean> {
           name: store.name,
           legal_name: `${store.name} SARL`,
           category_id: categoryId,
-          contact_email: 'merchant@mawjood.local',
+          contact_email: 'merchant@mazal.local',
           phone: '+212 522 000 000',
           status: 'ACTIVE',
         })

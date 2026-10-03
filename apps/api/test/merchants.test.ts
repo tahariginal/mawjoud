@@ -5,7 +5,7 @@ import {
   MerchantBusiness,
   MerchantOffer,
   StaffMember,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { z } from 'zod';
 

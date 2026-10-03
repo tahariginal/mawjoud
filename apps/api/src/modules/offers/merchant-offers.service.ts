@@ -2,7 +2,7 @@ import type {
   MerchantOffer,
   MerchantOfferInput,
   UpdateMerchantOfferRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import { sql } from 'kysely';
 

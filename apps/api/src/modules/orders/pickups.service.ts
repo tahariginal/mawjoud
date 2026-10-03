@@ -3,7 +3,7 @@ import type {
   MerchantOrder,
   PickupValidateRequest,
   PickupValidateResult,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import { sql, type Transaction } from 'kysely';
 

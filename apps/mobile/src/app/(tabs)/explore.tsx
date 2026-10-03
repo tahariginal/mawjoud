@@ -1,4 +1,4 @@
-import type { BoundingBox, OfferSort, OffersQuery } from '@mawjood/contracts';
+import type { BoundingBox, OfferSort, OffersQuery } from '@mazal/contracts';
 import { FlashList } from '@shopify/flash-list';
 import { router } from 'expo-router';
 import { useMemo, useState } from 'react';

@@ -1,4 +1,4 @@
-# UX Specification — MAWJOOd
+# UX Specification — Mazal
 
 ## 1. Research basis
 
@@ -6,7 +6,7 @@ Principles were drawn from common patterns in surplus-food marketplaces, food de
 
 | Pattern source | Principle we keep |
 |---|---|
-| Surplus-food marketplaces | Time-boxed pickup windows; reserve-and-pay; "contents may vary" honesty; favorites as the main retention loop. One known model has the *customer* swipe in their own app to redeem; MAWJOOd instead has the **merchant validate** (QR or code) because customer-side redemption is easy to fake. |
+| Surplus-food marketplaces | Time-boxed pickup windows; reserve-and-pay; "contents may vary" honesty; favorites as the main retention loop. One known model has the *customer* swipe in their own app to redeem; Mazal instead has the **merchant validate** (QR or code) because customer-side redemption is easy to fake. |
 | Food delivery | Location first; scannable cards; filters as chips; clear "closed / unavailable" states. |
 | Local marketplaces | Distance and place are as important as price; map ↔ list toggle. |
 | Booking apps | Explicit date/time display; confirmation screen that repeats *what, where, when, how much*; booking pass you can show offline. |
@@ -61,7 +61,7 @@ app/
   settings/…                  notifications, language, privacy, delete account
 ```
 
-Deep links: `mawjood://offer/{id}`, `mawjood://order/{id}`, `mawjood://store/{id}` plus universal/app links on the production domain (domain pending D5). Every deep link resolves even when the target is gone (→ "This offer has ended" state with nearby alternatives).
+Deep links: `mazal://offer/{id}`, `mazal://order/{id}`, `mazal://store/{id}` plus universal/app links on the production domain (domain pending D5). Every deep link resolves even when the target is gone (→ "This offer has ended" state with nearby alternatives).
 
 ## 3. Key screens
 
@@ -175,7 +175,7 @@ Every screen implements: **loading** (skeletons shaped like content, not spinner
 | Sold out | `offer.soldOut` → "This rescue has already been claimed." |
 | Offline | `error.offline` → "You're offline. Check your connection and try again." |
 | Server error | `error.generic` → "Something went wrong on our side. Try again." |
-| Unsupported app version | `error.updateRequired` → "Please update MAWJOOd to continue." |
+| Unsupported app version | `error.updateRequired` → "Please update Mazal to continue." |
 
 ## 5. Screen quality checklist (applied to every screen before build)
 

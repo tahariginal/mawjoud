@@ -1,4 +1,4 @@
-import { ApiErrorEnvelope } from '@mawjood/contracts';
+import { ApiErrorEnvelope } from '@mazal/contracts';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import { createTestApp, type TestContext } from './support/app.ts';

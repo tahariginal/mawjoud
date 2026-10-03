@@ -1,4 +1,4 @@
-import { DietaryTag, RADIUS_OPTIONS_M } from '@mawjood/contracts';
+import { DietaryTag, RADIUS_OPTIONS_M } from '@mazal/contracts';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';

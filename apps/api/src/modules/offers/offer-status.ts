@@ -1,4 +1,4 @@
-import type { OfferStatus } from '@mawjood/contracts';
+import type { OfferStatus } from '@mazal/contracts';
 
 import type { OfferDbStatus } from '../../database/schema.ts';
 

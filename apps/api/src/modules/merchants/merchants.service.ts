@@ -4,7 +4,7 @@ import type {
   MerchantBusiness,
   SetBusinessHoursRequest,
   StaffMember,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import { sql } from 'kysely';
 
@@ -197,7 +197,7 @@ export class MerchantsService {
   }
 
   /**
-   * Adds an existing MAWJOOd user as staff. Unknown emails answer 404: email invitations for
+   * Adds an existing Mazal user as staff. Unknown emails answer 404: email invitations for
    * people without an account come with notifications (Phase 7).
    */
   async inviteStaff(userId: string, businessId: string, input: InviteStaffRequest): Promise<void> {

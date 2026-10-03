@@ -6,13 +6,13 @@ import {
   type GeoPoint,
   type Order,
   type Quote,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 
 import { newUuid, randomFromAlphabet } from '@/lib/ids';
 
 import { ApiError } from '../errors';
 import { tokenStorage } from '../tokenStorage';
-import type { MawjoodApi } from '../types';
+import type { MazalApi } from '../types';
 import { DEMO_CURRENCY, demoCategories, demoStores } from './fixtures';
 import {
   MINUTE,
@@ -73,7 +73,7 @@ type CustomerKeys =
   | 'updateNotificationPreferences'
   | 'getImpact';
 
-export type DemoCustomerApi = Pick<MawjoodApi, CustomerKeys>;
+export type DemoCustomerApi = Pick<MazalApi, CustomerKeys>;
 
 export function requireSession(state: DemoState) {
   if (!state.session) throw new ApiError('AUTH_REQUIRED', 'Sign in required', { status: 401 });
@@ -150,7 +150,7 @@ export function createDemoCustomerApi(state: DemoState, now: () => number): Demo
       customerInitial: 'D',
       order: {
         id,
-        shortCode: 'MW-H1ST0',
+        shortCode: 'MZ-H1ST0',
         status: 'PICKED_UP',
         store: {
           id: s.id,
@@ -432,7 +432,7 @@ export function createDemoCustomerApi(state: DemoState, now: () => number): Demo
       const t = now();
       const order: Order = {
         id: newUuid(),
-        shortCode: `MW-${randomFromAlphabet(5, PICKUP_CODE_ALPHABET)}`,
+        shortCode: `MZ-${randomFromAlphabet(5, PICKUP_CODE_ALPHABET)}`,
         status: 'CREATED',
         store: {
           id: s.id,

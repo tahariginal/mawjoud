@@ -1,8 +1,8 @@
-# UI Design System — MAWJOOd
+# UI Design System — Mazal
 
 Visual direction: **clean and minimal.** White surfaces, near-black text, **Majorelle blue** for the brand and every primary action, one accent green, generous spacing and hairlines instead of boxes and shadows. Food photography carries the color. Logo and brand assets: `brand/` (open `brand/index.html`).
 
-> Status: proposed, revised 2026-10-03 (minimal redesign, then Majorelle blue as the brand color with the Mazal logo). The brief refers to "provided MAWJOOd references" that are not in the repository (open decision D6), and the client's Claude Design design-system projects are still empty. Tokens below are the source of truth until references arrive; token *names* are stable, values may change.
+> Status: proposed, revised 2026-10-03 (minimal redesign, then Majorelle blue as the brand color with the Mazal logo). The brief refers to "provided Mazal references" that are not in the repository (open decision D6), and the client's Claude Design design-system projects are still empty. Tokens below are the source of truth until references arrive; token *names* are stable, values may change.
 
 ## 1. Token architecture
 

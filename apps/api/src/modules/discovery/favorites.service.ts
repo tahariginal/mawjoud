@@ -1,4 +1,4 @@
-import type { FavoriteStore, GeoPoint } from '@mawjood/contracts';
+import type { FavoriteStore, GeoPoint } from '@mazal/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import { sql } from 'kysely';
 

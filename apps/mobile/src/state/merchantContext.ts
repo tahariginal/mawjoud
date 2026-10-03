@@ -1,4 +1,4 @@
-import type { BusinessRole, MerchantBusiness } from '@mawjood/contracts';
+import type { BusinessRole, MerchantBusiness } from '@mazal/contracts';
 
 import { useMerchantBusinesses } from '@/api/merchantHooks';
 

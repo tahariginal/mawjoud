@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
-import { Order } from '@mawjood/contracts';
+import { Order } from '@mazal/contracts';
 
 import { TokenService } from '../../src/shared/security/token.service.ts';
 import type { TestContext } from './app.ts';

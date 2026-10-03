@@ -1,4 +1,4 @@
-import type { BoundingBox, GeoPoint, OfferSummary } from '@mawjood/contracts';
+import type { BoundingBox, GeoPoint, OfferSummary } from '@mazal/contracts';
 import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, StyleSheet, View } from 'react-native';

@@ -1,4 +1,4 @@
-import { type Me, NotificationPreferences, type UpdateMeRequest } from '@mawjood/contracts';
+import { type Me, NotificationPreferences, type UpdateMeRequest } from '@mazal/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import type { Kysely, Transaction } from 'kysely';
 
@@ -159,7 +159,7 @@ export class AccountService {
       await trx
         .updateTable('users')
         .set({
-          email: `deleted+${userId}@invalid.mawjood`,
+          email: `deleted+${userId}@invalid.mazal`,
           email_verified_at: null,
           password_hash: null,
           display_name: 'Deleted user',

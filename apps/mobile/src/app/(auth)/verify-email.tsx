@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { VerifyEmailRequest } from '@mawjood/contracts';
+import { VerifyEmailRequest } from '@mazal/contracts';
 import { Redirect, Stack, router } from 'expo-router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

@@ -1,4 +1,4 @@
-# Database Design — MAWJOOd
+# Database Design — Mazal
 
 PostgreSQL 18 + PostGIS 3.6 (fallback PostgreSQL 17 if the production host lacks 18). Extensions: `postgis`, `citext`, `pg_trgm`, `unaccent`.
 
@@ -135,7 +135,7 @@ Release (hold expiry / cancellation) adds back the quantity in the **same** tran
 | Column | Constraint / note |
 |---|---|
 | `id` | uuid PK |
-| `short_code` | `text UNIQUE` — human reference (e.g. `MW-7K3Q9`) for support |
+| `short_code` | `text UNIQUE` — human reference (e.g. `MZ-7K3Q9`) for support |
 | `user_id`, `business_id`, `location_id` | FK |
 | `status` | see §4 |
 | `subtotal_minor`, `fees_minor`, `discount_minor`, `tax_minor`, `total_minor` | `bigint >= 0`; `CHECK (total_minor = subtotal_minor + fees_minor + tax_minor - discount_minor)` |

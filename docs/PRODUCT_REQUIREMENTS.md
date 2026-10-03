@@ -1,12 +1,12 @@
-# Product Requirements — MAWJOOd
+# Product Requirements — Mazal
 
 ## 1. Vision
 
-MAWJOOd connects people with nearby food businesses that have good food left at the end of the day. Customers rescue it at a lower price, businesses recover value instead of throwing it away, and less food is wasted.
+Mazal connects people with nearby food businesses that have good food left at the end of the day. Customers rescue it at a lower price, businesses recover value instead of throwing it away, and less food is wasted.
 
 **North-star question the app must answer within seconds of opening:** *"What can I rescue near me right now?"*
 
-MAWJOOd learns from the surplus-food marketplace *model* (pickup windows, reserve-and-pay, in-store pickup). It does **not** reuse any other company's branding, copy, assets, layouts or visual identity.
+Mazal learns from the surplus-food marketplace *model* (pickup windows, reserve-and-pay, in-store pickup). It does **not** reuse any other company's branding, copy, assets, layouts or visual identity.
 
 ## 2. Product principles
 
@@ -21,7 +21,7 @@ Explicitly avoided: clutter, decorative animation, repeated information, unneces
 | **Customer** — student, young professional, family on a budget | Good food at a low price, close by, without hassle | Limited time; often on a mobile network; may not have a card |
 | **Merchant owner** — bakery, café, restaurant, grocer, supermarket manager | Recover value from surplus with minimal effort | Busy at closing time; low tolerance for admin work |
 | **Merchant staff** — cashier, counter staff | Hand over orders quickly and correctly | Seconds per customer; shared device; may be offline |
-| **Admin / support** — MAWJOOd operations | Keep the marketplace safe and fair, resolve issues | Needs full visibility with an audit trail |
+| **Admin / support** — Mazal operations | Keep the marketplace safe and fair, resolve issues | Needs full visibility with an audit trail |
 
 ## 4. Scope
 

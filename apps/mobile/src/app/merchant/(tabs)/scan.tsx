@@ -1,4 +1,4 @@
-import type { PickupValidateResult } from '@mawjood/contracts';
+import type { PickupValidateResult } from '@mazal/contracts';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as Haptics from 'expo-haptics';
 import { useIsFocused } from 'expo-router';

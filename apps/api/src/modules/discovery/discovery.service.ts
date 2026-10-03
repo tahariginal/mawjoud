@@ -7,7 +7,7 @@ import type {
   Page,
   SearchResults,
   StorePage,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import { type Expression, sql } from 'kysely';
 

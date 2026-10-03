@@ -1,4 +1,4 @@
-import type { PickupPass } from '@mawjood/contracts';
+import type { PickupPass } from '@mazal/contracts';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';

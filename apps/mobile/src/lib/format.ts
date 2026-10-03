@@ -1,4 +1,4 @@
-import type { Money } from '@mawjood/contracts';
+import type { Money } from '@mazal/contracts';
 
 /** Minor units per major unit. MAD and the other currencies we expect use 2 decimals. */
 const MINOR_UNITS = 100;

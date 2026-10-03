@@ -55,12 +55,12 @@ export class BullMqEmailOutbox implements EmailOutbox, OnApplicationShutdown {
 export const emailTemplates = {
   verifyEmail: (to: string, code: string): EmailMessage => ({
     to,
-    subject: 'Your MAWJOOd verification code',
-    text: `Your verification code is ${code}.\n\nIt expires in 15 minutes. If you did not create a MAWJOOd account, you can ignore this email.`,
+    subject: 'Your Mazal verification code',
+    text: `Your verification code is ${code}.\n\nIt expires in 15 minutes. If you did not create a Mazal account, you can ignore this email.`,
   }),
   passwordReset: (to: string, code: string): EmailMessage => ({
     to,
-    subject: 'Reset your MAWJOOd password',
+    subject: 'Reset your Mazal password',
     text: `Your password reset code is ${code}.\n\nIt expires in 15 minutes. If you did not ask to reset your password, you can ignore this email; your password stays the same.`,
   }),
 };

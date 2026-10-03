@@ -1,4 +1,4 @@
-# Observability — MAWJOOd
+# Observability — Mazal
 
 Goal: know something is broken **before** users report it, and find the cause from one request id.
 

@@ -1,4 +1,4 @@
-import type { BusinessRole } from '@mawjood/contracts';
+import type { BusinessRole } from '@mazal/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { DB, type Db } from '../../database/db.ts';

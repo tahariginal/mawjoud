@@ -1,5 +1,5 @@
 /**
- * MAWJOOd design tokens. Source of truth: docs/UI_DESIGN_SYSTEM.md.
+ * Mazal design tokens. Source of truth: docs/UI_DESIGN_SYSTEM.md.
  * Components use semantic `colors`, never `palette` directly.
  * Contrast pairs were verified against WCAG 2.2 AA (see the design doc).
  *

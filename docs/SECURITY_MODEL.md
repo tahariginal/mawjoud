@@ -1,4 +1,4 @@
-# Security Model — MAWJOOd
+# Security Model — Mazal
 
 Reference bar: OWASP ASVS Level 2, OWASP Mobile Top 10, OWASP API Security Top 10.
 
@@ -83,7 +83,7 @@ If Redis is unavailable, auth and checkout limiters **fail closed** with a short
 
 ## 6. Payments and webhooks
 
-- Card data is entered only in the provider's SDK or hosted page; MAWJOOd never receives or stores PAN, CVV or card credentials (keeps PCI scope minimal).
+- Card data is entered only in the provider's SDK or hosted page; Mazal never receives or stores PAN, CVV or card credentials (keeps PCI scope minimal).
 - Webhooks: verify the provider signature over the **raw** request body, enforce timestamp tolerance, reject unsigned requests, store the event (unique id) before acknowledging, process asynchronously.
 - Provider API keys only on the server, in the secret manager. The mobile app only receives publishable/client parameters for a single payment.
 

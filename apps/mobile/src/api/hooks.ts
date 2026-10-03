@@ -6,7 +6,7 @@ import type {
   Order,
   OrdersScope,
   ReviewRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { newUuid } from '@/lib/ids';

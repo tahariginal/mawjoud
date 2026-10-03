@@ -24,7 +24,7 @@ import {
   pageOf,
   type GeoPoint,
   type OffersQuery,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Platform } from 'react-native';
 import { z } from 'zod';
 
@@ -33,7 +33,7 @@ import { newUuid } from '@/lib/ids';
 
 import { ApiError } from './errors';
 import { tokenStorage } from './tokenStorage';
-import type { AuthResult, MawjoodApi } from './types';
+import type { AuthResult, MazalApi } from './types';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 type QueryValue = string | number | boolean | undefined;
@@ -91,7 +91,7 @@ function buildUrl(baseUrl: string, path: string, query?: Record<string, QueryVal
 }
 
 /** Real REST client for /api/v1 (docs/API_SPECIFICATION.md). */
-export function createHttpApi(baseUrl: string): MawjoodApi {
+export function createHttpApi(baseUrl: string): MazalApi {
   let accessToken: string | null = null;
   let refreshInFlight: Promise<boolean> | null = null;
 

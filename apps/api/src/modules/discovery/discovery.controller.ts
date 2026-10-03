@@ -6,7 +6,7 @@ import type {
   Page,
   SearchResults,
   StorePage,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Controller, Delete, Get, HttpCode, Inject, Param, Put, Query } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { z } from 'zod';

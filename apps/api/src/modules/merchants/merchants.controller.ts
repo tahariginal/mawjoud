@@ -4,7 +4,7 @@ import {
   type MerchantBusiness,
   SetBusinessHoursRequest,
   type StaffMember,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Body, Controller, Get, HttpCode, Inject, Param, Post, Put } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { z } from 'zod';

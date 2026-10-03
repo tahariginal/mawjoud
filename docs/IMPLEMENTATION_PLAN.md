@@ -1,4 +1,4 @@
-# Implementation Plan — MAWJOOd
+# Implementation Plan — Mazal
 
 Work is delivered phase by phase. A phase is **done** only when its exit criteria pass; the next phase does not start on a red build.
 

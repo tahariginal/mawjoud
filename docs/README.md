@@ -1,4 +1,4 @@
-# MAWJOOd — Documentation Index
+# Mazal — Documentation Index
 
 Status: **Phase 1 — Architecture (awaiting approval)**. No product code exists yet.
 Last updated: 2026-10-02.
@@ -38,11 +38,11 @@ Last updated: 2026-10-02.
 | ID | Decision | Owner | Blocks |
 |---|---|---|---|
 | D1 | **Payment provider** — *deferred: MVP has no online payment (ADR-015).* Stripe does not support Morocco-based accounts (verified at stripe.com/global on 2026-10-02). Choose a Moroccan PSP/acquirer, or confirm a foreign entity. | Client + finance | Phase 5 |
-| D2 | Marketplace money flow: does MAWJOOd collect and pay out merchants (commission), or do merchants get paid directly? | Client + legal | Phase 5 |
+| D2 | Marketplace money flow: does Mazal collect and pay out merchants (commission), or do merchants get paid directly? | Client + legal | Phase 5 |
 | D3 | ~~Cash-at-pickup allowed?~~ **Decided 2026-10-02: pay at pickup for the MVP (ADR-015).** | Client | — |
 | D4 | Hosting region and data residency under Law 09-08 (CNDP authorization for transfers abroad) | Client + legal counsel | Phase 2 (staging), Phase 11 (prod) |
-| D5 | Exact brand spelling for store listings and bundle IDs (`MAWJOOd` vs `Mawjood` vs `Mawjoud`). Bundle IDs **cannot change after publishing**. | Client | Phase 2 |
-| D6 | Visual references: the brief mentions "provided MAWJOOd references" but none are in the repository | Client | Phase 1 sign-off of design system |
+| D5 | ~~Brand name~~ **Decided 2026-10-03: Mazal** (logo and Majorelle blue in `brand/`). "Mawjood" was dropped: 8 App Store and 5+ Play apps already used it. "Mazal" also exists ("Mazal App", a London restaurant, on the App Store; "Mazal" on Play): use a longer store title (e.g. "Mazal – Food rescue"), run an OMPIC trademark search, and confirm the bundle ID `com.mazal.app` before publishing — bundle IDs **cannot change after publishing**. | Client | Before store release |
+| D6 | Visual references: the brief mentions "provided Mazal references" but none are in the repository | Client | Phase 1 sign-off of design system |
 | D7 | Policies: cancellation cutoff, no-show refund policy, merchant cancellation compensation, commission rate | Client | Phase 5–8 |
 | D8 | Impact factors (kg food per offer, kg CO2e per kg) and their scientific sources | Client | Phase 7 |
 | D9 | Apple Developer + Google Play accounts, owned by the client's legal entity | Client | Phase 4 device builds, store release |

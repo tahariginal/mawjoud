@@ -1,4 +1,4 @@
-# Risk Register — MAWJOOd
+# Risk Register — Mazal
 
 Scale: Likelihood / Impact = Low · Medium · High.
 

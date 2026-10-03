@@ -1,22 +1,23 @@
 import type { ConfigContext, ExpoConfig } from 'expo/config';
 
 /**
- * PLACEHOLDERS — pending client decisions (see docs/README.md):
- *  - D5: final brand spelling, bundle identifier and Android package.
- *        These cannot be changed after the first store release.
+ * Name: Mazal (decided 2026-10-03, D5 in docs/README.md).
+ * PLACEHOLDERS — pending client decisions:
+ *  - Bundle identifier and Android package: confirm `com.mazal.app` is free in both stores and
+ *        owned by the client's developer accounts (D9). They cannot change after release.
  *  - Google Maps Android key: set GOOGLE_MAPS_ANDROID_API_KEY at build time.
  *        Without it, the Android map falls back to the list view.
  */
-const BUNDLE_ID_PLACEHOLDER = 'com.mawjood.app';
+const BUNDLE_ID_PLACEHOLDER = 'com.mazal.app';
 const googleMapsAndroidApiKey = process.env.GOOGLE_MAPS_ANDROID_API_KEY ?? '';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: 'MAWJOOd',
-  slug: 'mawjood',
+  name: 'Mazal',
+  slug: 'mazal',
   platforms: ['ios', 'android'],
   version: '0.1.0',
-  scheme: 'mawjood',
+  scheme: 'mazal',
   orientation: 'portrait',
   icon: './assets/images/icon.png',
   userInterfaceStyle: 'light',
@@ -50,13 +51,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       'expo-location',
       {
         locationWhenInUsePermission:
-          'MAWJOOd uses your location to show food you can rescue nearby. It is never stored.',
+          'Mazal uses your location to show food you can rescue nearby. It is never stored.',
       },
     ],
     [
       'expo-camera',
       {
-        cameraPermission: 'MAWJOOd uses the camera to scan pickup codes at your store.',
+        cameraPermission: 'Mazal uses the camera to scan pickup codes at your store.',
         microphonePermission: false,
         recordAudioAndroid: false,
       },

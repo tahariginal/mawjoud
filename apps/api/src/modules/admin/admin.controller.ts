@@ -3,7 +3,7 @@ import {
   AdminBusinessQuery,
   AdminDecisionRequest,
   type BusinessStatus,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import {
   Body,
   Controller,

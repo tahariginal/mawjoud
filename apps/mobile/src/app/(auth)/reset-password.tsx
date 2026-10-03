@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PASSWORD_MIN_LENGTH, ResetPasswordRequest } from '@mawjood/contracts';
+import { PASSWORD_MIN_LENGTH, ResetPasswordRequest } from '@mazal/contracts';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

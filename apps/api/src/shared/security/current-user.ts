@@ -1,4 +1,4 @@
-import type { PlatformRole } from '@mawjood/contracts';
+import type { PlatformRole } from '@mazal/contracts';
 import { createParamDecorator, type ExecutionContext } from '@nestjs/common';
 import type { Request } from 'express';
 

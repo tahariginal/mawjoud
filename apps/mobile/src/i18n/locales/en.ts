@@ -1,7 +1,7 @@
 /** English strings. Every user-facing string in the app comes from here (translation keys). */
 export const en = {
   common: {
-    appName: 'MAWJOOd',
+    appName: 'Mazal',
     retry: 'Try again',
     cancel: 'Cancel',
     save: 'Save',
@@ -274,14 +274,14 @@ export const en = {
   },
   profile: {
     title: 'Profile',
-    guestTitle: 'Welcome to MAWJOOd',
+    guestTitle: 'Welcome to Mazal',
     guestBody: 'Sign in to rescue food, save favorites and track your impact.',
     signIn: 'Sign in',
     signUp: 'Create account',
     impact: 'Your impact',
     merchantSection: 'For businesses',
     switchToMerchant: 'Switch to business mode',
-    becomeMerchant: 'Sell your surplus food on MAWJOOd',
+    becomeMerchant: 'Sell your surplus food on Mazal',
     settings: 'Settings',
     notifications: 'Notifications',
     language: 'Language',
@@ -396,7 +396,7 @@ export const en = {
   },
   merchant: {
     notMemberTitle: 'No business yet',
-    notMemberBody: 'Apply to sell your surplus food on MAWJOOd.',
+    notMemberBody: 'Apply to sell your surplus food on Mazal.',
     apply: 'Apply as a business',
     todayTitle: "Today's pickups",
     pickups_one: '{{count}} pickup',
@@ -510,7 +510,7 @@ export const en = {
   },
   updateRequired: {
     title: 'Update required',
-    body: 'Please update MAWJOOd to continue.',
+    body: 'Please update Mazal to continue.',
   },
   notFound: {
     title: 'Page not found',

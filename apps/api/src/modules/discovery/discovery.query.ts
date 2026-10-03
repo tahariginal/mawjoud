@@ -1,4 +1,4 @@
-import { BoundingBox, DietaryTag, IsoDateTime, OfferSort } from '@mawjood/contracts';
+import { BoundingBox, DietaryTag, IsoDateTime, OfferSort } from '@mazal/contracts';
 import { z } from 'zod';
 
 /** Query strings arrive as text: coerce, then validate with the same rules as the contracts. */

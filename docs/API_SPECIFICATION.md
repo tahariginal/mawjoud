@@ -1,4 +1,4 @@
-# API Specification — MAWJOOd (REST, v1)
+# API Specification — Mazal (REST, v1)
 
 Base path: `/api/v1`. JSON only. The machine-readable OpenAPI document is generated from `packages/contracts` and served at `/api/v1/openapi.json` in non-production environments.
 
@@ -147,7 +147,7 @@ Content-Type: application/json
 {
   "order": {
     "id": "0192…",
-    "shortCode": "MW-7K3Q9",
+    "shortCode": "MZ-7K3Q9",
     "status": "PAYMENT_PENDING",
     "total": { "amountMinor": 3500, "currency": "MAD" },
     "pickup": { "start": "2026-10-02T17:00:00Z", "end": "2026-10-02T18:00:00Z", "timezone": "Africa/Casablanca" },

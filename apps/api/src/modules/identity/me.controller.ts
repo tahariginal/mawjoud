@@ -3,7 +3,7 @@ import {
   type Me,
   NotificationPreferences,
   UpdateMeRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Body, Controller, Delete, Get, HttpCode, Inject, Patch, Put } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 

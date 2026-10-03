@@ -1,4 +1,4 @@
-import type { MerchantOffer } from '@mawjood/contracts';
+import type { MerchantOffer } from '@mazal/contracts';
 import { FlashList } from '@shopify/flash-list';
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';

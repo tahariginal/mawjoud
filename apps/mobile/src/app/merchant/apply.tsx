@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MerchantApplicationRequest } from '@mawjood/contracts';
+import { MerchantApplicationRequest } from '@mazal/contracts';
 import * as Location from 'expo-location';
 import { Redirect, router } from 'expo-router';
 import { useState } from 'react';

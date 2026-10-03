@@ -1,4 +1,4 @@
-import type { Category } from '@mawjood/contracts';
+import type { Category } from '@mazal/contracts';
 import { useCallback, useSyncExternalStore } from 'react';
 
 import type { IconName } from '@/components/ui/Icon';

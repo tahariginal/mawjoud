@@ -1,4 +1,4 @@
-import { ReviewRequest } from '@mawjood/contracts';
+import { ReviewRequest } from '@mazal/contracts';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';

@@ -2,7 +2,7 @@ import {
   type MerchantOffer,
   MerchantOfferInput,
   UpdateMerchantOfferRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Body, Controller, Get, HttpCode, Inject, Param, Patch, Post, Query } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { z } from 'zod';

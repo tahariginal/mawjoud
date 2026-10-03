@@ -1,4 +1,4 @@
-import type { BoundingBox, GeoPoint, OfferSummary, Rating, StoreSummary } from '@mawjood/contracts';
+import type { BoundingBox, GeoPoint, OfferSummary, Rating, StoreSummary } from '@mazal/contracts';
 import { type InferResult, sql } from 'kysely';
 
 import type { Db } from '../../database/db.ts';

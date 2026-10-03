@@ -1,4 +1,4 @@
-# System Architecture — MAWJOOd
+# System Architecture — Mazal
 
 ## 1. Repository assessment (2026-10-02)
 

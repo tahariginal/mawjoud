@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 
-import { AuthResponse, Me } from '@mawjood/contracts';
+import { AuthResponse, Me } from '@mazal/contracts';
 import { expect } from 'vitest';
 
 import type { TestContext } from './app.ts';

@@ -1,4 +1,4 @@
-# Error Handling & Resilience — MAWJOOd
+# Error Handling & Resilience — Mazal
 
 ## 1. Error envelope (every API error)
 

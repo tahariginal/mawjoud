@@ -1,4 +1,4 @@
-import type { Money, PickupWindow } from '@mawjood/contracts';
+import type { Money, PickupWindow } from '@mazal/contracts';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 

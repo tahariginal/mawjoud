@@ -12,7 +12,7 @@ import {
   type Quote,
   QuoteRequest,
   ReviewRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Body, Controller, Get, HttpCode, Inject, Param, Post, Query } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { z } from 'zod';

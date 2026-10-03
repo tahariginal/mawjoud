@@ -17,7 +17,7 @@ import {
   type StoreSummary,
   type Allergen,
   type DietaryTag,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 
 import { ApiError } from '../errors';
 import {
@@ -93,7 +93,7 @@ function seedOffers(now: number): DemoOffer[] {
 
 export const demoMe = (): Me => ({
   id: demoUserId,
-  email: 'demo@mawjood.test',
+  email: 'demo@mazal.test',
   emailVerified: true,
   displayName: 'Demo user',
   locale: 'en',
@@ -126,13 +126,13 @@ export function createDemoState(now = Date.now()) {
       {
         userId: demoUserId,
         displayName: 'Demo user',
-        email: 'demo@mawjood.test',
+        email: 'demo@mazal.test',
         role: 'OWNER' as const,
       },
       {
         userId: demoIds.id(0x502),
         displayName: 'Salma (staff)',
-        email: 'staff@mawjood.test',
+        email: 'staff@mazal.test',
         role: 'STAFF' as const,
       },
     ],
@@ -307,7 +307,7 @@ export function seedMerchantOrders(state: DemoState, now: number, makeToken: () 
       customerInitial: index === 0 ? 'Y' : 'O',
       order: {
         id: orderId,
-        shortCode: `MW-DEMO${index + 1}`,
+        shortCode: `MZ-DEMO${index + 1}`,
         status: 'READY_FOR_PICKUP',
         store: {
           id: s.id,

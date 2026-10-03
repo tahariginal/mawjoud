@@ -6,7 +6,7 @@ import type {
   ResetPasswordRequest,
   UpdateMeRequest,
   VerifyEmailRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useSession } from '@/state/session';

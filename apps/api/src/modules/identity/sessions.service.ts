@@ -1,4 +1,4 @@
-import type { AuthTokens, PlatformRole } from '@mawjood/contracts';
+import type { AuthTokens, PlatformRole } from '@mazal/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import type { Kysely, Transaction } from 'kysely';
 import { randomUUID } from 'node:crypto';

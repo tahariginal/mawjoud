@@ -3,7 +3,7 @@ import { DEV_PASSWORD, seedDevelopmentData } from './seed.ts';
 
 /**
  * Database CLI: `migrate` (to latest), `rollback` (one step) and `seed` (development data).
- * Run with the built output: `pnpm --filter @mawjood/api db:migrate`.
+ * Run with the built output: `pnpm --filter @mazal/api db:migrate`.
  */
 const command = process.argv[2];
 const url = process.env.DATABASE_URL;

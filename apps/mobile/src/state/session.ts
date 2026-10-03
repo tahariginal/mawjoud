@@ -1,4 +1,4 @@
-import type { Me } from '@mawjood/contracts';
+import type { Me } from '@mazal/contracts';
 import { create } from 'zustand';
 
 type Mode = 'customer' | 'merchant';

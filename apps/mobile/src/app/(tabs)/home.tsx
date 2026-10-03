@@ -1,4 +1,4 @@
-import type { OfferSummary } from '@mawjood/contracts';
+import type { OfferSummary } from '@mazal/contracts';
 import { router } from 'expo-router';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';

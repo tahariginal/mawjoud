@@ -8,7 +8,7 @@ import {
   RegisterRequest,
   ResetPasswordRequest,
   VerifyEmailRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Body, Controller, Headers, HttpCode, Inject, Post } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 

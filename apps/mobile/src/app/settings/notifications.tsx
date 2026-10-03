@@ -1,4 +1,4 @@
-import { NotificationType, TimeOfDay, type NotificationPreferences } from '@mawjood/contracts';
+import { NotificationType, TimeOfDay, type NotificationPreferences } from '@mazal/contracts';
 import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';

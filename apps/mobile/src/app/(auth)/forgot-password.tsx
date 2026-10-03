@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ForgotPasswordRequest } from '@mawjood/contracts';
+import { ForgotPasswordRequest } from '@mazal/contracts';
 import { Stack, router } from 'expo-router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

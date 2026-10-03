@@ -6,12 +6,12 @@ import {
   type MerchantOffer,
   type MerchantOrder,
   type PickupValidateResult,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 
 import { newUuid } from '@/lib/ids';
 
 import { ApiError } from '../errors';
-import type { MawjoodApi } from '../types';
+import type { MazalApi } from '../types';
 import { DEMO_CURRENCY, demoStores } from './fixtures';
 import { requireSession } from './customer';
 import {
@@ -43,7 +43,7 @@ type MerchantKeys =
   | 'listStaff'
   | 'inviteStaff';
 
-export type DemoMerchantApi = Pick<MawjoodApi, MerchantKeys>;
+export type DemoMerchantApi = Pick<MazalApi, MerchantKeys>;
 
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
 

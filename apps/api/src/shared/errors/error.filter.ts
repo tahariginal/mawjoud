@@ -1,4 +1,4 @@
-import type { ErrorCode } from '@mawjood/contracts';
+import type { ErrorCode } from '@mazal/contracts';
 import {
   type ArgumentsHost,
   Catch,

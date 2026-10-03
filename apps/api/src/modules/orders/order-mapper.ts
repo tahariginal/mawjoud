@@ -1,4 +1,4 @@
-import type { Order } from '@mawjood/contracts';
+import type { Order } from '@mazal/contracts';
 import { type Kysely, sql, type Transaction } from 'kysely';
 
 import { latitudeOf, longitudeOf } from '../../database/geo.ts';

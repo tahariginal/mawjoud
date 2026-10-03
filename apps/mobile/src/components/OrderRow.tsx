@@ -1,4 +1,4 @@
-import type { Order } from '@mawjood/contracts';
+import type { Order } from '@mazal/contracts';
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 

@@ -4,7 +4,7 @@ import type { TestProject } from 'vitest/node';
 
 import { createDb, migrateToLatest } from '../src/database/db.ts';
 
-export const TEMPLATE_DB = 'mawjood_template';
+export const TEMPLATE_DB = 'mazal_template';
 
 declare module 'vitest' {
   export interface ProvidedContext {

@@ -1,4 +1,4 @@
-import { MerchantBusiness, MerchantOffer, type MerchantOfferInput } from '@mawjood/contracts';
+import { MerchantBusiness, MerchantOffer, type MerchantOfferInput } from '@mazal/contracts';
 import { z } from 'zod';
 
 import type { TestContext } from './app.ts';

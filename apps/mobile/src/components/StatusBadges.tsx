@@ -1,4 +1,4 @@
-import type { OfferStatus, OrderStatus } from '@mawjood/contracts';
+import type { OfferStatus, OrderStatus } from '@mazal/contracts';
 import { useTranslation } from 'react-i18next';
 
 import { env } from '@/config/env';

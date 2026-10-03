@@ -1,4 +1,4 @@
-import type { ErrorCode } from '@mawjood/contracts';
+import type { ErrorCode } from '@mazal/contracts';
 
 /** Server error codes plus failures that only exist on the client. */
 export type ClientErrorCode =

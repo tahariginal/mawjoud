@@ -38,7 +38,7 @@ import type {
   StorePage,
   UpdateMeRequest,
   VerifyEmailRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 
 export type AuthResult = { me: Me; tokens: AuthTokens };
 
@@ -47,7 +47,7 @@ export type AuthResult = { me: Me; tokens: AuthTokens };
  *  - `http`: the real REST client (docs/API_SPECIFICATION.md)
  *  - `demo`: an isolated in-memory adapter for development, refused in production
  */
-export interface MawjoodApi {
+export interface MazalApi {
   readonly mode: 'demo' | 'http';
 
   getAppConfig(): Promise<AppConfig>;

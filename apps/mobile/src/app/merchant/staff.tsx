@@ -1,4 +1,4 @@
-import { InviteStaffRequest } from '@mawjood/contracts';
+import { InviteStaffRequest } from '@mazal/contracts';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';

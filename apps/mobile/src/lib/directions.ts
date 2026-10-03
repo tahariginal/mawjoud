@@ -1,4 +1,4 @@
-import type { GeoPoint } from '@mawjood/contracts';
+import type { GeoPoint } from '@mazal/contracts';
 import { Linking, Platform } from 'react-native';
 
 /** Hands off to the platform maps app (Apple Maps on iOS, Google Maps on Android). */

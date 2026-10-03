@@ -1,4 +1,4 @@
-import type { DietaryTag, OfferSort } from '@mawjood/contracts';
+import type { DietaryTag, OfferSort } from '@mazal/contracts';
 import { create } from 'zustand';
 
 export type PickupDay = 'any' | 'today' | 'tomorrow';

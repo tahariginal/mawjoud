@@ -6,7 +6,7 @@ import type {
   Me,
   RegisterRequest,
   ResetPasswordRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 
 import { DB, type Db } from '../../database/db.ts';

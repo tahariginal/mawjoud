@@ -1,4 +1,4 @@
-import { DisplayName } from '@mawjood/contracts';
+import { DisplayName } from '@mazal/contracts';
 import { Redirect, Stack } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';

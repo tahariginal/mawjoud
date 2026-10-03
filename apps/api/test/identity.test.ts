@@ -1,4 +1,4 @@
-import { ApiErrorEnvelope, AuthTokens, Me, NotificationPreferences } from '@mawjood/contracts';
+import { ApiErrorEnvelope, AuthTokens, Me, NotificationPreferences } from '@mazal/contracts';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import { createTestApp, type TestContext } from './support/app.ts';

@@ -1,4 +1,4 @@
-import type { ErrorCode } from '@mawjood/contracts';
+import type { ErrorCode } from '@mazal/contracts';
 
 /**
  * The only error type domain and application code should throw for expected failures.

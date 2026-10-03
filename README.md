@@ -1,4 +1,4 @@
-# MAWJOOd
+# Mazal
 
 Mobile-first marketplace for rescuing surplus food from local businesses.
 
@@ -25,33 +25,33 @@ docs/                 Product, UX, design system, architecture, ADRs, risks, pla
 
 ```bash
 pnpm install
-pnpm --filter @mawjood/contracts build          # shared contracts (Turborepo also does this)
+pnpm --filter @mazal/contracts build          # shared contracts (Turborepo also does this)
 
 # Backend
 pnpm services:up                                 # PostGIS :5442, Redis :6389, Mailpit :1035/:8035
 cp apps/api/.env.example apps/api/.env
-pnpm --filter @mawjood/api build
-pnpm --filter @mawjood/api db:migrate
-pnpm --filter @mawjood/api db:seed               # development data (see below)
-pnpm --filter @mawjood/api dev                   # API on :3100 + worker, rebuilt on change
+pnpm --filter @mazal/api build
+pnpm --filter @mazal/api db:migrate
+pnpm --filter @mazal/api db:seed               # development data (see below)
+pnpm --filter @mazal/api dev                   # API on :3100 + worker, rebuilt on change
 
 # App
 cp apps/mobile/.env.example apps/mobile/.env.local
 # set EXPO_PUBLIC_API_MODE=http and EXPO_PUBLIC_API_BASE_URL=http://<your-LAN-IP>:3100/api/v1
-pnpm --filter @mawjood/mobile start
+pnpm --filter @mazal/mobile start
 ```
 
 Emails (verification and reset codes) are delivered by the worker to Mailpit: open http://localhost:8035.
 
 ### Development accounts (`db:seed`)
 
-| Email                    | Role                                                                     |
-| ------------------------ | ------------------------------------------------------------------------ |
-| `admin@mawjood.local`    | Platform admin (approves businesses)                                     |
-| `merchant@mawjood.local` | Owner of four approved stores in Maarif / Gauthier with offers for today |
-| `customer@mawjood.local` | Verified customer                                                        |
+| Email                  | Role                                                                     |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `admin@mazal.local`    | Platform admin (approves businesses)                                     |
+| `merchant@mazal.local` | Owner of four approved stores in Maarif / Gauthier with offers for today |
+| `customer@mazal.local` | Verified customer                                                        |
 
-Password for all: `mawjood-dev-password`. The seed refuses to run unless `APP_ENV=development`; reset with `pnpm services:reset`.
+Password for all: `mazal-dev-password`. The seed refuses to run unless `APP_ENV=development`; reset with `pnpm services:reset`.
 
 ## Commands
 
@@ -60,9 +60,9 @@ Password for all: `mawjood-dev-password`. The seed refuses to run unless `APP_EN
 | `pnpm verify`                                               | Lint + typecheck + tests + production bundle build for every package (same as CI) |
 | `pnpm lint` / `pnpm typecheck` / `pnpm test` / `pnpm build` | Individual steps via Turborepo                                                    |
 | `pnpm format` / `pnpm format:check`                         | Prettier                                                                          |
-| `pnpm --filter @mawjood/mobile start`                       | Start the Expo dev server                                                         |
-| `pnpm --filter @mawjood/api dev`                            | API + worker with rebuild on change                                               |
-| `pnpm --filter @mawjood/api db:migrate` / `db:rollback`     | Apply all migrations / roll back one                                              |
+| `pnpm --filter @mazal/mobile start`                         | Start the Expo dev server                                                         |
+| `pnpm --filter @mazal/api dev`                              | API + worker with rebuild on change                                               |
+| `pnpm --filter @mazal/api db:migrate` / `db:rollback`       | Apply all migrations / roll back one                                              |
 | `pnpm services:up` / `services:down` / `services:reset`     | Local PostgreSQL, Redis, Mailpit (reset deletes the data)                         |
 
 `typecheck` in the mobile app first runs `scripts/typegen.mjs`, which generates Expo Router's typed routes, so a broken link fails the build.
@@ -71,7 +71,7 @@ Password for all: `mawjood-dev-password`. The seed refuses to run unless `APP_EN
 
 - REST under `/api/v1` (health probes at `/health/live` and `/health/ready`), errors in one envelope `{ error: { code, message, requestId, timestamp } }` — see `docs/API_SPECIFICATION.md` and `docs/ERROR_HANDLING.md`.
 - Configuration is validated at boot (`apps/api/.env.example` lists every variable). Staging/production refuse to start without `APP_SECRET`, JWT keys, `SMTP_URL` and rate limits.
-- Tests (`pnpm --filter @mawjood/api test`) start PostGIS and Redis containers, clone a migrated template database per test file, and include the critical concurrency scenarios (last-unit race, duplicate submissions, double pickup scans) plus a contract test that runs the mobile app's own HTTP client against the API.
+- Tests (`pnpm --filter @mazal/api test`) start PostGIS and Redis containers, clone a migrated template database per test file, and include the critical concurrency scenarios (last-unit race, duplicate submissions, double pickup scans) plus a contract test that runs the mobile app's own HTTP client against the API.
 
 ## Configuration (mobile)
 
@@ -97,7 +97,7 @@ The demo adapter (`apps/mobile/src/api/demo/`) simulates the backend in memory w
 | Placeholder                                                | Where                                                     | Decision                    |
 | ---------------------------------------------------------- | --------------------------------------------------------- | --------------------------- |
 | Online payment (deferred; Stripe not available in Morocco) | Reservations are paid at the store at pickup              | ADR-015                     |
-| Brand spelling, bundle ID `com.mawjood.app`, icon          | `apps/mobile/app.config.ts`, `assets/images/`             | D5, D6                      |
+| Bundle ID `com.mazal.app` (name and icon are decided)      | `apps/mobile/app.config.ts`                               | D5, D9                      |
 | Visual references                                          | Design tokens follow `docs/UI_DESIGN_SYSTEM.md`           | D6                          |
 | CO2e impact factors                                        | Impact screen shows "Coming soon", never a made-up number | D8                          |
 | Cancellation / no-show policy, fees                        | Checkout shows a pending-policy note; fees are 0          | D7                          |

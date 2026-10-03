@@ -1,4 +1,4 @@
-import type { ImageSet } from '@mawjood/contracts';
+import type { ImageSet } from '@mazal/contracts';
 import { Image } from 'expo-image';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';

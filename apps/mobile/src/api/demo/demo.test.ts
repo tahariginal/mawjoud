@@ -1,5 +1,5 @@
 import { ApiError } from '../errors';
-import type { MawjoodApi } from '../types';
+import type { MazalApi } from '../types';
 import { createDemoApi, DEMO_SEEDED_PICKUP_CODES } from './index';
 
 const OFFER_LAST_UNIT = '00000000-0000-4000-8000-000000000403'; // seeded with quantity 1
@@ -15,9 +15,9 @@ async function codeOf(promise: Promise<unknown>): Promise<string> {
   }
 }
 
-async function signedIn(): Promise<MawjoodApi> {
+async function signedIn(): Promise<MazalApi> {
   const api = createDemoApi({ latencyMs: 0 });
-  await api.login({ email: 'demo@mawjood.test', password: 'x' });
+  await api.login({ email: 'demo@mazal.test', password: 'x' });
   return api;
 }
 

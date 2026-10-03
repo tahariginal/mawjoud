@@ -15,7 +15,7 @@ import { DB, type Db } from '../../src/database/db.ts';
 import { EMAIL_OUTBOX } from '../../src/shared/email/email.ts';
 import { CapturingEmailOutbox } from './email.ts';
 
-const TEMPLATE_DB = 'mawjood_template';
+const TEMPLATE_DB = 'mazal_template';
 
 /** Clones the migrated template into a fresh database for one test file. */
 export async function createTestDatabase(): Promise<string> {

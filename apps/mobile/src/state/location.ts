@@ -1,4 +1,4 @@
-import type { GeoPoint } from '@mawjood/contracts';
+import type { GeoPoint } from '@mazal/contracts';
 import { create } from 'zustand';
 
 /**

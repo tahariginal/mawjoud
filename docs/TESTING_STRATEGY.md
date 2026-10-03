@@ -1,4 +1,4 @@
-# Testing Strategy — MAWJOOd
+# Testing Strategy — Mazal
 
 Testing is a release gate, not an afterthought. Money, stock and pickups are tested against a **real PostgreSQL/PostGIS and Redis** (Testcontainers), never mocks.
 

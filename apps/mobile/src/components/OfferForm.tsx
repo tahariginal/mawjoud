@@ -6,7 +6,7 @@ import {
   OFFER_TITLE_MAX,
   type MerchantOffer,
   type MerchantOfferInput,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';

@@ -1,19 +1,19 @@
 # Local development services. Ports are offset from defaults to avoid clashing with other projects.
-name: mawjood
+name: mazal
 
 services:
   postgres:
     image: postgis/postgis:18-3.6
     environment:
-      POSTGRES_USER: mawjood
-      POSTGRES_PASSWORD: mawjood
-      POSTGRES_DB: mawjood
+      POSTGRES_USER: mazal
+      POSTGRES_PASSWORD: mazal
+      POSTGRES_DB: mazal
     ports:
       - '5442:5432'
     volumes:
       - postgres-data:/var/lib/postgresql
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U mawjood -d mawjood']
+      test: ['CMD-SHELL', 'pg_isready -U mazal -d mazal']
       interval: 5s
       timeout: 5s
       retries: 10

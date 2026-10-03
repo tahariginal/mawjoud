@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PASSWORD_MIN_LENGTH, RegisterRequest } from '@mawjood/contracts';
+import { PASSWORD_MIN_LENGTH, RegisterRequest } from '@mazal/contracts';
 import { Stack, router } from 'expo-router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

@@ -2,7 +2,7 @@ import * as SecureStore from 'expo-secure-store';
 
 import { newUuid } from '@/lib/ids';
 
-const STORAGE_KEY = 'mawjood.checkoutAttempt';
+const STORAGE_KEY = 'mazal.checkoutAttempt';
 /** Matches the server hold duration; after it, a new attempt gets a new key. */
 const ATTEMPT_TTL_MS = 10 * 60_000;
 

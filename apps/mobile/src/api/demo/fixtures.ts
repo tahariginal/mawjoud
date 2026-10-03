@@ -1,14 +1,8 @@
 /**
  * DEMO DATA — development only. Fictional businesses in Casablanca used by the demo adapter
- * until the MAWJOOd API exists. Never shipped to production (see src/config/env.ts).
+ * until the Mazal API exists. Never shipped to production (see src/config/env.ts).
  */
-import type {
-  Allergen,
-  BusinessHours,
-  Category,
-  DietaryTag,
-  StoreDetail,
-} from '@mawjood/contracts';
+import type { Allergen, BusinessHours, Category, DietaryTag, StoreDetail } from '@mazal/contracts';
 
 export const DEMO_TIMEZONE = 'Africa/Casablanca';
 export const DEMO_CURRENCY = 'MAD';

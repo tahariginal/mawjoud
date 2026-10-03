@@ -1,4 +1,4 @@
-import type { AdminBusiness, BusinessStatus } from '@mawjood/contracts';
+import type { AdminBusiness, BusinessStatus } from '@mazal/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import { sql } from 'kysely';
 

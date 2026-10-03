@@ -1,4 +1,4 @@
-import type { OrdersScope } from '@mawjood/contracts';
+import type { OrdersScope } from '@mazal/contracts';
 import { FlashList } from '@shopify/flash-list';
 import { router } from 'expo-router';
 import { useState } from 'react';

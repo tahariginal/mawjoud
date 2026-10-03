@@ -1,4 +1,4 @@
-import type { GeoPoint } from '@mawjood/contracts';
+import type { GeoPoint } from '@mazal/contracts';
 import { type Expression, type RawBuilder, sql } from 'kysely';
 
 /** WGS84 point as a PostGIS geography. Coordinates are bound parameters, never interpolated. */

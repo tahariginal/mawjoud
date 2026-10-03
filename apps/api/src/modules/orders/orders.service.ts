@@ -8,7 +8,7 @@ import {
   type Quote,
   type QuoteRequest,
   type ReviewRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { Inject, Injectable } from '@nestjs/common';
 import { sql, type Transaction } from 'kysely';
 
@@ -220,7 +220,7 @@ export class OrdersService {
     const order = await trx
       .insertInto('orders')
       .values({
-        short_code: `MW-${randomFromAlphabet(6, PICKUP_CODE_ALPHABET)}`,
+        short_code: `MZ-${randomFromAlphabet(6, PICKUP_CODE_ALPHABET)}`,
         user_id: userId,
         business_id: offer.business_id,
         location_id: offer.location_id,

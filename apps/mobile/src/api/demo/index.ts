@@ -1,12 +1,12 @@
 /**
  * DEMO ADAPTER — development only.
- * In-memory implementation of `MawjoodApi` so the app can be built and reviewed before the
+ * In-memory implementation of `MazalApi` so the app can be built and reviewed before the
  * backend exists. `src/config/env.ts` refuses to start a production build in this mode, and the
  * UI shows a "Demo data" badge whenever it is active.
  */
 import { newUuid } from '@/lib/ids';
 
-import type { MawjoodApi } from '../types';
+import type { MazalApi } from '../types';
 import { createDemoCustomerApi } from './customer';
 import { createDemoMerchantApi } from './merchant';
 import { createDemoState, seedMerchantOrders } from './state';
@@ -20,7 +20,7 @@ type DemoOptions = {
   now?: () => number;
 };
 
-export function createDemoApi(options: DemoOptions = {}): MawjoodApi {
+export function createDemoApi(options: DemoOptions = {}): MazalApi {
   const latencyMs = options.latencyMs ?? 350;
   const now = options.now ?? Date.now;
   const state = createDemoState(now());

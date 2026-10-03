@@ -1,4 +1,4 @@
-import type { OfferSummary } from '@mawjood/contracts';
+import type { OfferSummary } from '@mazal/contracts';
 import { fireEvent, render, screen } from '@testing-library/react-native';
 
 import { OfferCard } from './OfferCard';

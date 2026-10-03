@@ -3,7 +3,7 @@ import type {
   MerchantApplicationRequest,
   MerchantOfferInput,
   PickupValidateRequest,
-} from '@mawjood/contracts';
+} from '@mazal/contracts';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { newUuid } from '@/lib/ids';

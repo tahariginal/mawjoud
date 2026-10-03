@@ -1,4 +1,4 @@
-# Scalability — MAWJOOd
+# Scalability — Mazal
 
 ## 1. Assumptions (illustrative, to be replaced with real targets from the client)
 

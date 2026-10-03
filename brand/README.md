@@ -36,4 +36,4 @@ The app's icons in `apps/mobile/assets/images/` are generated from the same symb
 
 ## Name
 
-The wordmark reads **mazal**, as chosen on 2026-10-03. On that date "Mazal App" (a London restaurant, Food & Drink) existed on the App Store and an app named "Mazal" on Google Play; `mazal.ma` and `mazal.com` were taken, `mazalapp.ma`/`.com` and `mazalfood.ma`/`.com` were free. Use a longer store title (e.g. "Mazal – Food rescue") and run an OMPIC trademark search before launch. The app's display name in code is still "MAWJOOd" until the rename is decided.
+The wordmark reads **mazal**, as chosen on 2026-10-03. On that date "Mazal App" (a London restaurant, Food & Drink) existed on the App Store and an app named "Mazal" on Google Play; `mazal.ma` and `mazal.com` were taken, `mazalapp.ma`/`.com` and `mazalfood.ma`/`.com` were free. Use a longer store title (e.g. "Mazal – Food rescue") and run an OMPIC trademark search before launch. The app is named Mazal everywhere in the code since 2026-10-03.

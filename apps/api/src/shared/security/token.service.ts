@@ -1,4 +1,4 @@
-import type { PlatformRole } from '@mawjood/contracts';
+import type { PlatformRole } from '@mazal/contracts';
 import { Logger } from '@nestjs/common';
 import {
   calculateJwkThumbprint,
@@ -15,8 +15,8 @@ import {
 import type { AppConfig } from '../../config/config.ts';
 
 const ALG = 'ES256';
-const ISSUER = 'mawjood-api';
-const AUDIENCE = 'mawjood-app';
+const ISSUER = 'mazal-api';
+const AUDIENCE = 'mazal-app';
 export const ACCESS_TOKEN_TTL_SECONDS = 15 * 60;
 
 export type AccessClaims = { userId: string; sessionId: string; role: PlatformRole };
