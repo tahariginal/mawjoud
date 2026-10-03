@@ -39,7 +39,7 @@ export function ListRow({
         <Icon name={icon} size={22} color={destructive ? colors.errorFg : colors.icon} />
       ) : null}
       <View style={styles.text}>
-        <AppText variant="body" color={color}>
+        <AppText variant="body" color={color} style={styles.title}>
           {title}
         </AppText>
         {subtitle ? (
@@ -87,4 +87,5 @@ const styles = StyleSheet.create({
   pressed: { backgroundColor: colors.bgSurfaceMuted },
   dimmed: { opacity: 0.6 },
   text: { flex: 1, gap: spacing.xxs },
+  title: { textAlign: 'left' },
 });

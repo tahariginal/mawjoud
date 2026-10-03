@@ -57,7 +57,7 @@ export default function BusinessScreen() {
                 {t('merchant.hours')}
               </AppText>
               {[...loc.hours]
-                .sort((a, b) => a.weekday - b.weekday)
+                .sort((a, b) => ((a.weekday + 6) % 7) - ((b.weekday + 6) % 7))
                 .map((h) => (
                   <View key={h.weekday} style={styles.hours}>
                     <AppText variant="subhead" style={styles.flex}>

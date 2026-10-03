@@ -31,7 +31,7 @@ export function OrderRow({ order }: { order: Order }) {
           <OrderStatusBadge status={order.status} />
         </View>
         <AppText variant="subhead" color={colors.textSecondary} numberOfLines={1}>
-          {title} · {formatMoney(order.breakdown.total, currentLocale())}
+          {formatMoney(order.breakdown.total, currentLocale())} · {title}
         </AppText>
         <PickupWindowText window={order.pickup} showIcon={false} />
       </View>

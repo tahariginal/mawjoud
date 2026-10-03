@@ -25,16 +25,23 @@ type Props = { label: string; tone?: BadgeTone; icon?: IconName };
 export function Badge({ label, tone = 'neutral', icon }: Props) {
   const t = tones[tone];
   return (
-    <View style={[styles.base, { backgroundColor: t.bg }]}>
-      {icon ? <Icon name={icon} size={12} color={t.fg} /> : null}
-      <AppText variant="caption" color={t.fg} numberOfLines={1}>
-        {label}
-      </AppText>
+    <View style={styles.wrap}>
+      <View style={[styles.base, { backgroundColor: t.bg }]}>
+        {icon ? <Icon name={icon} size={12} color={t.fg} /> : null}
+        <AppText variant="caption" color={t.fg} numberOfLines={1}>
+          {label}
+        </AppText>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  /**
+   * Row wrapper: the pill keeps its content width in columns and is vertically centered in
+   * rows (an `alignSelf: 'flex-start'` pill was top-aligned inside rows).
+   */
+  wrap: { flexDirection: 'row' },
   base: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -42,6 +49,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     paddingVertical: spacing.xxs,
     borderRadius: radius.xs,
-    alignSelf: 'flex-start',
   },
 });

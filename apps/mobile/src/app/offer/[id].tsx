@@ -281,7 +281,13 @@ export default function OfferScreen() {
         </View>
       </ScrollView>
       <FloatingBar
-        right={<FavoriteButton storeId={o.store.id} isFavorite={store.data?.isFavorite ?? false} />}
+        right={
+          <FavoriteButton
+            storeId={o.store.id}
+            isFavorite={store.data?.isFavorite ?? false}
+            floating
+          />
+        }
       />
     </Screen>
   );

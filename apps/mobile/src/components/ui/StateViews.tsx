@@ -37,7 +37,9 @@ export function EmptyState({
         </AppText>
       ) : null}
       {actionLabel && onAction ? (
-        <Button label={actionLabel} onPress={onAction} variant="secondary" />
+        <View>
+          <Button label={actionLabel} onPress={onAction} variant="secondary" />
+        </View>
       ) : null}
     </View>
   );
@@ -57,13 +59,15 @@ export function ErrorState({ error, onRetry, retrying }: ErrorProps) {
         {message}
       </AppText>
       {onRetry ? (
-        <Button
-          label={t('common.retry')}
-          onPress={onRetry}
-          loading={retrying}
-          icon="refresh-outline"
-          variant="secondary"
-        />
+        <View>
+          <Button
+            label={t('common.retry')}
+            onPress={onRetry}
+            loading={retrying}
+            icon="refresh-outline"
+            variant="secondary"
+          />
+        </View>
       ) : null}
     </View>
   );

@@ -12,10 +12,24 @@ import { currentLocale } from '@/i18n';
 import { formatMoney } from '@/lib/format';
 import { useSession } from '@/state/session';
 
-function Metric({ label, value, color }: { label: string; value: string; color?: string }) {
+function Metric({
+  label,
+  value,
+  color,
+  pending = false,
+}: {
+  label: string;
+  value: string;
+  color?: string;
+  /** Not available yet: shown as quiet text instead of a big number. */
+  pending?: boolean;
+}) {
   return (
     <Card>
-      <AppText variant="display" color={color ?? colors.textPrimary}>
+      <AppText
+        variant={pending ? 'title2' : 'display'}
+        color={pending ? colors.textSecondary : (color ?? colors.textPrimary)}
+      >
         {value}
       </AppText>
       <AppText variant="subhead" color={colors.textSecondary}>
@@ -75,6 +89,7 @@ export default function ImpactScreen() {
         />
         <Metric
           label={t('impact.co2')}
+          pending={d.co2eKg === null}
           value={
             d.co2eKg === null
               ? t('impact.co2Pending')

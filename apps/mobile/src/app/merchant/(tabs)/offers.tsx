@@ -177,5 +177,5 @@ const styles = StyleSheet.create({
   item: { paddingHorizontal: spacing.lg, paddingVertical: spacing.lg },
   separator: { paddingHorizontal: spacing.lg },
   top: { flexDirection: 'row', gap: spacing.sm, alignItems: 'flex-start' },
-  actions: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  actions: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: spacing.sm },
 });

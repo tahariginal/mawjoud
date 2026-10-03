@@ -7,7 +7,16 @@ import { useSession } from '@/state/session';
 
 import { IconButton } from './ui/IconButton';
 
-export function FavoriteButton({ storeId, isFavorite }: { storeId: string; isFavorite: boolean }) {
+export function FavoriteButton({
+  storeId,
+  isFavorite,
+  floating = false,
+}: {
+  storeId: string;
+  isFavorite: boolean;
+  /** Round white button with a shadow, for use over images. */
+  floating?: boolean;
+}) {
   const { t } = useTranslation();
   const signedIn = useSession((s) => s.status === 'signedIn');
   const toggle = useToggleFavorite();
@@ -18,7 +27,7 @@ export function FavoriteButton({ storeId, isFavorite }: { storeId: string; isFav
       icon={shown ? 'heart' : 'heart-outline'}
       color={colors.icon}
       selected={shown}
-      background
+      background={floating}
       accessibilityLabel={shown ? t('favorites.remove') : t('favorites.add')}
       onPress={() => {
         if (!signedIn) {
