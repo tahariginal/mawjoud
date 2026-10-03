@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mazal brand</title>
+    <style>
+      :root {
+        --majorelle: #6050dc;
+        --majorelle-pressed: #4a3bc2;
+        --ink: #111111;
+        --secondary: #6b6b6b;
+        --muted: #f5f5f4;
+        --line: #ededec;
+        --green: #0b7a4b;
+        --mint: #9fe3bf;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: var(--ink);
+        font:
+          15px/1.5 -apple-system,
+          'Segoe UI',
+          Inter,
+          Roboto,
+          sans-serif;
+      }
+      header,
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      header {
+        padding-top: 40px;
+      }
+      h1 {
+        font-size: 32px;
+        letter-spacing: -0.6px;
+        margin: 0 0 8px;
+      }
+      h2 {
+        font-size: 22px;
+        letter-spacing: -0.2px;
+        margin: 0 0 16px;
+      }
+      p {
+        color: var(--secondary);
+        max-width: 760px;
+        margin: 4px 0;
+      }
+      section {
+        border-top: 1px solid var(--line);
+        margin-top: 32px;
+        padding-top: 28px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 16px;
+      }
+      .tile {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        min-height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+      }
+      .tile.blue {
+        background: var(--majorelle);
+        border-color: var(--majorelle);
+      }
+      .tile.dark {
+        background: var(--ink);
+        border-color: var(--ink);
+      }
+      .tile img {
+        max-width: 100%;
+      }
+      .caption {
+        font-size: 13px;
+        color: var(--secondary);
+        margin-top: 8px;
+      }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+      }
+      .swatch {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .chip {
+        height: 96px;
+      }
+      .meta {
+        padding: 12px 14px;
+        font-size: 13px;
+        color: var(--secondary);
+      }
+      .meta strong {
+        display: block;
+        color: var(--ink);
+        font-size: 15px;
+      }
+      .sizes {
+        display: flex;
+        align-items: flex-end;
+        gap: 28px;
+        flex-wrap: wrap;
+      }
+      ul {
+        margin: 0;
+        padding-left: 20px;
+        color: var(--secondary);
+      }
+      li {
+        margin: 6px 0;
+      }
+      code {
+        background: var(--muted);
+        padding: 1px 6px;
+        border-radius: 6px;
+        font-size: 13px;
+        color: var(--ink);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mazal — brand</h1>
+      <p>
+        A tagine whose knob is a fresh leaf: Moroccan food, still good. Majorelle blue for the brand
+        and every primary action in the app; green only for freshness and savings.
+      </p>
+    </header>
+    <main>
+      <section>
+        <h2>Logo</h2>
+        <div class="row">
+          <div>
+            <div class="tile"><img src="logo/mazal-logo.svg" alt="Mazal logo" width="420" /></div>
+            <div class="caption">Primary — on white and light backgrounds</div>
+          </div>
+          <div>
+            <div class="tile blue">
+              <img src="logo/mazal-logo-white.svg" alt="Mazal logo, white" width="420" />
+            </div>
+            <div class="caption">Reversed — on Majorelle blue (leaf in mint)</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Symbol and app icon</h2>
+        <div class="row">
+          <div>
+            <div class="tile">
+              <img src="logo/mazal-symbol.svg" alt="Mazal symbol" width="160" />
+            </div>
+            <div class="caption">Symbol — avatars, favicons, small spaces</div>
+          </div>
+          <div>
+            <div class="tile">
+              <img
+                src="png/mazal-app-icon-1024.png"
+                alt="Mazal app icon"
+                width="160"
+                style="border-radius: 36px"
+              />
+            </div>
+            <div class="caption">App icon — white symbol on Majorelle</div>
+          </div>
+          <div>
+            <div class="tile dark">
+              <img src="logo/mazal-symbol-white.svg" alt="Mazal symbol, white" width="160" />
+            </div>
+            <div class="caption">Symbol reversed — dark backgrounds</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Colors</h2>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="chip" style="background: #6050dc"></div>
+            <div class="meta">
+              <strong>Majorelle #6050DC</strong>Brand, primary buttons, selected states, links,
+              active tab. White text 5.71:1.
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #4a3bc2"></div>
+            <div class="meta">
+              <strong>Majorelle pressed #4A3BC2</strong>Pressed primary button. White text 7.79:1.
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #111111"></div>
+            <div class="meta"><strong>Ink #111111</strong>Text and icons. 18.88:1 on white.</div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #0b7a4b"></div>
+            <div class="meta">
+              <strong>Green #0B7A4B</strong>Leaf on white, savings, "Open now", success. 5.39:1 on
+              white.
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #9fe3bf"></div>
+            <div class="meta">
+              <strong>Mint #9FE3BF</strong>Leaf on Majorelle only (3.86:1, graphic use).
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #f5f5f4"></div>
+            <div class="meta">
+              <strong>Muted #F5F5F4</strong>Secondary buttons, chips, fields, placeholders.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Sizes</h2>
+        <div class="sizes">
+          <img src="logo/mazal-logo.svg" alt="" width="240" />
+          <img src="logo/mazal-logo.svg" alt="" width="140" />
+          <img src="logo/mazal-logo.svg" alt="" width="96" />
+          <img src="logo/mazal-symbol.svg" alt="" width="48" />
+          <img src="logo/mazal-symbol.svg" alt="" width="24" />
+        </div>
+        <p>Minimum: logo 96 px wide, symbol 24 px.</p>
+      </section>
+
+      <section>
+        <h2>Rules</h2>
+        <ul>
+          <li>Clear space around the logo: at least the height of the leaf on every side.</li>
+          <li>
+            The leaf is green on light backgrounds and mint on Majorelle; never blue, never green on
+            blue.
+          </li>
+          <li>Do not stretch, rotate, outline, add shadows or change the blue.</li>
+          <li>
+            The wordmark is drawn, not typed: use the files in <code>logo/</code>, not a font. App
+            text uses Inter.
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
